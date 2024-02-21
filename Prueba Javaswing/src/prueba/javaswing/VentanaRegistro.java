@@ -46,7 +46,7 @@ public class VentanaRegistro extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(435, 662));
+        setTitle("Registro");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -58,6 +58,7 @@ public class VentanaRegistro extends javax.swing.JFrame {
         jTextField1.setBorder(null);
 
         jPasswordField1.setForeground(new java.awt.Color(204, 204, 204));
+        jPasswordField1.setText("*************");
         jPasswordField1.setBorder(null);
 
         jPanel2.setBackground(new java.awt.Color(254, 177, 3));
