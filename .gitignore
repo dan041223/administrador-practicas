@@ -1,25 +1,50 @@
-# Compiled class file
-*.class
+# Ignorar archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db
 
-# Log file
+# Ignorar archivos de construcción y ejecutables
+/build/
+/nbproject/
+*.classpath
+*.project
+/*.exe
+*.dll
+
+# Ignorar archivos y carpetas de dependencias
+/node_modules/
+/vendor/
+
+# Ignorar archivos de configuración local
+.env
+.env.local
+
+# Ignorar archivos de logs y temporales
+/log/
+/tmp/
 *.log
 
-# BlueJ files
-*.ctxt
+# Ignorar archivos de respaldo y temporales
+*.bak
+*.swp
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Ignorar archivos de configuración específicos del usuario
+.idea/
+.vscode/
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+# Ignorar archivos de prueba
+/test/
+/tests/
+/*.test.js
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# Ignorar archivos de salida y generados automáticamente
+/out/
+/dist/
+
+# Ignorar carpetas específicas del proyecto
+/Proyecto/build/
+/Proyecto/nbproject/
+/Proyecto/test/
+
+# Ignorar carpetas en la carpeta raíz del repositorio
+/RemoteSystemTempFiles/
 /.metadata/
