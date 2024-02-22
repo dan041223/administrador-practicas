@@ -41,9 +41,9 @@ Thumbs.db
 /dist/
 
 # Ignorar carpetas específicas del proyecto
-/Proyecto/build/
-/Proyecto/nbproject/
-/Proyecto/test/
+/administradorPracticasProyect/build/
+/administradorPracticasProyect/nbproject/
+/administradorPracticasProyect/test/
 
 # Ignorar carpetas en la carpeta raíz del repositorio
 /RemoteSystemTempFiles/
