@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package vista;
+import controlador.RegistrarseMetodos;
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.util.Date;
 
 /**
  *
@@ -14,6 +16,7 @@ import java.awt.Toolkit;
 public class VentanaRegistro extends javax.swing.JFrame {
 
     Color primerItemCB = new Color(204,204,204);
+    RegistrarseMetodos registrarseMetodos = new RegistrarseMetodos();
     
     /**
      * Creates new form VentanaRegistro
@@ -35,23 +38,23 @@ public class VentanaRegistro extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        tfNacimiento = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        tfPassword = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        tfNombre = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
-        jTextField3 = new javax.swing.JTextField();
+        tfApellidos = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
-        jTextField4 = new javax.swing.JTextField();
+        tfEmail = new javax.swing.JTextField();
         jSeparator5 = new javax.swing.JSeparator();
-        jTextField5 = new javax.swing.JTextField();
+        tfTelefono = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        comboBoxSuggestion1 = new elementos.ComboBoxSuggestion();
+        cbTipoUsuario = new elementos.ComboBoxSuggestion();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registro");
@@ -61,32 +64,37 @@ public class VentanaRegistro extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add_profile_img.png"))); // NOI18N
 
-        jTextField1.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField1.setText("Fecha de nacimiento");
-        jTextField1.setBorder(null);
-        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+        tfNacimiento.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        tfNacimiento.setForeground(new java.awt.Color(204, 204, 204));
+        tfNacimiento.setText("Fecha de nacimiento (DD-MM-YYYY)");
+        tfNacimiento.setBorder(null);
+        tfNacimiento.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField1FocusGained(evt);
+                tfNacimientoFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField1FocusLost(evt);
+                tfNacimientoFocusLost(evt);
             }
         });
 
-        jPasswordField1.setForeground(new java.awt.Color(204, 204, 204));
-        jPasswordField1.setText("*************");
-        jPasswordField1.setBorder(null);
-        jPasswordField1.addFocusListener(new java.awt.event.FocusAdapter() {
+        tfPassword.setForeground(new java.awt.Color(204, 204, 204));
+        tfPassword.setText("*************");
+        tfPassword.setBorder(null);
+        tfPassword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jPasswordField1FocusGained(evt);
+                tfPasswordFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jPasswordField1FocusLost(evt);
+                tfPasswordFocusLost(evt);
             }
         });
 
         jPanel2.setBackground(new java.awt.Color(254, 177, 3));
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel2MouseClicked(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -104,65 +112,65 @@ public class VentanaRegistro extends javax.swing.JFrame {
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
         );
 
-        jTextField2.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField2.setText("Nombre");
-        jTextField2.setBorder(null);
-        jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+        tfNombre.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        tfNombre.setForeground(new java.awt.Color(204, 204, 204));
+        tfNombre.setText("Nombre");
+        tfNombre.setBorder(null);
+        tfNombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField2FocusGained(evt);
+                tfNombreFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField2FocusLost(evt);
+                tfNombreFocusLost(evt);
             }
         });
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        tfNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                tfNombreActionPerformed(evt);
             }
         });
 
-        jTextField3.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField3.setText("Apellidos");
-        jTextField3.setBorder(null);
-        jTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
+        tfApellidos.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        tfApellidos.setForeground(new java.awt.Color(204, 204, 204));
+        tfApellidos.setText("Apellidos");
+        tfApellidos.setBorder(null);
+        tfApellidos.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField3FocusGained(evt);
+                tfApellidosFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField3FocusLost(evt);
+                tfApellidosFocusLost(evt);
             }
         });
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        tfApellidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                tfApellidosActionPerformed(evt);
             }
         });
 
-        jTextField4.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField4.setText("Introduzca su correo electrónico");
-        jTextField4.setBorder(null);
-        jTextField4.addFocusListener(new java.awt.event.FocusAdapter() {
+        tfEmail.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        tfEmail.setForeground(new java.awt.Color(204, 204, 204));
+        tfEmail.setText("Introduzca su correo electrónico");
+        tfEmail.setBorder(null);
+        tfEmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField4FocusGained(evt);
+                tfEmailFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField4FocusLost(evt);
+                tfEmailFocusLost(evt);
             }
         });
 
-        jTextField5.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        jTextField5.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField5.setText("Teléfono");
-        jTextField5.setBorder(null);
-        jTextField5.addFocusListener(new java.awt.event.FocusAdapter() {
+        tfTelefono.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        tfTelefono.setForeground(new java.awt.Color(204, 204, 204));
+        tfTelefono.setText("Teléfono");
+        tfTelefono.setBorder(null);
+        tfTelefono.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField5FocusGained(evt);
+                tfTelefonoFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField5FocusLost(evt);
+                tfTelefonoFocusLost(evt);
             }
         });
 
@@ -184,8 +192,8 @@ public class VentanaRegistro extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel2.setText("Registrarse");
 
-        comboBoxSuggestion1.setEditable(false);
-        comboBoxSuggestion1.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        cbTipoUsuario.setEditable(false);
+        cbTipoUsuario.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -197,32 +205,33 @@ public class VentanaRegistro extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(141, 141, 141)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel2)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jLabel1)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                            .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                            .addComponent(jSeparator5, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                            .addComponent(jSeparator6, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
+                                .addGap(141, 141, 141)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(comboBoxSuggestion1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jLabel2))
+                                    .addComponent(jLabel1)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(83, 83, 83)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                                    .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                                    .addComponent(jSeparator5, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                                    .addComponent(jSeparator6, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                                    .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(9, 9, 9)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tfApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tfNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(cbTipoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(0, 97, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -238,31 +247,31 @@ public class VentanaRegistro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(comboBoxSuggestion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
@@ -285,13 +294,13 @@ public class VentanaRegistro extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void tfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_tfNombreActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void tfApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfApellidosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_tfApellidosActionPerformed
 
     private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseEntered
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -306,89 +315,93 @@ public class VentanaRegistro extends javax.swing.JFrame {
         new PanelLogin().setVisible(true);
     }//GEN-LAST:event_jLabel5MouseClicked
 
-    private void jTextField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusGained
-        if (jTextField2.getText().equals("Nombre")) {
-            jTextField2.setText("");
-            jTextField2.setForeground(new Color(153,153,153));
+    private void tfNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNombreFocusGained
+        if (tfNombre.getText().equals("Nombre")) {
+            tfNombre.setText("");
+            tfNombre.setForeground(new Color(153,153,153));
         }
-    }//GEN-LAST:event_jTextField2FocusGained
+    }//GEN-LAST:event_tfNombreFocusGained
 
-    private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
-        if (jTextField2.getText().isEmpty()) {
-            jTextField2.setText("Nombre");
-            jTextField2.setForeground(new Color(204,204,204));
+    private void tfNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNombreFocusLost
+        if (tfNombre.getText().isEmpty()) {
+            tfNombre.setText("Nombre");
+            tfNombre.setForeground(new Color(204,204,204));
         }
-    }//GEN-LAST:event_jTextField2FocusLost
+    }//GEN-LAST:event_tfNombreFocusLost
 
-    private void jTextField3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusGained
-        if (jTextField3.getText().equals("Apellidos")) {
-            jTextField3.setText("");
-            jTextField3.setForeground(new Color(153,153,153));
+    private void tfApellidosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfApellidosFocusGained
+        if (tfApellidos.getText().equals("Apellidos")) {
+            tfApellidos.setText("");
+            tfApellidos.setForeground(new Color(153,153,153));
         }
-    }//GEN-LAST:event_jTextField3FocusGained
+    }//GEN-LAST:event_tfApellidosFocusGained
 
-    private void jTextField3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusLost
-        if (jTextField3.getText().isEmpty()) {
-            jTextField3.setText("Apellidos");
-            jTextField3.setForeground(new Color(204,204,204));
+    private void tfApellidosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfApellidosFocusLost
+        if (tfApellidos.getText().isEmpty()) {
+            tfApellidos.setText("Apellidos");
+            tfApellidos.setForeground(new Color(204,204,204));
         }
-    }//GEN-LAST:event_jTextField3FocusLost
+    }//GEN-LAST:event_tfApellidosFocusLost
 
-    private void jTextField4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusGained
-        if (jTextField4.getText().equals("Introduzca su correo electrónico")) {
-            jTextField4.setText("");
-            jTextField4.setForeground(new Color(153,153,153));
+    private void tfEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfEmailFocusGained
+        if (tfEmail.getText().equals("Introduzca su correo electrónico")) {
+            tfEmail.setText("");
+            tfEmail.setForeground(new Color(153,153,153));
         }
-    }//GEN-LAST:event_jTextField4FocusGained
+    }//GEN-LAST:event_tfEmailFocusGained
 
-    private void jTextField4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusLost
-        if (jTextField4.getText().isEmpty()) {
-            jTextField4.setText("Introduzca su correo electrónico");
-            jTextField4.setForeground(new Color(204,204,204));
+    private void tfEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfEmailFocusLost
+        if (tfEmail.getText().isEmpty()) {
+            tfEmail.setText("Introduzca su correo electrónico");
+            tfEmail.setForeground(new Color(204,204,204));
         }
-    }//GEN-LAST:event_jTextField4FocusLost
+    }//GEN-LAST:event_tfEmailFocusLost
 
-    private void jTextField5FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField5FocusGained
-        if (jTextField5.getText().equals("Teléfono")) {
-            jTextField5.setText("");
-            jTextField5.setForeground(new Color(153,153,153));
+    private void tfTelefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfTelefonoFocusGained
+        if (tfTelefono.getText().equals("Teléfono")) {
+            tfTelefono.setText("");
+            tfTelefono.setForeground(new Color(153,153,153));
         }
-    }//GEN-LAST:event_jTextField5FocusGained
+    }//GEN-LAST:event_tfTelefonoFocusGained
 
-    private void jTextField5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField5FocusLost
-        if (jTextField5.getText().isEmpty()) {
-            jTextField5.setText("Teléfono");
-            jTextField5.setForeground(new Color(204,204,204));
+    private void tfTelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfTelefonoFocusLost
+        if (tfTelefono.getText().isEmpty()) {
+            tfTelefono.setText("Teléfono");
+            tfTelefono.setForeground(new Color(204,204,204));
         }
-    }//GEN-LAST:event_jTextField5FocusLost
+    }//GEN-LAST:event_tfTelefonoFocusLost
 
-    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
-        if (jTextField1.getText().equals("Fecha de nacimiento")) {
-            jTextField1.setText("");
-            jTextField1.setForeground(new Color(153,153,153));
+    private void tfNacimientoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNacimientoFocusGained
+        if (tfNacimiento.getText().equals("Fecha de nacimiento (DD-MM-YYYY)")) {
+            tfNacimiento.setText("");
+            tfNacimiento.setForeground(new Color(153,153,153));
         }
-    }//GEN-LAST:event_jTextField1FocusGained
+    }//GEN-LAST:event_tfNacimientoFocusGained
 
-    private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
-        if (jTextField1.getText().isEmpty()) {
-            jTextField1.setText("Fecha de nacimiento");
-            jTextField1.setForeground(new Color(204,204,204));
+    private void tfNacimientoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNacimientoFocusLost
+        if (tfNacimiento.getText().isEmpty()) {
+            tfNacimiento.setText("Fecha de nacimiento (DD-MM-YYYY)");
+            tfNacimiento.setForeground(new Color(204,204,204));
         }
-    }//GEN-LAST:event_jTextField1FocusLost
+    }//GEN-LAST:event_tfNacimientoFocusLost
 
-    private void jPasswordField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusGained
-        if (jPasswordField1.getText().equals("*************")) {
-            jPasswordField1.setText("");
-            jPasswordField1.setForeground(new Color(153,153,153));
+    private void tfPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPasswordFocusGained
+        if (tfPassword.getText().equals("*************")) {
+            tfPassword.setText("");
+            tfPassword.setForeground(new Color(153,153,153));
         }
-    }//GEN-LAST:event_jPasswordField1FocusGained
+    }//GEN-LAST:event_tfPasswordFocusGained
 
-    private void jPasswordField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusLost
-        if (jPasswordField1.getText().isEmpty()) {
-            jPasswordField1.setText("*************");
-            jPasswordField1.setForeground(new Color(204,204,204));
+    private void tfPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPasswordFocusLost
+        if (tfPassword.getText().isEmpty()) {
+            tfPassword.setText("*************");
+            tfPassword.setForeground(new Color(204,204,204));
         }
-    }//GEN-LAST:event_jPasswordField1FocusLost
+    }//GEN-LAST:event_tfPasswordFocusLost
+
+    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
+        registrarseMetodos.comprobarCampos(this, tfNombre.getText(), tfApellidos.getText(), tfEmail.getText(), tfTelefono.getText(), tfNacimiento.getText(), tfPassword.getText(), cbTipoUsuario.getSelectedItem().toString());
+    }//GEN-LAST:event_jPanel2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -429,32 +442,32 @@ public class VentanaRegistro extends javax.swing.JFrame {
     
     public void rellenarComboBox(){
         String valorDefault = "Selecciona los permisos";
-        comboBoxSuggestion1.addItem(valorDefault);
-        String administrador = "Administrador";
-        comboBoxSuggestion1.addItem(administrador);
-        String tutor = "Tutor de centro";
-        comboBoxSuggestion1.addItem(tutor);
+        cbTipoUsuario.addItem(valorDefault);
+        String administrador = "administrador";
+        cbTipoUsuario.addItem(administrador);
+        String tutor = "tutor";
+        cbTipoUsuario.addItem(tutor);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private elementos.ComboBoxSuggestion comboBoxSuggestion1;
+    private elementos.ComboBoxSuggestion cbTipoUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField tfApellidos;
+    private javax.swing.JTextField tfEmail;
+    private javax.swing.JTextField tfNacimiento;
+    private javax.swing.JTextField tfNombre;
+    private javax.swing.JPasswordField tfPassword;
+    private javax.swing.JTextField tfTelefono;
     // End of variables declaration//GEN-END:variables
 }

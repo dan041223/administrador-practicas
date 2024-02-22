@@ -18,6 +18,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal() {
     	setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaPrincipal.class.getResource("/img/Logo.png")));
         initComponents();
+        setContentPane(new PanelMenu());
     }
 
     /**
@@ -78,8 +79,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             public void run() {
                 VentanaPrincipal vp = new VentanaPrincipal();
                 vp.setVisible(true);
-                vp.setContentPane(new PanelMenu());
-                
             }
         });
     }
