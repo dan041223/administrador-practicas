@@ -19,7 +19,22 @@
 *.tar.gz
 *.rar
 
+<<<<<<< Updated upstream
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+=======
+# Ignorar archivos de salida y generados automáticamente
+/out/
+/dist/
+
+# Ignorar carpetas específicas del proyecto
+/administradorPracticasProyect/build/
+/administradorPracticasProyect/nbproject/
+/administradorPracticasProyect/test/
+/administradorPracticasProyect/build.xml
+
+# Ignorar carpetas en la carpeta raíz del repositorio
+/RemoteSystemTempFiles/
+>>>>>>> Stashed changes
 /.metadata/
