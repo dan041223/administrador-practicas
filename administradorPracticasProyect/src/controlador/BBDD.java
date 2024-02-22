@@ -16,10 +16,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelo.TIPOUSUARIO;
+import modelo.Usuario;
 import org.postgresql.util.PSQLException;
 
 /**
@@ -48,6 +54,38 @@ public class BBDD {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return con;
+    }
+    
+    public List obtenerListaUsuarios(){
+        Usuario usuario;
+        List<Usuario> usuarios = null;
+        try {
+            Connection con = conectar();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("Select * from usuarios");
+            usuarios = new ArrayList<>();
+            while (rs.next()) {                
+                usuario = new Usuario();
+                usuario.setId(rs.getInt("id"));
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setApellidos(rs.getString("apellidos"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setTelefono(rs.getString("telefono"));
+                usuario.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
+                usuario.setPassword(rs.getString("password"));
+                String tipo_usuario = rs.getString("tipo_usuario");
+                
+                if (tipo_usuario.equals("ADMINISTRADOR")) {
+                usuario.setTipousuario(TIPOUSUARIO.ADMINISTRADOR);
+                }else if (tipo_usuario.equals("TUTOR")) {
+                usuario.setTipousuario(TIPOUSUARIO.TUTOR);
+                }
+                usuarios.add(usuario);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return usuarios;
     }
     
     public void subirArchivo() throws IOException{
@@ -106,6 +144,28 @@ public class BBDD {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    void agregarUsuario(String nombre, String apellidos, String email, String telefono, String fechaNacimiento, String password, String tipoUsuario) {
+        Connection con;
+        try {
+            SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy", Locale.FRANCE);
+            Date fechaFormateada = formateador.parse(fechaNacimiento);
+            con = conectar();
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate("INSERT INTO usuarios(nombre, apellidos, email, telefono, fecha_nacimiento, password, tipo_usuario) "
+                    + "values ('" + nombre + "'"
+                            + ", '" + apellidos + "'"
+                            + ", '" + email + "'"
+                            + ", '" + telefono + "'"
+                            + ", '" + fechaFormateada + "'"
+                            + ", '" + password + "'"
+                            + ", '" + tipoUsuario + "')");
+        } catch (ParseException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
