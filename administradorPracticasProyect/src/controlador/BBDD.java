@@ -56,13 +56,13 @@ public class BBDD {
         return con;
     }
     
-    public List obtenerListaUsuarios(){
+    public List obtenerListaUsuarios(String query){
         Usuario usuario;
         List<Usuario> usuarios = null;
         try {
             Connection con = conectar();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("Select * from usuarios");
+            ResultSet rs = stmt.executeQuery(query);
             usuarios = new ArrayList<>();
             while (rs.next()) {                
                 usuario = new Usuario();
@@ -75,9 +75,9 @@ public class BBDD {
                 usuario.setPassword(rs.getString("password"));
                 String tipo_usuario = rs.getString("tipo_usuario");
                 
-                if (tipo_usuario.equals("ADMINISTRADOR")) {
+                if (tipo_usuario.equals("administrador")) {
                 usuario.setTipousuario(TIPOUSUARIO.ADMINISTRADOR);
-                }else if (tipo_usuario.equals("TUTOR")) {
+                }else if (tipo_usuario.equals("tutor")) {
                 usuario.setTipousuario(TIPOUSUARIO.TUTOR);
                 }
                 usuarios.add(usuario);
