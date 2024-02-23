@@ -7,6 +7,7 @@ package controlador;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelo.Usuario;
@@ -50,6 +51,14 @@ public class MenuMetodos {
         }
         
         return modeloDefaultTabla;
+    }
+    
+    public JPanel cambioPanel(JPanel panelActual, JPanel panelCard){
+        panelCard.removeAll();
+        panelCard.add(panelActual);
+        panelCard.repaint();
+        panelCard.revalidate();
+        return panelCard;
     }
     //int id, String nombre, String apellidos, String email, String telefono, String fechaNacimiento, String password, String tipoUsuario, 
 }
