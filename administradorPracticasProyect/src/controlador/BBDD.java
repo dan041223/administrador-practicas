@@ -56,13 +56,13 @@ public class BBDD {
         return con;
     }
     
-    public List obtenerListaUsuarios(){
+    public List obtenerListaUsuarios(String query){
         Usuario usuario;
         List<Usuario> usuarios = null;
         try {
             Connection con = conectar();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("Select * from usuarios");
+            ResultSet rs = stmt.executeQuery(query);
             usuarios = new ArrayList<>();
             while (rs.next()) {                
                 usuario = new Usuario();

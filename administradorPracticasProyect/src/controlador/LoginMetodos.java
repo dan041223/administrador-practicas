@@ -16,7 +16,8 @@ public class LoginMetodos {
     
     public Usuario obtenerUsuario(String email, String password){
         BBDD bbdd = new BBDD();
-        List<Usuario> usuarios = bbdd.obtenerListaUsuarios();
+        String query = "SELECT * FROM usuarios";
+        List<Usuario> usuarios = bbdd.obtenerListaUsuarios(query);
         for (Usuario usuario : usuarios) {
             if (usuario.getEmail().equals(email) && usuario.getPassword().equals(password)) {
                 return usuario;
