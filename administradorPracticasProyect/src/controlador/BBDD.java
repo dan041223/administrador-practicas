@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelo.Alumno;
 import modelo.TIPOUSUARIO;
 import modelo.Usuario;
 import org.postgresql.util.PSQLException;
@@ -165,6 +166,48 @@ public class BBDD {
                             + ", '" + tipoUsuario + "')");
         } catch (ParseException ex) {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    List<Alumno> obtenerListaAlumnos(String query) {
+        Alumno alumno;
+        List<Alumno> alumnos = null;
+        try {
+            Connection con = conectar();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            alumnos = new ArrayList<>();
+            while (rs.next()) {                
+                alumno = new Alumno();
+                alumno.setId(rs.getInt("id"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setApellidos(rs.getString("apellidos"));
+                alumno.setDni(rs.getString("dni"));
+                alumno.setEmail(rs.getString("email"));
+                alumno.setTelefono(rs.getString("telefono"));
+                alumno.setDireccion(rs.getString("direccion"));
+                alumno.setNumSeguridadSocial(rs.getString("numSeguridadSocial"));
+                alumno.setCiclo(rs.getString("ciclo"));
+                alumno.setEstado(rs.getBoolean("estado"));
+                alumno.setCv(rs.getBytes("curriculum"));
+                alumno.setIdCentro(rs.getInt("id_centro"));
+                
+                alumnos.add(alumno);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return alumnos;
+    }
+
+    void borrarAlumno(int idABorrar) {
+        Connection con;
+        try {
+            con = conectar();
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate("UPDATE alumnos SET eliminado = TRUE WHERE id = " + idABorrar + ";");
         } catch (SQLException ex) {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
