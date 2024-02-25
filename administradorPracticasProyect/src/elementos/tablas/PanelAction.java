@@ -33,12 +33,6 @@ public class PanelAction extends javax.swing.JPanel {
                 event.onDelete(row);
             }
         });
-        cmdView.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                event.onView(row);
-            }
-        });
     }
 
     /**
@@ -53,13 +47,10 @@ public class PanelAction extends javax.swing.JPanel {
 
         cmdEdit = new elementos.tablas.ActionButton();
         cmdDelete = new elementos.tablas.ActionButton();
-        cmdView = new elementos.tablas.ActionButton();
 
         cmdEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar (Personalizado).png"))); // NOI18N
 
         cmdDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/borrar (Personalizado).png"))); // NOI18N
-
-        cmdView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ver (Personalizado).png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -70,8 +61,6 @@ public class PanelAction extends javax.swing.JPanel {
                 .addComponent(cmdEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmdDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmdView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -79,7 +68,6 @@ public class PanelAction extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmdView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmdDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmdEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -89,6 +77,5 @@ public class PanelAction extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private elementos.tablas.ActionButton cmdDelete;
     private elementos.tablas.ActionButton cmdEdit;
-    private elementos.tablas.ActionButton cmdView;
     // End of variables declaration//GEN-END:variables
 }

@@ -233,7 +233,7 @@ public class PanelLogin extends javax.swing.JFrame {
     private void tfEmailFocusGained(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_tfEmailFocusGained
         if (tfEmail.getText().equals("Introduzca su correo electrónico")) {
             tfEmail.setText("");
-            tfEmail.setForeground(new Color(153, 153, 153));
+            tfEmail.setForeground(new Color(0, 0, 0));
         }
     }// GEN-LAST:event_tfEmailFocusGained
 
@@ -247,7 +247,7 @@ public class PanelLogin extends javax.swing.JFrame {
     private void tfPasswordFocusGained(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_tfPasswordFocusGained
         if (tfPassword.getText().equals("*************")) {
             tfPassword.setText("");
-            tfPassword.setForeground(new Color(153, 153, 153));
+            tfPassword.setForeground(new Color(0, 0, 0));
         }
 
     }// GEN-LAST:event_tfPasswordFocusGained

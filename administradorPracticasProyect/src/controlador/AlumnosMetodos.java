@@ -10,7 +10,12 @@ import elementos.mensaje.message.MessageDialog;
 import elementos.tablas.TableActionCellEditor;
 import elementos.tablas.TableActionCellRender;
 import elementos.tablas.TableActionEvent;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -18,6 +23,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import modelo.Alumno;
 import vista.PanelAlumnos;
+import static vista.PanelAlumnos.tfBusqueda;
+import vista.PanelLogin;
+import vista.VentanaMasInfoAlumno;
 
 /**
  *
@@ -26,6 +34,7 @@ import vista.PanelAlumnos;
 public class AlumnosMetodos {
     
     BBDD bbdd = new BBDD();
+    public static int idEscogido;
     
     public JTable prepararRenderizadoCeldas(JTable tabla){
         tabla.getColumnModel().getColumn(6).setCellRenderer(new TableActionCellRender());
@@ -37,6 +46,8 @@ public class AlumnosMetodos {
             @Override
             public void onEdit(int row) {
                 System.out.println("Editar fila: " + row);
+                idEscogido = (Integer) tabla.getValueAt(row, 0);
+                new VentanaMasInfoAlumno().setVisible(true);
             }
 
             @Override
@@ -57,11 +68,6 @@ public class AlumnosMetodos {
                     Notification notificacion = new Notification(((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, tabla)), Notification.Type.WARNING, Notification.Location.TOP_CENTER, "El alumno no ha sido eliminado");
                     notificacion.showNotification();
                 }
-            }
-
-            @Override
-            public void onView(int row) {
-                System.out.println("Ver fila: " + row);
             }
         };
         tabla.getColumnModel().getColumn(6).setCellEditor(new TableActionCellEditor(evento));
@@ -88,5 +94,32 @@ public class AlumnosMetodos {
     public List rellenarListaAlumnos(String query){
         List<Alumno> alumnos = bbdd.obtenerListaAlumnos(query);
         return alumnos;
+    }
+
+    public void comprobarCampos(JFrame framePadre, String nombre, String apellidos, String ciclo, String direccion, String dni, String email, String numSS, String telefono, FileInputStream cvASubir) {
+        Notification notificacion;
+        if (nombre.equals("Nombre del alumno")
+                || apellidos.equals("Apellidos")
+                || email.equals("Correo electrónico")
+                || telefono.equals("Teléfono")
+                || ciclo.equals("Ciclo")
+                || direccion.equals("Dirección")
+                || dni.equals("Dni")
+                || numSS.equals("Número de Seguridad Social")
+                || nombre.isEmpty()
+                || apellidos.isEmpty()
+                || email.isEmpty()
+                || telefono.isEmpty()
+                || ciclo.isEmpty()
+                || direccion.isEmpty()
+                || dni.isEmpty()
+                || numSS.isEmpty()) {
+            notificacion = new Notification(framePadre, Notification.Type.WARNING, Notification.Location.TOP_CENTER, "Todos los campos deben de estar rellenos.");
+            notificacion.showNotification();
+        }else{
+            bbdd.agregarAlumno(nombre, apellidos, dni, direccion, email, numSS, telefono, ciclo, cvASubir);
+            notificacion = new Notification(framePadre, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "¡Alumno creado con éxito!");
+            notificacion.showNotification();
+        }
     }
 }
