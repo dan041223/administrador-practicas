@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelo.Alumno;
 import modelo.TIPOUSUARIO;
 import modelo.Usuario;
 import org.postgresql.util.PSQLException;
@@ -168,5 +169,127 @@ public class BBDD {
         } catch (SQLException ex) {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    List<Alumno> obtenerListaAlumnos(String query) {
+        Alumno alumno;
+        List<Alumno> alumnos = null;
+        try {
+            Connection con = conectar();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            alumnos = new ArrayList<>();
+            while (rs.next()) {                
+                alumno = new Alumno();
+                alumno.setId(rs.getInt("id"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setApellidos(rs.getString("apellidos"));
+                alumno.setDni(rs.getString("dni"));
+                alumno.setEmail(rs.getString("email"));
+                alumno.setTelefono(rs.getString("telefono"));
+                alumno.setDireccion(rs.getString("direccion"));
+                alumno.setNumSeguridadSocial(rs.getString("numSeguridadSocial"));
+                alumno.setCiclo(rs.getString("ciclo"));
+                alumno.setEstado(rs.getBoolean("estado"));
+                alumno.setCv(rs.getBytes("curriculum"));
+                alumno.setIdCentro(rs.getInt("id_centro"));
+                
+                alumnos.add(alumno);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return alumnos;
+    }
+
+    void borrarAlumno(int idABorrar) {
+        Connection con;
+        try {
+            con = conectar();
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate("UPDATE alumnos SET eliminado = TRUE WHERE id = " + idABorrar + ";");
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Alumno obtenerAlumno(int idEscogido) {
+         Alumno alumno = new Alumno();
+        try {
+            Connection con = conectar();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from alumnos where id = " + idEscogido + "");
+            if (rs.next()) {
+                alumno.setId(rs.getInt("id"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setApellidos(rs.getString("apellidos"));
+                alumno.setDni(rs.getString("dni"));
+                alumno.setEmail(rs.getString("email"));
+                alumno.setDireccion(rs.getString("direccion"));
+                alumno.setNumSeguridadSocial(rs.getString("numSeguridadSocial"));
+                alumno.setTelefono(rs.getString("telefono"));
+                alumno.setCiclo(rs.getString("ciclo"));
+                alumno.setCv(rs.getBytes("curriculum"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return alumno;
+    }
+
+    public int modificarAlumno(int idAlumno, String nombre, String apellidos, String dni, String direccion, String email, String numSS, String telefono, String ciclo, byte[] cvActual, FileInputStream cvASubir) {
+        Connection con;
+        int filasMod = 0;
+        try {
+            con = conectar();
+             // SQL para la actualización
+            String sql = "UPDATE alumnos SET nombre=?, apellidos=?, dni=?, direccion=?, " +
+                         "email=?, \"numSeguridadSocial\"=?, telefono=?, ciclo=?, curriculum=? WHERE id=?";
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+                // Establecer los parámetros con los nuevos valores
+                preparedStatement.setString(1, nombre);
+                preparedStatement.setString(2, apellidos);
+                preparedStatement.setString(3, dni);
+                preparedStatement.setString(4, direccion);
+                preparedStatement.setString(5, email);
+                preparedStatement.setString(6, numSS);
+                preparedStatement.setString(7, telefono);
+                preparedStatement.setString(8, ciclo);
+                if (cvActual==null) {
+                    preparedStatement.setBinaryStream(9, cvASubir);
+                }else{
+                    preparedStatement.setBytes(9, cvActual);
+                }
+                preparedStatement.setInt(10, idAlumno);
+                
+                filasMod = preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return filasMod;
+    }
+
+    public int agregarAlumno(String nombre, String apellidos, String dni, String direccion, String email, String numSS, String telefono, String ciclo, FileInputStream cvASubir) {
+        int filasMod = 0;
+        try {
+            Connection con = conectar();
+            String query = "INSERT INTO alumnos(nombre, apellidos, dni, direccion, email, \"numSeguridadSocial\", telefono, ciclo, curriculum) VALUES (?,?,?,?,?,?,?,?,?)";
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, nombre);
+            preparedStatement.setString(2, apellidos);
+            preparedStatement.setString(3, dni);
+            preparedStatement.setString(4, direccion);
+            preparedStatement.setString(5, email);
+            preparedStatement.setString(6, numSS);
+            preparedStatement.setString(7, telefono);
+            preparedStatement.setString(8, ciclo);
+            preparedStatement.setBinaryStream(9, cvASubir);
+            
+            filasMod = preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return filasMod;
     }
 }

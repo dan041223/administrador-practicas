@@ -36,18 +36,18 @@ public class ComboSuggestionUI extends BasicComboBoxUI {
         txt.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent fe) {
-                border.setColor(new Color(254,177,3));
+                border.setColor(new Color(254, 177, 3));
             }
 
             @Override
             public void focusLost(FocusEvent fe) {
-                border.setColor(new Color(254,177,3));
+                border.setColor(new Color(254, 177, 3));
             }
         });
         comboBox.addPopupMenuListener(new PopupMenuListener() {
             @Override
             public void popupMenuWillBecomeVisible(PopupMenuEvent pme) {
-                arrowButton.setBackground(new Color(254,177,3));
+                arrowButton.setBackground(new Color(254, 177, 3));
             }
 
             @Override
@@ -61,7 +61,7 @@ public class ComboSuggestionUI extends BasicComboBoxUI {
             }
         });
         AutoCompleteDecorator.decorate(comboBox);
-        txt.setSelectionColor(new Color(254,177,3));
+        txt.setSelectionColor(new Color(254, 177, 3));
         txt.setBorder(new EmptyBorder(0, 4, 0, 4));
         comboBox.setBackground(Color.WHITE);
         comboBox.setBorder(border);
@@ -93,7 +93,7 @@ public class ComboSuggestionUI extends BasicComboBoxUI {
                 if (bln) {
                     label.setOpaque(true);
                     label.setBackground(new Color(240, 240, 240));
-                    label.setForeground(new Color(254,177,3));
+                    label.setForeground(new Color(254, 177, 3));
                 }
                 return label;
             }
@@ -145,8 +145,8 @@ public class ComboSuggestionUI extends BasicComboBoxUI {
             int sizeY = 8;
             int x = (width - sizeX) / 2;
             int y = (height - sizeY) / 2;
-            int px[] = {x, x + sizeX, x + sizeX / 2};
-            int py[] = {y, y, y + sizeY};
+            int px[] = { x, x + sizeX, x + sizeX / 2 };
+            int py[] = { y, y, y + sizeY };
             g2.setColor(getBackground());
             g2.fillPolygon(px, py, px.length);
             g2.dispose();
@@ -171,8 +171,8 @@ public class ComboSuggestionUI extends BasicComboBoxUI {
             this.color = color;
         }
 
-        private Color focusColor = new Color(254,177,3);
-        private Color color = new Color(254,177,3);
+        private Color focusColor = new Color(254, 177, 3);
+        private Color color = new Color(254, 177, 3);
 
         public Border(int border) {
             super(border, border, border, border);
