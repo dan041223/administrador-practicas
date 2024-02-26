@@ -6,11 +6,8 @@
 package vista;
 
 import controlador.AlumnosMetodos;
-import elementos.mensaje.message.MessageDialog;
 import java.awt.Color;
 import java.util.List;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 import modelo.Alumno;
 
 /**

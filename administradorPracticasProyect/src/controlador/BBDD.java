@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Alumno;
+import modelo.Empresa;
 import modelo.TIPOUSUARIO;
 import modelo.Usuario;
 import org.postgresql.util.PSQLException;
@@ -72,7 +74,7 @@ public class BBDD {
                 usuario.setApellidos(rs.getString("apellidos"));
                 usuario.setEmail(rs.getString("email"));
                 usuario.setTelefono(rs.getString("telefono"));
-                usuario.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
+                usuario.setFechaNacimiento(rs.getString("fecha_nacimiento"));
                 usuario.setPassword(rs.getString("password"));
                 String tipo_usuario = rs.getString("tipo_usuario");
                 
@@ -190,7 +192,8 @@ public class BBDD {
                 alumno.setDireccion(rs.getString("direccion"));
                 alumno.setNumSeguridadSocial(rs.getString("numSeguridadSocial"));
                 alumno.setCiclo(rs.getString("ciclo"));
-                alumno.setEstado(rs.getBoolean("estado"));
+                alumno.setEstado(rs.getBoolean("buscando"));
+                alumno.setBuscando(rs.getBoolean("buscando"));
                 alumno.setCv(rs.getBytes("curriculum"));
                 alumno.setIdCentro(rs.getInt("id_centro"));
                 
@@ -214,7 +217,7 @@ public class BBDD {
     }
 
     public Alumno obtenerAlumno(int idEscogido) {
-         Alumno alumno = new Alumno();
+        Alumno alumno = new Alumno();
         try {
             Connection con = conectar();
             Statement stmt = con.createStatement();
@@ -291,5 +294,249 @@ public class BBDD {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return filasMod;
+    }
+
+    void borrarUsuario(int idABorrar) {
+        Connection con;
+        try {
+            con = conectar();
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate("UPDATE usuarios SET eliminado = TRUE WHERE id = " + idABorrar + ";");
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public int modificarUsuario(int idUsuario, String nombre, String apellidos, String fecha_nacimiento, String password, String email, String telefono, String tipo_usuario) {
+        Connection con;
+        int filasMod = 0;
+        try {
+            con = conectar();
+            Statement stmt = con.createStatement();
+             // SQL para la actualización
+            String sql = "UPDATE usuarios SET nombre='" + nombre + "', apellidos='" + apellidos + "', fecha_nacimiento='" + fecha_nacimiento + "', password='" + password + "', " +
+                         "email='" + email + "', telefono='" + telefono + "', tipo_usuario='" + tipo_usuario + "' WHERE id=" + idUsuario + "";
+            filasMod = stmt.executeUpdate(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return filasMod;
+    }
+
+    public Usuario obtenerUsuario(int idEscogido) {
+        Usuario usuario = new Usuario();
+        try {
+            Connection con = conectar();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from usuarios where id = " + idEscogido + "");
+            if (rs.next()) {
+                usuario.setId(rs.getInt("id"));
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setApellidos(rs.getString("apellidos"));
+                usuario.setFechaNacimiento(rs.getString("fecha_nacimiento"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setPassword(rs.getString("password"));
+                String tipoUsuario = rs.getString("tipo_usuario");
+                if (tipoUsuario.equalsIgnoreCase("ADMINISTRADOR")) {
+                    usuario.setTipousuario(TIPOUSUARIO.ADMINISTRADOR);
+                }else{
+                    usuario.setTipousuario(TIPOUSUARIO.TUTOR);
+                }
+                usuario.setTelefono(rs.getString("telefono"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return usuario;
+    }
+
+    public List<Empresa> obtenerListaEmpresasBuscando() {
+        Empresa empresa;
+        List<Empresa> empresas = null;
+        try {
+            Connection con = conectar();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM empresa WHERE buscando = TRUE and eliminado = FALSE");
+            empresas = new ArrayList<>();
+            while (rs.next()) {                
+                empresa = new Empresa();
+                empresa.setId(rs.getInt("idEmpresa"));
+                empresa.setNombre(rs.getString("nombre"));
+                empresa.setCif(rs.getInt("cif"));
+                empresa.setDuenio(rs.getString("dueño"));
+                empresa.setEmail(rs.getString("email"));
+                empresa.setTelefono(rs.getString("telefono"));
+                empresa.setDireccion(rs.getString("direccion"));
+                empresa.setAmbito(rs.getString("ambito"));
+                empresa.setTutor(rs.getString("tutor"));
+                empresa.setNombre_contacto(rs.getString("nombre_contacto"));
+                empresa.setEmail_contacto(rs.getString("email_contacto"));
+                empresa.setBuscando(rs.getBoolean("buscando"));
+                
+                empresas.add(empresa);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return empresas;
+    }
+
+    public List<Alumno> obtenerListaAlumnosBuscando() {
+        Alumno alumno;
+        List<Alumno> alumnos = null;
+        try {
+            Connection con = conectar();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM alumnos WHERE buscando = TRUE and eliminado = FALSE");
+            alumnos = new ArrayList<>();
+            while (rs.next()) {                
+                alumno = new Alumno();
+                alumno.setId(rs.getInt("id"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setApellidos(rs.getString("apellidos"));
+                alumno.setDni(rs.getString("dni"));
+                alumno.setEmail(rs.getString("email"));
+                alumno.setTelefono(rs.getString("telefono"));
+                alumno.setDireccion(rs.getString("direccion"));
+                alumno.setNumSeguridadSocial(rs.getString("numSeguridadSocial"));
+                alumno.setCiclo(rs.getString("ciclo"));
+                alumno.setEstado(rs.getBoolean("eliminado"));
+                alumno.setCv(rs.getBytes("curriculum"));
+                alumno.setIdCentro(rs.getInt("id_centro"));
+                alumno.setBuscando(rs.getBoolean("buscando"));
+                
+                alumnos.add(alumno);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return alumnos;
+    }
+
+    public Empresa obtenerEmpresa(int id) {
+        Empresa empresa = new Empresa();
+        try {
+            Connection con = conectar();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from empresa where \"idEmpresa\" = " + id + "");
+            if (rs.next()) {
+                empresa.setId(rs.getInt("idEmpresa"));
+                empresa.setNombre(rs.getString("nombre"));
+                empresa.setCif(rs.getInt("cif"));
+                empresa.setDuenio(rs.getString("dueño"));
+                empresa.setEmail(rs.getString("email"));
+                empresa.setTelefono(rs.getString("telefono"));
+                empresa.setDireccion(rs.getString("direccion"));
+                empresa.setAmbito(rs.getString("ambito"));
+                empresa.setTutor(rs.getString("tutor"));
+                empresa.setNombre_contacto(rs.getString("nombre_contacto"));
+                empresa.setEmail_contacto(rs.getString("email_contacto"));
+                empresa.setBuscando(rs.getBoolean("buscando"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return empresa;
+    }
+
+    public int agregarBolsa(Alumno alumnoSeleccionado, Empresa empresaSeleccionada) {
+        int filasMod = 0;
+        try {
+            Connection con = conectar();
+            String query = "INSERT INTO bolsa(id_alumno, id_empresa) VALUES (?,?)";
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setInt(1, alumnoSeleccionado.getId());
+            preparedStatement.setInt(2, empresaSeleccionada.getId());
+            
+            filasMod = preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return filasMod;
+    }
+
+    public void quitarBuscandoAlumno(int id) {
+        Connection con;
+        int filasMod = 0;
+        try {
+            con = conectar();
+            Statement stmt = con.createStatement();
+             // SQL para la actualización
+            String sql = "UPDATE alumnos SET buscando = FALSE WHERE id=" + id + "";
+            filasMod = stmt.executeUpdate(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public List<Alumno> obtenerListaAlumnosBuscandoPorPalabra(String valorIntroducidoAlumnos) {
+        Alumno alumno;
+        List<Alumno> alumnos = null;
+        try {
+            Connection con = conectar();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM alumnos WHERE CAST(id AS TEXT) LIKE '%" + valorIntroducidoAlumnos
+                                                        + "%' "
+                                                        + "OR nombre LIKE '%" + valorIntroducidoAlumnos + "%' "
+                                                        + "OR apellidos LIKE '%" + valorIntroducidoAlumnos + "%' "
+                                                        + "ORDER BY id ASC");
+            alumnos = new ArrayList<>();
+            while (rs.next()) {                
+                alumno = new Alumno();
+                alumno.setId(rs.getInt("id"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setApellidos(rs.getString("apellidos"));
+                alumno.setDni(rs.getString("dni"));
+                alumno.setEmail(rs.getString("email"));
+                alumno.setTelefono(rs.getString("telefono"));
+                alumno.setDireccion(rs.getString("direccion"));
+                alumno.setNumSeguridadSocial(rs.getString("numSeguridadSocial"));
+                alumno.setCiclo(rs.getString("ciclo"));
+                alumno.setEstado(rs.getBoolean("buscando"));
+                alumno.setBuscando(rs.getBoolean("buscando"));
+                alumno.setCv(rs.getBytes("curriculum"));
+                alumno.setIdCentro(rs.getInt("id_centro"));
+                
+                alumnos.add(alumno);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return alumnos;
+    }
+
+    public List<Empresa> obtenerListaEmpresasBuscandoPorPalabra(String valorIntroducidoEmpresas) {
+        Empresa empresa;
+        List<Empresa> empresas = null;
+        try {
+            Connection con = conectar();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM empresa WHERE CAST(\"idEmpresa\" AS TEXT) LIKE '%" + valorIntroducidoEmpresas
+                                                        + "%' "
+                                                        + "OR nombre LIKE '%" + valorIntroducidoEmpresas + "%' "
+                                                        + "OR ambito LIKE '%" + valorIntroducidoEmpresas + "%' "
+                                                        + "ORDER BY \"idEmpresa\" ASC");
+            empresas = new ArrayList<>();
+            while (rs.next()) {                
+                empresa = new Empresa();
+                empresa.setId(rs.getInt("idEmpresa"));
+                empresa.setNombre(rs.getString("nombre"));
+                empresa.setCif(rs.getInt("cif"));
+                empresa.setDuenio(rs.getString("dueño"));
+                empresa.setEmail(rs.getString("email"));
+                empresa.setTelefono(rs.getString("telefono"));
+                empresa.setDireccion(rs.getString("direccion"));
+                empresa.setAmbito(rs.getString("ambito"));
+                empresa.setTutor(rs.getString("tutor"));
+                empresa.setNombre_contacto(rs.getString("nombre_contacto"));
+                empresa.setEmail_contacto(rs.getString("email_contacto"));
+                empresa.setBuscando(rs.getBoolean("buscando"));
+                
+                empresas.add(empresa);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return empresas;
     }
 }

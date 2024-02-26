@@ -39,20 +39,6 @@ public class MenuMetodos {
     return modeloDefaultTabla;
     }*/
     
-    public DefaultTableModel rellenarTablaUltimosUsuarios(JTable tabla){
-        DefaultTableModel modeloDefaultTabla = new DefaultTableModel(new Object[]{"Id", "Nombre", "Apellidos"}, 3);
-        
-        List<Usuario> usuarios = bbdd.obtenerListaUsuarios("SELECT * FROM usuarios ORDER BY id DESC LIMIT 10;");
-        for (Usuario usuario : usuarios) {
-            modeloDefaultTabla.addRow(new Object[]{
-                usuario.getId(),
-                usuario.getNombre(),
-                usuario.getApellidos()});
-        }
-        
-        return modeloDefaultTabla;
-    }
-    
     public JPanel cambioPanel(JPanel panelActual, JPanel panelCard){
         panelCard.removeAll();
         panelCard.add(panelActual);
