@@ -22,8 +22,17 @@ public class Alumno {
     boolean estado;
     byte[] cv;
     int idCentro;
+    boolean buscando;
 
     public Alumno() {
+    }
+    
+    public boolean getBuscando() {
+        return buscando;
+    }
+
+    public void setBuscando(boolean buscando) {
+        this.buscando = buscando;
     }
 
     public int getId() {

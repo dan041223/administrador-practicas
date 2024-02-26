@@ -16,6 +16,9 @@ import modelo.Usuario;
  * @author LinkA
  */
 public class PanelLogin extends javax.swing.JFrame {
+    
+    Color botonSeleccionado = new Color(230, 161, 2);
+    Color botonNoSeleccionado = new Color(254, 177, 3);
 
     LoginMetodos loginMetodos = new LoginMetodos();
     public static Usuario usuarioIniciado;
@@ -92,6 +95,12 @@ public class PanelLogin extends javax.swing.JFrame {
         jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel2MouseExited(evt);
             }
         });
 
@@ -216,6 +225,14 @@ public class PanelLogin extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jPanel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseEntered
+        jPanel2.setBackground(botonSeleccionado);
+    }//GEN-LAST:event_jPanel2MouseEntered
+
+    private void jPanel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseExited
+        jPanel2.setBackground(botonNoSeleccionado);
+    }//GEN-LAST:event_jPanel2MouseExited
 
     private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel5MouseEntered
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
