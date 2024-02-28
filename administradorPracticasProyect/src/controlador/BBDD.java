@@ -26,6 +26,7 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Alumno;
+import modelo.Anexo22;
 import modelo.Empresa;
 import modelo.TIPOUSUARIO;
 import modelo.Usuario;
@@ -538,5 +539,41 @@ public class BBDD {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return empresas;
+    }
+    
+    public List obtenerListaAnexo22(String query){
+        Anexo22 anexo;
+        List<Anexo22> anexos = null;
+        try {
+            Connection con = conectar();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            anexos = new ArrayList<>();
+            while (rs.next()) {                
+                anexo = new Anexo22();
+                anexo.setId(rs.getInt("id"));
+                anexo.setIdCentro(rs.getInt("id_entro"));
+                anexo.setFamiliaProfesional(rs.getString("familia_profesional"));
+                anexo.setCicloFormativo(rs.getString("ciclo_formativo"));
+                anexo.setAnexo22(rs.getBytes("anexo22"));
+                anexo.setEliminado(rs.getBoolean("eliminado"));
+
+                anexos.add(anexo);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return anexos;
+    }
+    
+    void borrarAnexo(int idABorrar) {
+        Connection con;
+        try {
+            con = conectar();
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate("UPDATE anexo22 SET eliminado = TRUE WHERE id = " + idABorrar + ";");
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
