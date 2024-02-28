@@ -539,4 +539,24 @@ public class BBDD {
         }
         return empresas;
     }
+
+    public int editarNecesidad(int id, int asir, int dam, int daw, int fin, int mark) {
+        Connection con;
+        int filasMod = 0;
+        try {
+            con = conectar();
+            Statement stmt = con.createStatement();
+             // SQL para la actualización
+            String sql = "UPDATE necesidades SET numDAM = " + dam + ", "
+                    + "SET numDAW = " + daw + ", "
+                    + "SET numASIR = " + asir + ", "
+                    + "SET numFIN = " + fin + ", "
+                    + "SET numMARK = " + mark + ", "
+                    + "WHERE id_empresa =" + id + ";";
+            filasMod = stmt.executeUpdate(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return filasMod;
+    }
 }

@@ -5,17 +5,36 @@
  */
 package vista;
 
+import controlador.BBDD;
+import elementos.Notification;
+import elementos.mensaje.message.MessageDialog;
+import java.awt.Color;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import modelo.Empresa;
+import modelo.Necesidad;
+
 /**
  *
  * @author LinkA
  */
 public class PanelNecesidades extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PanelNecesidades
-     */
+    /*
+    Empresa empresaSeleccionada = panelEmpresas.empresaSeleccionada();
+    */
+    
+    Color botonSeleccionado = new Color(230, 161, 2);
+    Color botonNoSeleccionado = new Color(254, 177, 3);
+    BBDD bbdd = new BBDD();
+    Necesidad necesidad;
+    int idTemporal = 1;
+    
     public PanelNecesidades() {
         initComponents();
+        necesidad
+        rellenarCamposConEmpresa();
+        
     }
 
     /**
@@ -26,20 +45,380 @@ public class PanelNecesidades extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        tfDAM = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel6 = new javax.swing.JLabel();
+        tfDAW = new javax.swing.JTextField();
+        jSeparator3 = new javax.swing.JSeparator();
+        tfMARK = new javax.swing.JTextField();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel7 = new javax.swing.JLabel();
+        tfASIR = new javax.swing.JTextField();
+        jSeparator5 = new javax.swing.JSeparator();
+        jLabel8 = new javax.swing.JLabel();
+        tfFIN = new javax.swing.JTextField();
+        jSeparator6 = new javax.swing.JSeparator();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new java.awt.GridBagLayout());
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/necesidadesVer.png"))); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(53, 355, 0, 0);
+        add(jLabel1, gridBagConstraints);
+
+        jLabel2.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        jLabel2.setText("Necesidades");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 355, 0, 0);
+        add(jLabel2, gridBagConstraints);
+
+        jLabel5.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel5.setText("Alumnos de DAM");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(41, 235, 0, 0);
+        add(jLabel5, gridBagConstraints);
+
+        tfDAM.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        tfDAM.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfDAM.setBorder(null);
+        tfDAM.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfDAMFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfDAMFocusLost(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = 147;
+        gridBagConstraints.ipady = 14;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 235, 0, 0);
+        add(tfDAM, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = 146;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 235, 0, 0);
+        add(jSeparator2, gridBagConstraints);
+
+        jLabel6.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel6.setText("Alumnos de DAW");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 14;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(41, 95, 0, 0);
+        add(jLabel6, gridBagConstraints);
+
+        tfDAW.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        tfDAW.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfDAW.setBorder(null);
+        tfDAW.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfDAWFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfDAWFocusLost(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 16;
+        gridBagConstraints.ipadx = 147;
+        gridBagConstraints.ipady = 14;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 95, 0, 0);
+        add(tfDAW, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 16;
+        gridBagConstraints.ipadx = 146;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 95, 0, 0);
+        add(jSeparator3, gridBagConstraints);
+
+        tfMARK.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        tfMARK.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfMARK.setBorder(null);
+        tfMARK.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfMARKFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfMARKFocusLost(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 13;
+        gridBagConstraints.ipadx = 139;
+        gridBagConstraints.ipady = 14;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 94, 0, 0);
+        add(tfMARK, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 15;
+        gridBagConstraints.ipadx = 146;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 94, 0, 0);
+        add(jSeparator4, gridBagConstraints);
+
+        jLabel7.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel7.setText("Alumnos de ASIR");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(29, 234, 0, 0);
+        add(jLabel7, gridBagConstraints);
+
+        tfASIR.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        tfASIR.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfASIR.setBorder(null);
+        tfASIR.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfASIRFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfASIRFocusLost(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 147;
+        gridBagConstraints.ipady = 14;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 234, 0, 0);
+        add(tfASIR, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 146;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 234, 0, 0);
+        add(jSeparator5, gridBagConstraints);
+
+        jLabel8.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel8.setText("Alumnos de MARK");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 17;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(29, 94, 0, 0);
+        add(jLabel8, gridBagConstraints);
+
+        tfFIN.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        tfFIN.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfFIN.setBorder(null);
+        tfFIN.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfFINFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfFINFocusLost(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridwidth = 12;
+        gridBagConstraints.ipadx = 147;
+        gridBagConstraints.ipady = 14;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 356, 0, 0);
+        add(tfFIN, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 12;
+        gridBagConstraints.ipadx = 146;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 356, 0, 0);
+        add(jSeparator6, gridBagConstraints);
+
+        jLabel9.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel9.setText("Alumnos de FIN");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 365, 0, 0);
+        add(jLabel9, gridBagConstraints);
+
+        jPanel1.setBackground(new java.awt.Color(254, 177, 3));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel1MouseExited(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Editar");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
         );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 21;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.ipadx = 88;
+        gridBagConstraints.ipady = 32;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(96, 78, 11, 10);
+        add(jPanel1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tfDAMFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDAMFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfDAMFocusGained
+
+    private void tfDAMFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDAMFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfDAMFocusLost
+
+    private void tfDAWFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDAWFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfDAWFocusGained
+
+    private void tfDAWFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDAWFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfDAWFocusLost
+
+    private void tfMARKFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfMARKFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfMARKFocusGained
+
+    private void tfMARKFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfMARKFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfMARKFocusLost
+
+    private void tfASIRFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfASIRFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfASIRFocusGained
+
+    private void tfASIRFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfASIRFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfASIRFocusLost
+
+    private void tfFINFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfFINFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfFINFocusGained
+
+    private void tfFINFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfFINFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfFINFocusLost
+
+    private void jPanel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseEntered
+        jPanel1.setBackground(botonSeleccionado);
+    }//GEN-LAST:event_jPanel1MouseEntered
+
+    private void jPanel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseExited
+        jPanel1.setBackground(botonNoSeleccionado);
+    }//GEN-LAST:event_jPanel1MouseExited
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        MessageDialog mensaje = new MessageDialog((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, this));
+        mensaje.showMessage("Confirmación de modificado", "¿Está seguro de querer modificar esta necesidad?");
+        if (mensaje.getMessageType() == MessageDialog.MessageType.OK) {
+            int filasMod = bbdd.editarNecesidad(1, 
+                    Integer.parseInt(tfASIR.getText()), 
+                    Integer.parseInt(tfDAM.getText()), 
+                    Integer.parseInt(tfDAW.getText()), 
+                    Integer.parseInt(tfFIN.getText()), 
+                    Integer.parseInt(tfMARK.getText()));
+            if (filasMod == 0) {
+                Notification notificacion = new Notification((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, this), Notification.Type.WARNING, Notification.Location.TOP_CENTER, "No se ha modificado con éxito");
+                notificacion.showNotification();
+            }else{
+                Notification notificacion = new Notification((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, this), Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "La modificación ha sido realizada con éxito");
+                notificacion.showNotification();
+            }
+        }
+    }//GEN-LAST:event_jPanel1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JTextField tfASIR;
+    private javax.swing.JTextField tfDAM;
+    private javax.swing.JTextField tfDAW;
+    private javax.swing.JTextField tfFIN;
+    private javax.swing.JTextField tfMARK;
     // End of variables declaration//GEN-END:variables
+
+    private void rellenarCamposConNecesidad() {
+        tfASIR.setText();
+    }
 }
