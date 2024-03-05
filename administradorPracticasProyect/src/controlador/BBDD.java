@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -26,6 +27,8 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Alumno;
+import modelo.Centro;
+import modelo.Convenio;
 import modelo.Empresa;
 import modelo.TIPOUSUARIO;
 import modelo.Usuario;
@@ -36,6 +39,7 @@ import org.postgresql.util.PSQLException;
  * @author LinkA
  */
 public class BBDD {
+
     String url = "jdbc:postgresql://aws-0-eu-central-1.pooler.supabase.com:5432/postgres?user=postgres.tbzzihapucuohfrrggup&password=Dalexiana1223";
     String user = "postgres.tbzzihapucuohfrrggup";
     String password = "Dalexiana1223";
@@ -58,8 +62,8 @@ public class BBDD {
         }
         return con;
     }
-    
-    public List obtenerListaUsuarios(String query){
+
+    public List obtenerListaUsuarios(String query) {
         Usuario usuario;
         List<Usuario> usuarios = null;
         try {
@@ -67,7 +71,7 @@ public class BBDD {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             usuarios = new ArrayList<>();
-            while (rs.next()) {                
+            while (rs.next()) {
                 usuario = new Usuario();
                 usuario.setId(rs.getInt("id"));
                 usuario.setNombre(rs.getString("nombre"));
@@ -77,11 +81,11 @@ public class BBDD {
                 usuario.setFechaNacimiento(rs.getString("fecha_nacimiento"));
                 usuario.setPassword(rs.getString("password"));
                 String tipo_usuario = rs.getString("tipo_usuario");
-                
+
                 if (tipo_usuario.equals("administrador")) {
-                usuario.setTipousuario(TIPOUSUARIO.ADMINISTRADOR);
-                }else if (tipo_usuario.equals("tutor")) {
-                usuario.setTipousuario(TIPOUSUARIO.TUTOR);
+                    usuario.setTipousuario(TIPOUSUARIO.ADMINISTRADOR);
+                } else if (tipo_usuario.equals("tutor")) {
+                    usuario.setTipousuario(TIPOUSUARIO.TUTOR);
                 }
                 usuarios.add(usuario);
             }
@@ -90,8 +94,8 @@ public class BBDD {
         }
         return usuarios;
     }
-    
-    public void subirArchivo() throws IOException{
+
+    public void subirArchivo() throws IOException {
         //Nos conectamos a la BBDD
         Connection con = conectar();
         FileInputStream fis = null;
@@ -127,7 +131,7 @@ public class BBDD {
             Connection connection = conectar();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
-            
+
             if (resultSet.next()) {
                 //Creamos array de bytes donde meteremos los bytes resultado de convertir anteriormente el archivo a bytes
                 byte[] datosBinarios = resultSet.getBytes("archivos");
@@ -160,12 +164,12 @@ public class BBDD {
             Statement stmt = con.createStatement();
             stmt.executeUpdate("INSERT INTO usuarios(nombre, apellidos, email, telefono, fecha_nacimiento, password, tipo_usuario) "
                     + "values ('" + nombre + "'"
-                            + ", '" + apellidos + "'"
-                            + ", '" + email + "'"
-                            + ", '" + telefono + "'"
-                            + ", '" + fechaFormateada + "'"
-                            + ", '" + password + "'"
-                            + ", '" + tipoUsuario + "')");
+                    + ", '" + apellidos + "'"
+                    + ", '" + email + "'"
+                    + ", '" + telefono + "'"
+                    + ", '" + fechaFormateada + "'"
+                    + ", '" + password + "'"
+                    + ", '" + tipoUsuario + "')");
         } catch (ParseException ex) {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -181,7 +185,7 @@ public class BBDD {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             alumnos = new ArrayList<>();
-            while (rs.next()) {                
+            while (rs.next()) {
                 alumno = new Alumno();
                 alumno.setId(rs.getInt("id"));
                 alumno.setNombre(rs.getString("nombre"));
@@ -196,7 +200,7 @@ public class BBDD {
                 alumno.setBuscando(rs.getBoolean("buscando"));
                 alumno.setCv(rs.getBytes("curriculum"));
                 alumno.setIdCentro(rs.getInt("id_centro"));
-                
+
                 alumnos.add(alumno);
             }
         } catch (SQLException ex) {
@@ -245,28 +249,28 @@ public class BBDD {
         int filasMod = 0;
         try {
             con = conectar();
-             // SQL para la actualización
-            String sql = "UPDATE alumnos SET nombre=?, apellidos=?, dni=?, direccion=?, " +
-                         "email=?, \"numSeguridadSocial\"=?, telefono=?, ciclo=?, curriculum=? WHERE id=?";
+            // SQL para la actualización
+            String sql = "UPDATE alumnos SET nombre=?, apellidos=?, dni=?, direccion=?, "
+                    + "email=?, \"numSeguridadSocial\"=?, telefono=?, ciclo=?, curriculum=? WHERE id=?";
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
-                // Establecer los parámetros con los nuevos valores
-                preparedStatement.setString(1, nombre);
-                preparedStatement.setString(2, apellidos);
-                preparedStatement.setString(3, dni);
-                preparedStatement.setString(4, direccion);
-                preparedStatement.setString(5, email);
-                preparedStatement.setString(6, numSS);
-                preparedStatement.setString(7, telefono);
-                preparedStatement.setString(8, ciclo);
-                if (cvActual==null) {
-                    preparedStatement.setBinaryStream(9, cvASubir);
-                }else{
-                    preparedStatement.setBytes(9, cvActual);
-                }
-                preparedStatement.setInt(10, idAlumno);
-                
-                filasMod = preparedStatement.executeUpdate();
+            // Establecer los parámetros con los nuevos valores
+            preparedStatement.setString(1, nombre);
+            preparedStatement.setString(2, apellidos);
+            preparedStatement.setString(3, dni);
+            preparedStatement.setString(4, direccion);
+            preparedStatement.setString(5, email);
+            preparedStatement.setString(6, numSS);
+            preparedStatement.setString(7, telefono);
+            preparedStatement.setString(8, ciclo);
+            if (cvActual == null) {
+                preparedStatement.setBinaryStream(9, cvASubir);
+            } else {
+                preparedStatement.setBytes(9, cvActual);
+            }
+            preparedStatement.setInt(10, idAlumno);
+
+            filasMod = preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -288,7 +292,7 @@ public class BBDD {
             preparedStatement.setString(7, telefono);
             preparedStatement.setString(8, ciclo);
             preparedStatement.setBinaryStream(9, cvASubir);
-            
+
             filasMod = preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
@@ -313,9 +317,9 @@ public class BBDD {
         try {
             con = conectar();
             Statement stmt = con.createStatement();
-             // SQL para la actualización
-            String sql = "UPDATE usuarios SET nombre='" + nombre + "', apellidos='" + apellidos + "', fecha_nacimiento='" + fecha_nacimiento + "', password='" + password + "', " +
-                         "email='" + email + "', telefono='" + telefono + "', tipo_usuario='" + tipo_usuario + "' WHERE id=" + idUsuario + "";
+            // SQL para la actualización
+            String sql = "UPDATE usuarios SET nombre='" + nombre + "', apellidos='" + apellidos + "', fecha_nacimiento='" + fecha_nacimiento + "', password='" + password + "', "
+                    + "email='" + email + "', telefono='" + telefono + "', tipo_usuario='" + tipo_usuario + "' WHERE id=" + idUsuario + "";
             filasMod = stmt.executeUpdate(sql);
         } catch (SQLException ex) {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
@@ -339,7 +343,7 @@ public class BBDD {
                 String tipoUsuario = rs.getString("tipo_usuario");
                 if (tipoUsuario.equalsIgnoreCase("ADMINISTRADOR")) {
                     usuario.setTipousuario(TIPOUSUARIO.ADMINISTRADOR);
-                }else{
+                } else {
                     usuario.setTipousuario(TIPOUSUARIO.TUTOR);
                 }
                 usuario.setTelefono(rs.getString("telefono"));
@@ -358,11 +362,11 @@ public class BBDD {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM empresa WHERE buscando = TRUE and eliminado = FALSE");
             empresas = new ArrayList<>();
-            while (rs.next()) {                
+            while (rs.next()) {
                 empresa = new Empresa();
                 empresa.setId(rs.getInt("idEmpresa"));
                 empresa.setNombre(rs.getString("nombre"));
-                empresa.setCif(rs.getInt("cif"));
+                empresa.setCif(rs.getString("cif"));
                 empresa.setDuenio(rs.getString("dueño"));
                 empresa.setEmail(rs.getString("email"));
                 empresa.setTelefono(rs.getString("telefono"));
@@ -372,7 +376,7 @@ public class BBDD {
                 empresa.setNombre_contacto(rs.getString("nombre_contacto"));
                 empresa.setEmail_contacto(rs.getString("email_contacto"));
                 empresa.setBuscando(rs.getBoolean("buscando"));
-                
+
                 empresas.add(empresa);
             }
         } catch (SQLException ex) {
@@ -389,7 +393,7 @@ public class BBDD {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM alumnos WHERE buscando = TRUE and eliminado = FALSE");
             alumnos = new ArrayList<>();
-            while (rs.next()) {                
+            while (rs.next()) {
                 alumno = new Alumno();
                 alumno.setId(rs.getInt("id"));
                 alumno.setNombre(rs.getString("nombre"));
@@ -404,7 +408,7 @@ public class BBDD {
                 alumno.setCv(rs.getBytes("curriculum"));
                 alumno.setIdCentro(rs.getInt("id_centro"));
                 alumno.setBuscando(rs.getBoolean("buscando"));
-                
+
                 alumnos.add(alumno);
             }
         } catch (SQLException ex) {
@@ -413,31 +417,6 @@ public class BBDD {
         return alumnos;
     }
 
-    public Empresa obtenerEmpresa(int id) {
-        Empresa empresa = new Empresa();
-        try {
-            Connection con = conectar();
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from empresa where \"idEmpresa\" = " + id + "");
-            if (rs.next()) {
-                empresa.setId(rs.getInt("idEmpresa"));
-                empresa.setNombre(rs.getString("nombre"));
-                empresa.setCif(rs.getInt("cif"));
-                empresa.setDuenio(rs.getString("dueño"));
-                empresa.setEmail(rs.getString("email"));
-                empresa.setTelefono(rs.getString("telefono"));
-                empresa.setDireccion(rs.getString("direccion"));
-                empresa.setAmbito(rs.getString("ambito"));
-                empresa.setTutor(rs.getString("tutor"));
-                empresa.setNombre_contacto(rs.getString("nombre_contacto"));
-                empresa.setEmail_contacto(rs.getString("email_contacto"));
-                empresa.setBuscando(rs.getBoolean("buscando"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return empresa;
-    }
 
     public int agregarBolsa(Alumno alumnoSeleccionado, Empresa empresaSeleccionada) {
         int filasMod = 0;
@@ -447,7 +426,7 @@ public class BBDD {
             PreparedStatement preparedStatement = con.prepareStatement(query);
             preparedStatement.setInt(1, alumnoSeleccionado.getId());
             preparedStatement.setInt(2, empresaSeleccionada.getId());
-            
+
             filasMod = preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
@@ -461,7 +440,7 @@ public class BBDD {
         try {
             con = conectar();
             Statement stmt = con.createStatement();
-             // SQL para la actualización
+            // SQL para la actualización
             String sql = "UPDATE alumnos SET buscando = FALSE WHERE id=" + id + "";
             filasMod = stmt.executeUpdate(sql);
         } catch (SQLException ex) {
@@ -475,13 +454,13 @@ public class BBDD {
         try {
             Connection con = conectar();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM alumnos WHERE CAST(id AS TEXT) LIKE '%" + valorIntroducidoAlumnos
-                                                        + "%' "
-                                                        + "OR nombre LIKE '%" + valorIntroducidoAlumnos + "%' "
-                                                        + "OR apellidos LIKE '%" + valorIntroducidoAlumnos + "%' "
-                                                        + "ORDER BY id ASC");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM alumnos WHERE CAST(\"idEmpresa\" AS TEXT) LIKE '%" + valorIntroducidoAlumnos
+                    + "%' "
+                    + "OR nombre LIKE '%" + valorIntroducidoAlumnos + "%' "
+                    + "OR apellidos LIKE '%" + valorIntroducidoAlumnos + "%' "
+                    + "ORDER BY id ASC");
             alumnos = new ArrayList<>();
-            while (rs.next()) {                
+            while (rs.next()) {
                 alumno = new Alumno();
                 alumno.setId(rs.getInt("id"));
                 alumno.setNombre(rs.getString("nombre"));
@@ -496,7 +475,7 @@ public class BBDD {
                 alumno.setBuscando(rs.getBoolean("buscando"));
                 alumno.setCv(rs.getBytes("curriculum"));
                 alumno.setIdCentro(rs.getInt("id_centro"));
-                
+
                 alumnos.add(alumno);
             }
         } catch (SQLException ex) {
@@ -512,16 +491,16 @@ public class BBDD {
             Connection con = conectar();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM empresa WHERE CAST(\"idEmpresa\" AS TEXT) LIKE '%" + valorIntroducidoEmpresas
-                                                        + "%' "
-                                                        + "OR nombre LIKE '%" + valorIntroducidoEmpresas + "%' "
-                                                        + "OR ambito LIKE '%" + valorIntroducidoEmpresas + "%' "
-                                                        + "ORDER BY \"idEmpresa\" ASC");
+                    + "%' "
+                    + "OR nombre LIKE '%" + valorIntroducidoEmpresas + "%' "
+                    + "OR ambito LIKE '%" + valorIntroducidoEmpresas + "%' "
+                    + "ORDER BY \"idEmpresa\" ASC");
             empresas = new ArrayList<>();
-            while (rs.next()) {                
+            while (rs.next()) {
                 empresa = new Empresa();
-                empresa.setId(rs.getInt("idEmpresa"));
+                empresa.setId(rs.getInt("\"idEmpresa\""));
                 empresa.setNombre(rs.getString("nombre"));
-                empresa.setCif(rs.getInt("cif"));
+                empresa.setCif(rs.getString("cif"));
                 empresa.setDuenio(rs.getString("dueño"));
                 empresa.setEmail(rs.getString("email"));
                 empresa.setTelefono(rs.getString("telefono"));
@@ -531,7 +510,7 @@ public class BBDD {
                 empresa.setNombre_contacto(rs.getString("nombre_contacto"));
                 empresa.setEmail_contacto(rs.getString("email_contacto"));
                 empresa.setBuscando(rs.getBoolean("buscando"));
-                
+
                 empresas.add(empresa);
             }
         } catch (SQLException ex) {
@@ -554,9 +533,145 @@ public class BBDD {
                     + "SET numMARK = " + mark + ", "
                     + "WHERE id_empresa =" + id + ";";
             filasMod = stmt.executeUpdate(sql);
+        }catch(Exception e){}
+        return filasMod;
+        }
+        
+    // Empresas 
+    List<Empresa> obtenerListaEmpresas(String query) {
+        Empresa empresa;
+        List<Empresa> empresas = null;
+        try {
+            Connection con = conectar();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            empresas = new ArrayList<>();
+            while (rs.next()) {
+                empresa = new Empresa();
+                empresa.setId(rs.getInt("idEmpresa"));
+                empresa.setNombre(rs.getString("nombre"));
+                empresa.setCif(rs.getString("cif"));
+                empresa.setDireccion(rs.getString("direccion"));
+                empresa.setDuenio(rs.getString("dueño"));
+                empresa.setAmbito(rs.getString("ambito"));
+                empresa.setTelefono(rs.getString("telefono"));
+                empresa.setEmail(rs.getString("email"));
+                empresa.setTutor(rs.getString("tutor"));
+                empresa.setNombre_contacto(rs.getString("nombre_contacto"));
+                empresa.setTelefono_contacto(rs.getString("telefono_contacto"));
+                empresa.setEmail_contacto(rs.getString("email_contacto"));
+
+                empresas.add(empresa);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return empresas;
+
+    }
+
+    public int agregarEmpresa(String nombre, String cif, String direccion, String duenio, String ambito, String telefono, String email, String tutor, String nombre_contacto, String telefono_contacto, String email_contacto) {
+        int filasMod = 0;
+        try {
+            Connection con = conectar();
+            String query = "INSERT INTO empresa(nombre, cif, direccion, duenio, ambito,  email, telefono, correo electronico, tutor, telefono_contacto, nombre_contacto, contacto_correo electronico) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, nombre);
+            preparedStatement.setString(2, cif);
+            preparedStatement.setString(3, direccion);
+            preparedStatement.setString(4, duenio);
+            preparedStatement.setString(5, ambito);
+            preparedStatement.setString(6, telefono);
+            preparedStatement.setString(7, email);
+            preparedStatement.setString(8, tutor);
+            preparedStatement.setString(9, nombre_contacto);
+            preparedStatement.setString(10, telefono_contacto);
+            preparedStatement.setString(11, email_contacto);
+
+            filasMod = preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return filasMod;
     }
+    
+    public Empresa obtenerEmpresa(int idEscogido) {
+        Empresa empresa = new Empresa();
+        try {
+            Connection con = conectar();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from empresa where idEmpresa = " + idEscogido + "");
+            if (rs.next()) {
+                empresa.setId(rs.getInt("idEmpresa"));
+                empresa.setNombre(rs.getString("nombre"));
+                empresa.setCif(rs.getString("cif"));
+                empresa.setDireccion(rs.getString("direccion"));
+                empresa.setDuenio(rs.getString("dueño"));
+                empresa.setAmbito(rs.getString("ambito"));
+                empresa.setTelefono(rs.getString("telefono"));
+                empresa.setEmail(rs.getString("email"));
+                empresa.setTutor(rs.getString("tutor"));
+                empresa.setTelefono_contacto(rs.getString("telefono_contacto"));
+                empresa.setNombre_contacto(rs.getString("nombre_contactto"));
+                empresa.setEmail_contacto(rs.getString("email_contacto")); 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return empresa;
+    }
+    
+     List<Convenio> obtenerListaConvenios(String query) {
+       Convenio convenio;
+        List<Convenio> convenios = null;
+        try {
+            Connection con = conectar();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            convenios = new ArrayList<>();
+            while (rs.next()) {
+                convenio = new Convenio();
+                convenio.setId(rs.getInt("id"));
+                convenio.setIdEmpresa(rs.getInt("id_empresa"));
+                convenio.setAnexo2_1(rs.getBytes("anexo2.1"));
+                convenio.setAnexo1(rs.getBytes("anexo1"));
+                convenios.add(convenio);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return convenios;
+    }
+     
+    /**
+     *
+    
+     */
+   
+     /*
+     
+      public int agregarConvenio(Empresa empresaSeleccionada, FileInputStream anexo2, Centro centroSelecionado, FileInputStream anexo1) {
+        int filasMod = 0;
+        try {
+            Connection con = conectar();
+            String query = "INSERT INTO convenio(id_empresa, anexo2.1, id_centro, anexo1 ) VALUES (?,?,?,?)";
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setInt(1, empresaSeleccionada.getId());
+            preparedStatement.setBinaryStream(2, anexo2);
+            preparedStatement.setInt(3, centroSelecionado.getId());
+            preparedStatement.setBinaryStream(4, anexo1);
+            
+            filasMod = preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return filasMod;
+    }
+     
+     
+     
+     */
+     // Me sale un error 
+    
+
 }

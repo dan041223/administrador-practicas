@@ -65,7 +65,8 @@ public class PanelLogin extends javax.swing.JFrame {
 
         tfEmail.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         tfEmail.setForeground(new java.awt.Color(204, 204, 204));
-        tfEmail.setText("Introduzca su correo electrónico");
+        tfEmail.setText("prueba3");
+        tfEmail.setToolTipText("Introduzca su correo electrónico");
         tfEmail.setBorder(null);
         tfEmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -80,7 +81,8 @@ public class PanelLogin extends javax.swing.JFrame {
         jLabel3.setText("Contraseña");
 
         tfPassword.setForeground(new java.awt.Color(204, 204, 204));
-        tfPassword.setText("*************");
+        tfPassword.setText("prueba3");
+        tfPassword.setToolTipText("*************");
         tfPassword.setBorder(null);
         tfPassword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
