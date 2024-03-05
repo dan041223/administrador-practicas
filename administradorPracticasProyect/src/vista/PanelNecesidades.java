@@ -27,14 +27,13 @@ public class PanelNecesidades extends javax.swing.JPanel {
     Color botonSeleccionado = new Color(230, 161, 2);
     Color botonNoSeleccionado = new Color(254, 177, 3);
     BBDD bbdd = new BBDD();
-    Empresa empresa = new Empresa();
+    Empresa empresa = PanelEmpresa.empresaSeleccionada;
     Necesidad necesidad;
     int idTemporal = 1;
     
     
     public PanelNecesidades() {
         initComponents();
-        necesidad = 
         rellenarCamposConEmpresa();
         
     }
@@ -232,7 +231,7 @@ public class PanelNecesidades extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(122, 122, 122)
                         .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,7 +270,7 @@ public class PanelNecesidades extends javax.swing.JPanel {
                 .addComponent(tfFIN, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -369,6 +368,11 @@ public class PanelNecesidades extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void rellenarCamposConEmpresa() {
-        tfASIR.setText(emp);
+        Necesidad ne = bbdd.obtenerNecesidadDeEmpresa(empresa);
+        tfDAM.setText(Integer.toString(ne.getNumDAM()));
+        tfDAW.setText(Integer.toString(ne.getNumDAW()));
+        tfASIR.setText(Integer.toString(ne.getNumASIR()));
+        tfFIN.setText(Integer.toString(ne.getNumFIN()));
+        tfMARK.setText(Integer.toString(ne.getNumMARK()));
     }
 }

@@ -8,6 +8,7 @@ package vista;
 import controlador.EmpresaMetodos;
 import java.awt.Color;
 import java.util.List;
+import javax.swing.JFrame;
 import modelo.Empresa;
 
 /**
@@ -19,8 +20,9 @@ public class PanelEmpresa extends javax.swing.JPanel {
     Color botonSeleccionado = new Color(230, 161, 2);
     Color botonNoSeleccionado = new Color(254, 177, 3);
     EmpresaMetodos empresaMetodos = new EmpresaMetodos();
-   List<Empresa> empresas = empresaMetodos
+    List<Empresa> empresas = empresaMetodos
                         .rellenarListaEmpresa("select * from empresa where eliminado = FALSE ORDER BY \"idEmpresa\" ASC");
+    public static Empresa empresaSeleccionada;
 
 
     public PanelEmpresa() {
@@ -46,6 +48,7 @@ public class PanelEmpresa extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaEmpresa = new javax.swing.JTable();
@@ -57,8 +60,11 @@ public class PanelEmpresa extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new java.awt.GridBagLayout());
 
         tablaEmpresa.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         tablaEmpresa.setModel(new javax.swing.table.DefaultTableModel(
@@ -69,7 +75,7 @@ public class PanelEmpresa extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Nombre", "Cif", "Dirección", "Dueño", "Ambito", "Telefono", "Email", "Tutor", "Telefono de contacto", "Nombre de contacto", "email del contacto"
+                "Id", "Nombre", "Cif", "Dirección", "Dueño", "Ambito", "Utilidad", "Email", "Tutor", "Email Tutor", "Telefono de contacto", "Nombre de contacto"
             }
         ) {
             Class[] types = new Class [] {
@@ -88,11 +94,27 @@ public class PanelEmpresa extends javax.swing.JPanel {
             }
         });
         tablaEmpresa.setSelectionBackground(new java.awt.Color(254, 177, 3));
+        tablaEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaEmpresaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaEmpresa);
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 1015;
+        gridBagConstraints.ipady = 570;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(18, 10, 11, 10);
+        add(jScrollPane1, gridBagConstraints);
+
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-
-
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -182,6 +204,15 @@ public class PanelEmpresa extends javax.swing.JPanel {
                 .addGap(6, 6, 6))
         );
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 4;
+        gridBagConstraints.ipadx = 228;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 10, 0, 0);
+        add(jPanel3, gridBagConstraints);
+
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar (Personalizado).png"))); // NOI18N
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -189,43 +220,58 @@ public class PanelEmpresa extends javax.swing.JPanel {
                 jLabel2MouseClicked(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(22, 6, 0, 10);
+        add(jLabel2, gridBagConstraints);
 
         jLabel3.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel3.setText("Agregar empresa");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(34, 342, 0, 0);
+        add(jLabel3, gridBagConstraints);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        jPanel4.setBackground(new java.awt.Color(254, 177, 3));
+        jPanel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel4MouseClicked(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jLabel4.setText("Necesidades");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1038, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)))
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
                 .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel3)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(24, 150, 0, 0);
+        add(jPanel4, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
@@ -233,6 +279,27 @@ public class PanelEmpresa extends javax.swing.JPanel {
         new VentanaAgregarEmpresa().setVisible(true);
         
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
+        System.out.println(empresaSeleccionada.getId());
+        new VentanaNecesidad().setVisible(true);
+    }//GEN-LAST:event_jPanel4MouseClicked
+
+    private void tablaEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEmpresaMouseClicked
+        int numFilaSeleccionada = tablaEmpresa.getSelectedRow();
+        empresaSeleccionada = new Empresa();
+        empresaSeleccionada.setId(Integer.parseInt(tablaEmpresa.getValueAt(numFilaSeleccionada, 0).toString()));
+        empresaSeleccionada.setNombre((String) tablaEmpresa.getValueAt(numFilaSeleccionada, 1));
+        empresaSeleccionada.setNombre( (String) tablaEmpresa.getValueAt(numFilaSeleccionada, 2));
+        empresaSeleccionada.setDireccion((String) tablaEmpresa.getValueAt(numFilaSeleccionada, 3));
+        empresaSeleccionada.setDuenio((String) tablaEmpresa.getValueAt(numFilaSeleccionada, 4));
+        empresaSeleccionada.setAmbito((String) tablaEmpresa.getValueAt(numFilaSeleccionada, 5));
+        empresaSeleccionada.setEmail((String) tablaEmpresa.getValueAt(numFilaSeleccionada, 7));
+        empresaSeleccionada.setTutor((String) tablaEmpresa.getValueAt(numFilaSeleccionada, 8));
+        empresaSeleccionada.setEmail_contacto((String) tablaEmpresa.getValueAt(numFilaSeleccionada, 9));
+        empresaSeleccionada.setTelefono_contacto((String) tablaEmpresa.getValueAt(numFilaSeleccionada, 10));
+        empresaSeleccionada.setNombre_contacto((String) tablaEmpresa.getValueAt(numFilaSeleccionada, 11));
+    }//GEN-LAST:event_tablaEmpresaMouseClicked
 
    
 
@@ -285,9 +352,11 @@ public class PanelEmpresa extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     public static javax.swing.JTable tablaEmpresa;

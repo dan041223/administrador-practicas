@@ -547,10 +547,13 @@ public class VentanaMasInfoUsuario extends javax.swing.JFrame {
         tfPassword.setText(usuario.getPassword());
         tfEmail.setText(usuario.getEmail());
         tfTelefono.setText(usuario.getTelefono());
+        cbTipoUsuario.addItem("-Tipo de usuario-");
+        cbTipoUsuario.addItem("administrador");
+        cbTipoUsuario.addItem("tutor");
         if (usuario.getTipousuario() == TIPOUSUARIO.ADMINISTRADOR) {
-            cbTipoUsuario.addItem("administrador");
+            cbTipoUsuario.setSelectedItem("administrador");
         }else{
-            cbTipoUsuario.addItem("tutor");
+            cbTipoUsuario.setSelectedItem("tutor");
         }
     }
 }

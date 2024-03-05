@@ -475,6 +475,10 @@ public class PanelMenu extends javax.swing.JPanel {
          PanelCentralMenu = menuMetodos.cambioPanel(new PanelEmpresa(), PanelCentralMenu);
     }//GEN-LAST:event_PanelBotonMenuIzqEmpresasMouseClicked
 
+    private void PanelBotonMenuIzqNecesidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonMenuIzqNecesidadesMouseClicked
+        PanelCentralMenu = menuMetodos.cambioPanel(new PanelNecesidades(), PanelCentralMenu);
+    }//GEN-LAST:event_PanelBotonMenuIzqNecesidadesMouseClicked
+
     private void PanelBotonMenuIzqEmpresasMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_PanelBotonMenuIzqEmpresasMouseEntered
         PanelBotonMenuIzqEmpresas.setBackground(botonSeleccionado);
         jPanel11.setBackground(tagSeleccionado);
