@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Development/Projects/Trimestre-2/SGE/administrador-practicas/administradorPracticasProyect/src/vista/PanelLogin.java</file>
-            <file>file:/C:/Development/Projects/Trimestre-2/SGE/administrador-practicas/administradorPracticasProyect/src/controlador/BBDD.java</file>
-            <file>file:/C:/Development/Projects/Trimestre-2/SGE/administrador-practicas/administradorPracticasProyect/src/vista/PanelAlumnos.java</file>
-            <file>file:/C:/Development/Projects/Trimestre-2/SGE/administrador-practicas/administradorPracticasProyect/src/modelo/Alumno.java</file>
-            <file>file:/C:/Development/Projects/Trimestre-2/SGE/administrador-practicas/administradorPracticasProyect/src/controlador/AlumnosMetodos.java</file>
+            <file>file:/C:/Users/diana/OneDrive/Documentos/GitHub/administrador-practicas/administradorPracticasProyect/src/vista/PanelEmpresa.java</file>
+            <file>file:/C:/Users/diana/OneDrive/Documentos/GitHub/administrador-practicas/administradorPracticasProyect/src/vista/VentanaAgregarEmpresa.java</file>
+            <file>file:/C:/Users/diana/OneDrive/Documentos/GitHub/administrador-practicas/administradorPracticasProyect/src/vista/VentanaAgregarAlumno.java</file>
         </group>
     </open-files>
 </project-private>

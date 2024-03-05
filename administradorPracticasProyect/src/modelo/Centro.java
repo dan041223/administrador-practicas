@@ -11,4 +11,17 @@ package modelo;
  */
 public class Centro {
     
+    private int id;
+    private String nombre;
+    private String email;
+    private String telefono;
+    private String direccion;
+    private int id_tutor;
+    boolean estado;
+    boolean buscando;
+    
+    
+    
+    
+    
 }

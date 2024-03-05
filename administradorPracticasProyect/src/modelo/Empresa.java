@@ -10,18 +10,19 @@ package modelo;
  * @author LinkA
  */
 public class Empresa {
-    int id;
-    String nombre;
-    int cif;
-    String direccion;
-    String duenio;
-    String ambito;
-    String telefono;
-    String email;
-    String tutor;
-    String telefono_contacto;
-    String nombre_contacto;
-    String email_contacto;
+
+    private int id;
+    private String nombre;
+    private String cif;
+    private String direccion;
+    private String duenio;
+    private String ambito;
+    private String telefono;
+    private String email;
+    private String tutor;
+    private String nombre_contacto;
+    private String telefono_contacto;
+    private String email_contacto;
     boolean buscando;
 
     public Empresa() {
@@ -43,11 +44,11 @@ public class Empresa {
         this.nombre = nombre;
     }
 
-    public int getCif() {
+    public String getCif() {
         return cif;
     }
 
-    public void setCif(int cif) {
+    public void setCif(String cif) {
         this.cif = cif;
     }
 
@@ -130,6 +131,5 @@ public class Empresa {
     public void setBuscando(boolean buscando) {
         this.buscando = buscando;
     }
-    
-    
+
 }
