@@ -153,7 +153,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="prueba3"/>
+            <Property name="text" type="java.lang.String" value="Introduzca su correo electr&#xf3;nico"/>
             <Property name="toolTipText" type="java.lang.String" value="Introduzca su correo electr&#xf3;nico"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -181,7 +181,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="prueba3"/>
+            <Property name="text" type="java.lang.String" value="*************"/>
             <Property name="toolTipText" type="java.lang.String" value="*************"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>

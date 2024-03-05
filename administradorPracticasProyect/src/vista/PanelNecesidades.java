@@ -5,17 +5,37 @@
  */
 package vista;
 
+import controlador.BBDD;
+import elementos.Notification;
+import elementos.mensaje.message.MessageDialog;
+import java.awt.Color;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import modelo.Empresa;
+import modelo.Necesidad;
+
 /**
  *
  * @author LinkA
  */
 public class PanelNecesidades extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PanelNecesidades
-     */
+    /*
+    Empresa empresaSeleccionada = panelEmpresas.empresaSeleccionada();
+    */
+    
+    Color botonSeleccionado = new Color(230, 161, 2);
+    Color botonNoSeleccionado = new Color(254, 177, 3);
+    BBDD bbdd = new BBDD();
+    Empresa empresa = PanelEmpresa.empresaSeleccionada;
+    Necesidad necesidad;
+    int idTemporal = 1;
+    
+    
     public PanelNecesidades() {
         initComponents();
+        rellenarCamposConEmpresa();
+        
     }
 
     /**
@@ -27,19 +47,332 @@ public class PanelNecesidades extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        tfDAM = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel6 = new javax.swing.JLabel();
+        tfDAW = new javax.swing.JTextField();
+        jSeparator3 = new javax.swing.JSeparator();
+        tfMARK = new javax.swing.JTextField();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel7 = new javax.swing.JLabel();
+        tfASIR = new javax.swing.JTextField();
+        jSeparator5 = new javax.swing.JSeparator();
+        jLabel8 = new javax.swing.JLabel();
+        tfFIN = new javax.swing.JTextField();
+        jSeparator6 = new javax.swing.JSeparator();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/necesidadesVer.png"))); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        jLabel2.setText("Necesidades");
+
+        jLabel5.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel5.setText("Alumnos de DAM");
+
+        tfDAM.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        tfDAM.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfDAM.setBorder(null);
+        tfDAM.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfDAMFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfDAMFocusLost(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel6.setText("Alumnos de DAW");
+
+        tfDAW.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        tfDAW.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfDAW.setBorder(null);
+        tfDAW.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfDAWFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfDAWFocusLost(evt);
+            }
+        });
+
+        tfMARK.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        tfMARK.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfMARK.setBorder(null);
+        tfMARK.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfMARKFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfMARKFocusLost(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel7.setText("Alumnos de ASIR");
+
+        tfASIR.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        tfASIR.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfASIR.setBorder(null);
+        tfASIR.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfASIRFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfASIRFocusLost(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel8.setText("Alumnos de MARK");
+
+        tfFIN.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        tfFIN.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfFIN.setBorder(null);
+        tfFIN.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfFINFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfFINFocusLost(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel9.setText("Alumnos de FIN");
+
+        jPanel1.setBackground(new java.awt.Color(254, 177, 3));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel1MouseExited(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Aceptar");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(137, 137, 137)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel5)
+                        .addGap(103, 103, 103)
+                        .addComponent(jLabel6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(tfDAM, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(95, 95, 95)
+                        .addComponent(tfDAW, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(95, 95, 95)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(104, 104, 104)
+                        .addComponent(jLabel8))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tfASIR, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(95, 95, 95)
+                        .addComponent(tfMARK, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(95, 95, 95)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(131, 131, 131)
+                        .addComponent(jLabel9))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(122, 122, 122)
+                        .addComponent(tfFIN, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(122, 122, 122)
+                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfDAM, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfDAW, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfASIR, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfMARK, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addComponent(tfFIN, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tfDAMFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDAMFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfDAMFocusGained
+
+    private void tfDAMFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDAMFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfDAMFocusLost
+
+    private void tfDAWFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDAWFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfDAWFocusGained
+
+    private void tfDAWFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDAWFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfDAWFocusLost
+
+    private void tfMARKFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfMARKFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfMARKFocusGained
+
+    private void tfMARKFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfMARKFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfMARKFocusLost
+
+    private void tfASIRFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfASIRFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfASIRFocusGained
+
+    private void tfASIRFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfASIRFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfASIRFocusLost
+
+    private void tfFINFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfFINFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfFINFocusGained
+
+    private void tfFINFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfFINFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfFINFocusLost
+
+    private void jPanel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseEntered
+        jPanel1.setBackground(botonSeleccionado);
+    }//GEN-LAST:event_jPanel1MouseEntered
+
+    private void jPanel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseExited
+        jPanel1.setBackground(botonNoSeleccionado);
+    }//GEN-LAST:event_jPanel1MouseExited
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        MessageDialog mensaje = new MessageDialog((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, this));
+        mensaje.showMessage("Confirmación de modificado", "¿Está seguro de querer modificar esta necesidad?");
+        if (mensaje.getMessageType() == MessageDialog.MessageType.OK) {
+            int filasMod = bbdd.editarNecesidad(1, 
+                    Integer.parseInt(tfASIR.getText()), 
+                    Integer.parseInt(tfDAM.getText()), 
+                    Integer.parseInt(tfDAW.getText()), 
+                    Integer.parseInt(tfFIN.getText()), 
+                    Integer.parseInt(tfMARK.getText()));
+            if (filasMod == 0) {
+                Notification notificacion = new Notification((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, this), Notification.Type.WARNING, Notification.Location.TOP_CENTER, "No se ha modificado con éxito");
+                notificacion.showNotification();
+            }else{
+                Notification notificacion = new Notification((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, this), Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "La modificación ha sido realizada con éxito");
+                notificacion.showNotification();
+            }
+        }
+    }//GEN-LAST:event_jPanel1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JTextField tfASIR;
+    private javax.swing.JTextField tfDAM;
+    private javax.swing.JTextField tfDAW;
+    private javax.swing.JTextField tfFIN;
+    private javax.swing.JTextField tfMARK;
     // End of variables declaration//GEN-END:variables
+
+    private void rellenarCamposConEmpresa() {
+        Necesidad ne = bbdd.obtenerNecesidadDeEmpresa(empresa);
+        tfDAM.setText(Integer.toString(ne.getNumDAM()));
+        tfDAW.setText(Integer.toString(ne.getNumDAW()));
+        tfASIR.setText(Integer.toString(ne.getNumASIR()));
+        tfFIN.setText(Integer.toString(ne.getNumFIN()));
+        tfMARK.setText(Integer.toString(ne.getNumMARK()));
+    }
 }

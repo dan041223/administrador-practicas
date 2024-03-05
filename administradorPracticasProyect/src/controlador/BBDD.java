@@ -30,6 +30,7 @@ import modelo.Alumno;
 import modelo.Centro;
 import modelo.Convenio;
 import modelo.Empresa;
+import modelo.Necesidad;
 import modelo.TIPOUSUARIO;
 import modelo.Usuario;
 import org.postgresql.util.PSQLException;
@@ -242,6 +243,48 @@ public class BBDD {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return alumno;
+    }
+    
+    public int modificarEmpresa(int idEmpresa, String nombre, String cif, String direccion, String duenio, String ambito, String telefono, String email, String tutor, String telefono_contacto, String nombre_contacto, String email_contacto) {
+        Connection con;
+        int filasMod = 0;
+        try {
+            con = conectar();
+            // SQL para la actualización
+            String sql = "UPDATE empresa SET nombre=?, cif=?, direccion=?, dueño=?, ambito=?, telefono=?, email=?, tutor=?, telefono_contacto=?, nombre_contacto=?, email_contacto=? "
+                    + "WHERE \"idEmpresa\"=?";
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            // Establecer los parámetros con los nuevos valores
+            preparedStatement.setString(1, nombre);
+            preparedStatement.setString(2, cif);
+            preparedStatement.setString(3, direccion);
+            preparedStatement.setString(4, duenio);
+            preparedStatement.setString(5, ambito);
+            preparedStatement.setString(6, telefono);
+            preparedStatement.setString(7, email);
+            preparedStatement.setString(8, tutor);
+            preparedStatement.setString(9, telefono_contacto);
+            preparedStatement.setString(10, nombre_contacto);
+            preparedStatement.setString(11, email_contacto);
+            preparedStatement.setInt(12, idEmpresa);
+
+            filasMod = preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return filasMod;
+    }
+    
+    public void borrarEmpresa(int idABorrar){
+        Connection con;
+        try {
+            con = conectar();
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate("UPDATE empresa SET eliminado = TRUE WHERE \"idEmpresa\" = " + idABorrar + ";");
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public int modificarAlumno(int idAlumno, String nombre, String apellidos, String dni, String direccion, String email, String numSS, String telefono, String ciclo, byte[] cvActual, FileInputStream cvASubir) {
@@ -519,6 +562,51 @@ public class BBDD {
         return empresas;
     }
 
+    public int editarNecesidad(int id, int asir, int dam, int daw, int fin, int mark) {
+        int filasMod = 0;
+        try {
+            Connection con;
+            
+            con = conectar();
+            Statement stmt = con.createStatement();
+            System.out.println(dam + " " + daw + " " + asir + " " + fin + " " + mark + " " + id + " ");
+            // SQL para la actualización
+            String sql = "UPDATE necesidades SET \"numDAM\" = " + dam + ", "
+                    + "\"numDAW\" = " + daw + ", "
+                    + "\"numASIR\" = " + asir + ", "
+                    + "\"numFIN\" = " + fin + ", "
+                    + "\"numMARK\" = " + mark + " "
+                    + "WHERE id_empresa =" + id + ";";
+            filasMod = stmt.executeUpdate(sql);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return filasMod;
+    }
+    
+    public Necesidad obtenerNecesidadDeEmpresa(Empresa empresa){
+        Necesidad ne = null;
+        try {
+            Connection con;
+            con = conectar();
+            Statement stmt = con.createStatement();
+            System.out.println(empresa.getId());
+            ResultSet rs = stmt.executeQuery("select * from necesidades where id_empresa = " + empresa.getId());
+            if (rs.next()) {                
+                ne = new Necesidad();
+                ne.setNumDAM(rs.getInt("numDAM"));
+                ne.setNumDAW(rs.getInt("numDAW"));
+                ne.setNumASIR(rs.getInt("numASIR"));
+                ne.setNumMARK(rs.getInt("numMARK"));
+                ne.setNumFIN(rs.getInt("numFIN"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ne;
+    }
+        
     // Empresas 
     List<Empresa> obtenerListaEmpresas(String query) {
         Empresa empresa;
@@ -556,7 +644,7 @@ public class BBDD {
         int filasMod = 0;
         try {
             Connection con = conectar();
-            String query = "INSERT INTO empresa(nombre, cif, direccion, duenio, ambito,  email, telefono, correo electronico, tutor, telefono_contacto, nombre_contacto, contacto_correo electronico) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO empresa(nombre, cif, direccion, dueño, ambito,  email, telefono, tutor, telefono_contacto, nombre_contacto, email_contacto) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1, nombre);
             preparedStatement.setString(2, cif);
@@ -566,8 +654,8 @@ public class BBDD {
             preparedStatement.setString(6, telefono);
             preparedStatement.setString(7, email);
             preparedStatement.setString(8, tutor);
-            preparedStatement.setString(9, nombre_contacto);
-            preparedStatement.setString(10, telefono_contacto);
+            preparedStatement.setString(9, telefono_contacto);
+            preparedStatement.setString(10, nombre_contacto);
             preparedStatement.setString(11, email_contacto);
 
             filasMod = preparedStatement.executeUpdate();
@@ -582,7 +670,7 @@ public class BBDD {
         try {
             Connection con = conectar();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from empresa where idEmpresa = " + idEscogido + "");
+            ResultSet rs = stmt.executeQuery("select * from empresa where \"idEmpresa\" = " + idEscogido + "");
             if (rs.next()) {
                 empresa.setId(rs.getInt("idEmpresa"));
                 empresa.setNombre(rs.getString("nombre"));
@@ -594,7 +682,7 @@ public class BBDD {
                 empresa.setEmail(rs.getString("email"));
                 empresa.setTutor(rs.getString("tutor"));
                 empresa.setTelefono_contacto(rs.getString("telefono_contacto"));
-                empresa.setNombre_contacto(rs.getString("nombre_contactto"));
+                empresa.setNombre_contacto(rs.getString("nombre_contacto"));
                 empresa.setEmail_contacto(rs.getString("email_contacto")); 
             }
         } catch (SQLException ex) {

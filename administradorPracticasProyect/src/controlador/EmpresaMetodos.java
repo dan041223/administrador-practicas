@@ -57,15 +57,15 @@ public class EmpresaMetodos {
                 message.showMessage("Confirmacion de borrado", "¿Esta seguro de querer borrar esta empresa?");
                 if (message.getMessageType()==MessageDialog.MessageType.OK) {
                     int idABorrar = (Integer) tabla.getModel().getValueAt(row, 0);
-                    bbdd.borrarAlumno(idABorrar);
+                    bbdd.borrarEmpresa(idABorrar);
                     
                     List<Empresa> empresas = rellenarListaEmpresa("SELECT * FROM empresa where eliminado = FALSE ORDER BY nombre ASC");
                     PanelEmpresa.tablaEmpresa = rellenarTablaEmpresa(PanelEmpresa.tablaEmpresa, empresas);
                     
-                    Notification notificacion = new Notification(((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, tabla)), Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "¡Alumno eliminado con exito!");
+                    Notification notificacion = new Notification(((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, tabla)), Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "¡Empresa eliminada con exito!");
                     notificacion.showNotification();
                 }else{
-                    Notification notificacion = new Notification(((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, tabla)), Notification.Type.WARNING, Notification.Location.TOP_CENTER, "El alumno no ha sido eliminado");
+                    Notification notificacion = new Notification(((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, tabla)), Notification.Type.WARNING, Notification.Location.TOP_CENTER, "La empresa no ha sido eliminada");
                     notificacion.showNotification();
                 }
             }

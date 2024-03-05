@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -677,8 +678,11 @@ public class VentanaAgregarEmpresa extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel5MouseExited
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        empresaMetodos.comprobarCampos(this, 
-     
+        MessageDialog message = new MessageDialog(((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, jPanel1)));
+        message.showMessage("Confirmacion de creacion", "¿Esta seguro de querer crear este alumno?");
+        
+        if (message.getMessageType() == MessageDialog.MessageType.OK) {
+            empresaMetodos.comprobarCampos(this,
                 tfNombreDeLaEmpresa.getText(), 
                 tfCif.getText(), 
                 tfDueño.getText(),
@@ -690,6 +694,11 @@ public class VentanaAgregarEmpresa extends javax.swing.JFrame {
                 tfTelefonoDeContacto1.getText(),
                 tfNombreDeContacto.getText(), 
                 tfEmailDeContacto.getText());
+        }else{
+            Notification notificacion = new Notification(((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, jPanel1)), Notification.Type.INFO, Notification.Location.TOP_CENTER, "¡No se ha creado una empresa!");
+            notificacion.showNotification();
+        }
+        
     }//GEN-LAST:event_jPanel5MouseClicked
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
