@@ -4,15 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/diana/OneDrive/Documentos/GitHub/administrador-practicas/administradorPracticasProyect/src/controlador/BBDD.java</file>
-            <file>file:/C:/Users/diana/OneDrive/Documentos/GitHub/administrador-practicas/administradorPracticasProyect/src/controlador/CentrosMetodos.java</file>
-            <file>file:/C:/Users/diana/OneDrive/Documentos/GitHub/administrador-practicas/administradorPracticasProyect/src/controlador/ConvenioMetodos.java</file>
-            <file>file:/C:/Users/diana/OneDrive/Documentos/GitHub/administrador-practicas/administradorPracticasProyect/src/vista/VentanaAgregarCentro.java</file>
-            <file>file:/C:/Users/diana/OneDrive/Documentos/GitHub/administrador-practicas/administradorPracticasProyect/src/vista/PanelEmpresa.java</file>
-            <file>file:/C:/Users/diana/OneDrive/Documentos/GitHub/administrador-practicas/administradorPracticasProyect/src/vista/PanelCentro.java</file>
-            <file>file:/C:/Users/diana/OneDrive/Documentos/GitHub/administrador-practicas/administradorPracticasProyect/src/modelo/Alumno.java</file>
-            <file>file:/C:/Users/diana/OneDrive/Documentos/GitHub/administrador-practicas/administradorPracticasProyect/src/modelo/Centro.java</file>
-            <file>file:/C:/Users/diana/OneDrive/Documentos/GitHub/administrador-practicas/administradorPracticasProyect/src/modelo/Convenio.java</file>
-            <file>file:/C:/Users/diana/OneDrive/Documentos/GitHub/administrador-practicas/administradorPracticasProyect/src/controlador/EmpresaMetodos.java</file>
+            <file>file:/C:/Users/diana/OneDrive/Documentos/GitHub/administrador-practicas/administradorPracticasProyect/src/modelo/Tutor.java</file>
+            <file>file:/C:/Users/diana/OneDrive/Documentos/GitHub/administrador-practicas/administradorPracticasProyect/src/vista/PanelTutor.java</file>
+            <file>file:/C:/Users/diana/OneDrive/Documentos/GitHub/administrador-practicas/administradorPracticasProyect/src/controlador/TutorMetodos.java</file>
+            <file>file:/C:/Users/diana/OneDrive/Documentos/GitHub/administrador-practicas/administradorPracticasProyect/src/vista/VentanaMasInfoTutor.java</file>
+            <file>file:/C:/Users/diana/OneDrive/Documentos/GitHub/administrador-practicas/administradorPracticasProyect/src/modelo/Item.java</file>
         </group>
     </open-files>
 </project-private>

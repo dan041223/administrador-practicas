@@ -53,7 +53,7 @@ public class PanelConvenio extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaConvenioos = new javax.swing.JTable();
+        tablaConvenio = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         tfBusqueda = new javax.swing.JTextField();

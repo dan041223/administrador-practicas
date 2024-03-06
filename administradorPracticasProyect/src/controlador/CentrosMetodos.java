@@ -29,6 +29,7 @@ import vista.PanelCentro;
 import static vista.PanelCentro.tablaCentro;
 
 import vista.VentanaMasInfoAlumno;
+import vista.VentanaMasInfoCentro;
 
 /**
  *
@@ -40,7 +41,7 @@ public class CentrosMetodos {
     public static int idEscogido;
     
     public JTable prepararRenderizadoCeldas(JTable tabla){
-        tabla.getColumnModel().getColumn(6).setCellRenderer(new TableActionCellRender());
+        //tabla.getColumnModel().getColumn(7).setCellRenderer(new TableActionCellRender());
         return tabla;
     }
     
@@ -50,14 +51,14 @@ public class CentrosMetodos {
             public void onEdit(int row) {
                 System.out.println("Editar fila: " + row);
                 idEscogido = (Integer) tabla.getValueAt(row, 0);
-                new VentanaMasInfoAlumno().setVisible(true);
+                new VentanaMasInfoCentro().setVisible(true);
             }
 
             @Override
             public void onDelete(int row) {
                 System.out.println("Borrar fila: " + row);
                 MessageDialog message = new MessageDialog(((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, tabla)));
-                message.showMessage("Confirmacion de borrado", "¿Esta seguro de querer borrar este alumno?");
+                message.showMessage("Confirmacion de borrado", "¿Esta seguro de querer borrar este centro?");
                 if (message.getMessageType()==MessageDialog.MessageType.OK) {
                     int idABorrar = (Integer) tabla.getModel().getValueAt(row, 0);
                     bbdd.borrarCentro(idABorrar);
@@ -73,12 +74,12 @@ public class CentrosMetodos {
                 }
             }
         };
-        tabla.getColumnModel().getColumn(6).setCellEditor(new TableActionCellEditor(evento));
+        //tabla.getColumnModel().getColumn(6).setCellEditor(new TableActionCellEditor(evento));
         return tabla;
     }
 
-    public JTable rellenarTablaCentros(JTable tablaAlumnos, List<Centro> centros) {
-        DefaultTableModel modeloDefaultTabla = (DefaultTableModel) tablaAlumnos.getModel();
+    public JTable rellenarTablaCentros(JTable tablaCentro, List<Centro> centros) {
+        DefaultTableModel modeloDefaultTabla = (DefaultTableModel) tablaCentro.getModel();
         modeloDefaultTabla.setRowCount(0);
         for (Centro centro : centros) {
             modeloDefaultTabla.addRow(new Object[]{
@@ -91,7 +92,7 @@ public class CentrosMetodos {
             });
         }
         tablaCentro.setModel(modeloDefaultTabla);
-        return tablaAlumnos;
+        return tablaCentro;
     }
     
     public List rellenarListaCentro(String query){
@@ -111,8 +112,10 @@ public class CentrosMetodos {
             notificacion.showNotification();
         }else{
             bbdd.agregarCentro(nombre, email, telefono, direccion, id_tutor);
-            notificacion = new Notification(framePadre, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "¡Alumno creado con éxito!");
+            notificacion = new Notification(framePadre, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "¡Centro creado con éxito!");
             notificacion.showNotification();
         }
     }
+    
+    
 }

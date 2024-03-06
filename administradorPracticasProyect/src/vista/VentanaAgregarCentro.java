@@ -5,7 +5,6 @@
  */
 package vista;
 
-
 import controlador.BBDD;
 import controlador.CentrosMetodos;
 
@@ -20,6 +19,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -27,6 +27,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import jnafilechooser.api.JnaFileChooser;
 
 import modelo.Centro;
+import modelo.Item;
 import sun.misc.IOUtils;
 import static vista.PanelCentro.tfBusqueda;
 
@@ -37,16 +38,22 @@ import static vista.PanelCentro.tfBusqueda;
 public class VentanaAgregarCentro extends javax.swing.JFrame {
 
     BBDD bbdd = new BBDD();
+    Object[] tutores;
     CentrosMetodos centroMetodos = new CentrosMetodos();
     Centro centro;
-    
+
     Color botonSeleccionado = new Color(230, 161, 2);
     Color botonNoSeleccionado = new Color(254, 177, 3);
+
+    JComboBox comboBoxSuggestionListadetutores;
+
     /**
      * Creates new form VentanaMasInfoAlumno
      */
     public VentanaAgregarCentro() {
+        tutores = bbdd.cargarComboTutores();
         initComponents();
+
     }
 
     /**
@@ -78,7 +85,7 @@ public class VentanaAgregarCentro extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        comboBoxSuggestionTutor = new elementos.ComboBoxSuggestion();
+        comboBoxSuggestionListadetutores = new JComboBox(tutores);
         jLabelNombre1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -196,6 +203,8 @@ public class VentanaAgregarCentro extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        comboBoxSuggestionListadetutores.setToolTipText("Tutores");
+
         jLabelNombre1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabelNombre1.setText("Elige el tutor");
 
@@ -247,7 +256,7 @@ public class VentanaAgregarCentro extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(comboBoxSuggestionTutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(comboBoxSuggestionListadetutores, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -291,7 +300,7 @@ public class VentanaAgregarCentro extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabelNombre1)
                 .addGap(18, 18, 18)
-                .addComponent(comboBoxSuggestionTutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(comboBoxSuggestionListadetutores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(88, Short.MAX_VALUE))
@@ -318,17 +327,17 @@ public class VentanaAgregarCentro extends javax.swing.JFrame {
         if (!tfBusqueda.getText().equals("Busque en cualquier campo")) {
             List<Centro> centros = centroMetodos.rellenarListaCentro(
                     "SELECT * FROM centro WHERE CAST(id AS TEXT) LIKE '%" + tfBusqueda.getText()
-                                                        + "%' "
-                                                          + "OR nombre LIKE '%" + tfBusqueda.getText() + "%' "
-                                                        + "OR email LIKE '%" + tfBusqueda.getText() + "%' "
-                                                        + "OR telefono LIKE '%" + tfBusqueda.getText() + "%' "
-                                                        + "OR direccion LIKE '%" + tfBusqueda.getText() + "%' "
-                                                        + "OR id_tutor LIKE '%" + tfBusqueda.getText()
-                                                        + "%' ORDER BY id ASC");
-            
+                    + "%' "
+                    + "OR nombre LIKE '%" + tfBusqueda.getText() + "%' "
+                    + "OR email LIKE '%" + tfBusqueda.getText() + "%' "
+                    + "OR telefono LIKE '%" + tfBusqueda.getText() + "%' "
+                    + "OR direccion LIKE '%" + tfBusqueda.getText() + "%' "
+                    + "OR id_tutor LIKE '%" + tfBusqueda.getText());
+                   // + "%' ORDER BY id ASC");
+
             PanelCentro.tablaCentro = centroMetodos.rellenarTablaCentros(PanelCentro.tablaCentro, centros);
-        }else{
-            List<Centro> centros = centroMetodos.rellenarListaCentro("SELECT * FROM centro where eliminado = FALSE;");
+        } else {
+            List<Centro> centros = centroMetodos.rellenarListaCentro("SELECT * FROM centro;");
             PanelCentro.tablaCentro = centroMetodos.rellenarTablaCentros(PanelCentro.tablaCentro, centros);
         }
     }//GEN-LAST:event_formWindowClosed
@@ -342,7 +351,7 @@ public class VentanaAgregarCentro extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel5MouseEntered
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        centroMetodos.comprobarCampos(this, tfNombre.getText(), tfEmail.getText(), tfTelefono.getText(), tfDireccion.getText(), comboBoxSuggestionTutor.addItemListener(aListener));
+        centroMetodos.comprobarCampos(this, tfNombre.getText(), tfEmail.getText(), tfTelefono.getText(), tfDireccion.getText(), String.valueOf(((Item) comboBoxSuggestionListadetutores.getSelectedItem()).getIdEnLaTabla()));
     }//GEN-LAST:event_jPanel5MouseClicked
 
     private void tfTelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfTelefonoFocusLost
@@ -353,7 +362,7 @@ public class VentanaAgregarCentro extends javax.swing.JFrame {
     }//GEN-LAST:event_tfTelefonoFocusLost
 
     private void tfTelefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfTelefonoFocusGained
-        if (tfTelefono.getText().equals("Dni")) {
+        if (tfTelefono.getText().equals("Telefono")) {
             tfTelefono.setText("");
             tfTelefono.setForeground(new Color(0, 0, 0));
         }
@@ -375,13 +384,13 @@ public class VentanaAgregarCentro extends javax.swing.JFrame {
 
     private void tfEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfEmailFocusLost
         if (tfEmail.getText().isEmpty()) {
-            tfEmail.setText("Apellidos");
+            tfEmail.setText("email");
             tfEmail.setForeground(new Color(204, 204, 204));
         }
     }//GEN-LAST:event_tfEmailFocusLost
 
     private void tfEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfEmailFocusGained
-        if (tfEmail.getText().equals("Apellidos")) {
+        if (tfEmail.getText().equals("email")) {
             tfEmail.setText("");
             tfEmail.setForeground(new Color(0, 0, 0));
         }
@@ -389,13 +398,13 @@ public class VentanaAgregarCentro extends javax.swing.JFrame {
 
     private void tfNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNombreFocusLost
         if (tfNombre.getText().isEmpty()) {
-            tfNombre.setText("Nombre del alumno");
+            tfNombre.setText("Nombre del tutor");
             tfNombre.setForeground(new Color(204, 204, 204));
         }
     }//GEN-LAST:event_tfNombreFocusLost
 
     private void tfNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNombreFocusGained
-        if (tfNombre.getText().equals("Nombre del alumno")) {
+        if (tfNombre.getText().equals("Nombre del tutor")) {
             tfNombre.setText("");
             tfNombre.setForeground(new Color(0, 0, 0));
         }
@@ -403,7 +412,6 @@ public class VentanaAgregarCentro extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private elementos.ComboBoxSuggestion comboBoxSuggestionTutor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -423,4 +431,11 @@ public class VentanaAgregarCentro extends javax.swing.JFrame {
     private javax.swing.JTextField tfNombre;
     private javax.swing.JTextField tfTelefono;
     // End of variables declaration//GEN-END:variables
+public void limpiarCampos() {
+        tfEmail.setText("");
+        tfNombre.setText("");
+        tfTelefono.setText("");
+        tfDireccion.setText("");
+ 
+    }
 }

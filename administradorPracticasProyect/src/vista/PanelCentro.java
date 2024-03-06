@@ -21,7 +21,7 @@ public class PanelCentro extends javax.swing.JPanel {
         Color botonNoSeleccionado = new Color(254, 177, 3);
         CentrosMetodos centrosMetodos = new CentrosMetodos();
         List<Centro> centros = centrosMetodos
-                        .rellenarListaCentro("select * from centro where eliminado = FALSE ORDER BY id ASC");
+                        .rellenarListaCentro("select * from centro  ORDER BY id ASC");
 
         public PanelCentro() {
                 initComponents();
@@ -29,8 +29,8 @@ public class PanelCentro extends javax.swing.JPanel {
                 tablaCentro = centrosMetodos.prepararEditadoCeldas(tablaCentro);
 
                 tablaCentro.setRowHeight(49);
-                tablaCentro.getColumnModel().getColumn(6).setMinWidth(113);
-                tablaCentro.getColumnModel().getColumn(6).setMaxWidth(113);
+                //tablaCentro.getColumnModel().getColumn(6).setMinWidth(113);
+                //tablaCentro.getColumnModel().getColumn(6).setMaxWidth(113);
                 tablaCentro = centrosMetodos.rellenarTablaCentros(tablaCentro, centros);
         }
 
@@ -143,6 +143,11 @@ public class PanelCentro extends javax.swing.JPanel {
         });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buscar (Personalizado).png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -226,10 +231,12 @@ public class PanelCentro extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel1MouseClicked
+
         private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel2MouseClicked
-            
-            
-            new VentanaAgregarAlumno().setVisible(true);
+            new VentanaAgregarCentro().setVisible(true);
         }// GEN-LAST:event_jLabel2MouseClicked
 
         private void tfBusquedaFocusGained(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_tfBusquedaFocusGained
@@ -258,14 +265,13 @@ public class PanelCentro extends javax.swing.JPanel {
                 List<Centro> centros = null;
                 if (!tfBusqueda.getText().equals("Busque en cualquier campo")) {
                         centros = centrosMetodos.rellenarListaCentro(
-                                        "SELECT * FROM centro WHERE CAST(id AS TEXT) LIKE '%" + tfBusqueda.getText()
-                                                        + "%' "
+                                        "SELECT * FROM centro WHERE CAST(id AS TEXT) LIKE '%" + tfBusqueda.getText()+ "%' "
                                                         + "OR nombre LIKE '%" + tfBusqueda.getText() + "%' "
                                                         + "OR email LIKE '%" + tfBusqueda.getText() + "%' "
                                                         + "OR telefono LIKE '%" + tfBusqueda.getText() + "%' "
                                                         + "OR direccion LIKE '%" + tfBusqueda.getText() + "%' "
-                                                        + "OR id_tutor LIKE '%" + tfBusqueda.getText()
-                                                        + "%' ORDER BY id ASC");
+                                                        + "OR CAST(id_tutor AS TEXT) LIKE '%" + tfBusqueda.getText() + "%' "
+                                                        +"ORDER BY id ASC");
                         tablaCentro = centrosMetodos.rellenarTablaCentros(tablaCentro, centros);
                 }
         }// GEN-LAST:event_jPanel2MouseClicked
@@ -282,4 +288,9 @@ public class PanelCentro extends javax.swing.JPanel {
     public static javax.swing.JTable tablaCentro;
     public static javax.swing.JTextField tfBusqueda;
     // End of variables declaration//GEN-END:variables
+
+
+
+
+
 }

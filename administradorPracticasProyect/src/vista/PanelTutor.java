@@ -10,6 +10,7 @@ import controlador.TutorMetodos;
 import java.awt.Color;
 import java.util.List;
 import modelo.Tutor;
+import static vista.PanelEmpresa.tfBusqueda;
 
 /**
  *
@@ -23,7 +24,7 @@ public class PanelTutor extends javax.swing.JPanel {
        TutorMetodos tutorMetodos = new TutorMetodos();
        
         List<Tutor> tutores = tutorMetodos
-                        .rellenarListaTutores("select * from tutor_centro where eliminado = FALSE ORDER BY id ASC");
+                        .rellenarListaTutores("select * from tutor_centro ORDER BY id ASC");
 
         public PanelTutor() {
                 initComponents();
@@ -31,8 +32,8 @@ public class PanelTutor extends javax.swing.JPanel {
                 tablaTutor = tutorMetodos.prepararEditadoCeldas(tablaTutor);
 
                 tablaTutor.setRowHeight(49);
-                tablaTutor.getColumnModel().getColumn(6).setMinWidth(113);
-                tablaTutor.getColumnModel().getColumn(6).setMaxWidth(113);
+                //tablaTutor.getColumnModel().getColumn(6).setMinWidth(113);
+                //tablaTutor.getColumnModel().getColumn(6).setMaxWidth(113);
                 tablaTutor = tutorMetodos.rellenarTablaTutores(tablaTutor, tutores);
         }
 
@@ -258,13 +259,13 @@ public class PanelTutor extends javax.swing.JPanel {
                 List<Tutor> tutores = null;
                 if (!tfBusqueda.getText().equals("Busque en cualquier campo")) {
                         tutores = tutorMetodos.rellenarListaTutores(
-                                        "SELECT * FROM tutor_centro WHERE CAST(id AS TEXT) LIKE '%" + tfBusqueda.getText()
-                                                        + "%' "
+                                        "SELECT * FROM tutor_centro WHERE CAST(\"id\"AS TEXT) LIKE '%" + tfBusqueda.getText() + "%' "
+                                                        //+ "OR \"id\" LIKE '%" +tfBusqueda.getText() + "%' "
                                                         + "OR nombre LIKE '%" + tfBusqueda.getText() + "%' "
                                                         + "OR apellidos LIKE '%" + tfBusqueda.getText() + "%' "
                                                         + "OR telefono LIKE '%" + tfBusqueda.getText() + "%' "
-                                                        + "OR email LIKE '%" + tfBusqueda.getText() + "%' "
-                                                        + "%' ORDER BY id ASC");
+                                                        + "OR email LIKE '%" + tfBusqueda.getText() + "%' ");
+                                                  //      + "%' ORDER BY id ASC");
                         tablaTutor = tutorMetodos.rellenarTablaTutores(tablaTutor, tutores);
                 }
         }// GEN-LAST:event_jPanel2MouseClicked

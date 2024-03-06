@@ -41,7 +41,7 @@ public class TutorMetodos {
     public static int idEscogido;
     
     public JTable prepararRenderizadoCeldas(JTable tabla){
-        tabla.getColumnModel().getColumn(6).setCellRenderer(new TableActionCellRender());
+        //tabla.getColumnModel().getColumn(6).setCellRenderer(new TableActionCellRender());
         return tabla;
     }
     
@@ -74,7 +74,7 @@ public class TutorMetodos {
                 }
             }
         };
-        tabla.getColumnModel().getColumn(6).setCellEditor(new TableActionCellEditor(evento));
+       // tabla.getColumnModel().getColumn(6).setCellEditor(new TableActionCellEditor(evento));
         return tabla;
     }
 
@@ -105,13 +105,13 @@ public class TutorMetodos {
                 || apellidos.equals("Apellidos")
                 || email.equals("Correo electrónico")
                 || telefono.equals("Teléfono")
-                || email.equals("Ciclo")
+                || email.equals("email")
               ) {
             notificacion = new Notification(framePadre, Notification.Type.WARNING, Notification.Location.TOP_CENTER, "Todos los campos deben de estar rellenos.");
             notificacion.showNotification();
         }else{
             bbdd.agregarTutor(nombre, apellidos,telefono,email);
-            notificacion = new Notification(framePadre, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "¡Alumno creado con éxito!");
+            notificacion = new Notification(framePadre, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "¡Tutor creado con éxito!");
             notificacion.showNotification();
         }
     }

@@ -29,7 +29,8 @@ import jnafilechooser.api.JnaFileChooser;
 import modelo.Alumno;
 import modelo.Tutor;
 import sun.misc.IOUtils;
-import static vista.PanelAlumnos.tfBusqueda;
+import static vista.PanelTutor.tfBusqueda;
+
 
 /**
  *
@@ -384,7 +385,7 @@ public class VentanaAgregarTutor extends javax.swing.JFrame {
                 + "%' ORDER BY id ASC");
             PanelTutor.tablaTutor = tutorMetodos.rellenarTablaTutores(PanelTutor.tablaTutor, tutores);
         }else{
-            List<Tutor> tutores = tutorMetodos.rellenarListaTutores("SELECT * FROM tutor_centro where eliminado = FALSE;");
+            List<Tutor> tutores = tutorMetodos.rellenarListaTutores("SELECT * FROM tutor_centro;");
             PanelTutor.tablaTutor = tutorMetodos.rellenarTablaTutores(PanelTutor.tablaTutor, tutores);
         }
     }//GEN-LAST:event_formWindowClosed

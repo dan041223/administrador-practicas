@@ -19,14 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFileChooser;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import jnafilechooser.api.JnaFileChooser;
-import modelo.Alumno;
+
 import modelo.Tutor;
 import sun.misc.IOUtils;
 import static vista.PanelAlumnos.tfBusqueda;
@@ -324,6 +317,9 @@ public class VentanaMasInfoTutor extends javax.swing.JFrame {
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
 
+        
+        
+        
     }//GEN-LAST:event_jPanel5MouseClicked
 
     private void tfTelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfTelefonoFocusLost
