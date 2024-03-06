@@ -101,7 +101,7 @@ public class UsuariosMetodos {
         return usuarios;
     }
 
-    public void comprobarCampos(JFrame framePadre, String nombre, String apellidos, String password, String fecha_nacimiento, String email, String telefono, String tipo_usuario) {
+    public void comprobarCampos(JFrame framePadre, String nombre, String apellidos, String fecha_nacimiento, String password, String email, String telefono, String tipo_usuario) {
         Notification notificacion;
         if (nombre.equals("Nombre del usuario")
                 || apellidos.equals("Apellidos")
@@ -109,7 +109,7 @@ public class UsuariosMetodos {
                 || telefono.equals("Teléfono")
                 || fecha_nacimiento.equals("Fecha de nacimiento (DD-MM-YYYY)")
                 || password.equals("Password")
-                || tipo_usuario.equals("Dni")
+                || tipo_usuario.equals("Selecciona los permisos")
                 || nombre.isEmpty()
                 || apellidos.isEmpty()
                 || email.isEmpty()
@@ -120,7 +120,7 @@ public class UsuariosMetodos {
             notificacion = new Notification(framePadre, Notification.Type.WARNING, Notification.Location.TOP_CENTER, "Todos los campos deben de estar rellenos.");
             notificacion.showNotification();
         }else{
-            bbdd.agregarUsuario(nombre, apellidos, fecha_nacimiento, password, email, tipo_usuario, telefono);
+            bbdd.agregarUsuario(nombre, apellidos, email, telefono, fecha_nacimiento, password, tipo_usuario);
             notificacion = new Notification(framePadre, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "¡Usuario creado con éxito!");
             notificacion.showNotification();
         }

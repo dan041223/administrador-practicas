@@ -383,7 +383,7 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNombreFocusGained
-        if (tfNombre.getText().equals("Nombre del alumno")) {
+        if (tfNombre.getText().equals("Nombre del usuario")) {
             tfNombre.setText("");
             tfNombre.setForeground(new Color(0, 0, 0));
         }
@@ -391,7 +391,7 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame {
 
     private void tfNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNombreFocusLost
         if (tfNombre.getText().isEmpty()) {
-            tfNombre.setText("Nombre del alumno");
+            tfNombre.setText("Nombre del usuario");
             tfNombre.setForeground(new Color(204, 204, 204));
         }
     }//GEN-LAST:event_tfNombreFocusLost
@@ -411,7 +411,7 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_tfApellidosFocusLost
 
     private void tfFecha_NacimientoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfFecha_NacimientoFocusGained
-        if (tfFecha_Nacimiento.getText().equals("Dni")) {
+        if (tfFecha_Nacimiento.getText().equals("Fecha de nacimiento (DD-MM-YYYY)")) {
             tfFecha_Nacimiento.setText("");
             tfFecha_Nacimiento.setForeground(new Color(0, 0, 0));
         }
@@ -419,13 +419,13 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame {
 
     private void tfFecha_NacimientoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfFecha_NacimientoFocusLost
         if (tfFecha_Nacimiento.getText().isEmpty()) {
-            tfFecha_Nacimiento.setText("Dni");
+            tfFecha_Nacimiento.setText("Fecha de nacimiento (DD-MM-YYYY)");
             tfFecha_Nacimiento.setForeground(new Color(204, 204, 204));
         }
     }//GEN-LAST:event_tfFecha_NacimientoFocusLost
 
     private void tfPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPasswordFocusGained
-        if (tfPassword.getText().equals("Dirección")) {
+        if (tfPassword.getText().equals("Password")) {
             tfPassword.setText("");
             tfPassword.setForeground(new Color(0, 0, 0));
         }
@@ -433,7 +433,7 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame {
 
     private void tfPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPasswordFocusLost
         if (tfPassword.getText().isEmpty()) {
-            tfPassword.setText("Dirección");
+            tfPassword.setText("Password");
             tfPassword.setForeground(new Color(204, 204, 204));
         }
     }//GEN-LAST:event_tfPasswordFocusLost
@@ -479,15 +479,15 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel5MouseClicked
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        if (!tfBusqueda.getText().equals("Busque en cualquier campo")) {
-            List<Usuario> usuarios = usuarioMetodos.rellenarListaUsuarios("SELECT * FROM usuarios WHERE CAST(id AS TEXT) LIKE '%" + tfBusqueda.getText()
+        if (!PanelUsuarios.tfBusqueda.getText().equals("Busque en cualquier campo")) {
+            List<Usuario> usuarios = usuarioMetodos.rellenarListaUsuarios("SELECT * FROM usuarios WHERE CAST(id AS TEXT) LIKE '%" + PanelUsuarios.tfBusqueda.getText()
                 + "%' "
-                + "OR nombre LIKE '%" + tfBusqueda.getText() + "%' "
-                + "OR apellidos LIKE '%" + tfBusqueda.getText() + "%' "
-                + "OR telefono LIKE '%" + tfBusqueda.getText() + "%' "
-                + "OR email LIKE '%" + tfBusqueda.getText() + "%' "
-                + "OR fecha_nacimiento LIKE '%" + tfBusqueda.getText() + "%' "
-                + "OR password LIKE '%" + tfBusqueda.getText() + "%' "
+                + "OR nombre LIKE '%" + PanelUsuarios.tfBusqueda.getText() + "%' "
+                + "OR apellidos LIKE '%" + PanelUsuarios.tfBusqueda.getText() + "%' "
+                + "OR telefono LIKE '%" + PanelUsuarios.tfBusqueda.getText() + "%' "
+                + "OR email LIKE '%" + PanelUsuarios.tfBusqueda.getText() + "%' "
+                + "OR fecha_nacimiento LIKE '%" + PanelUsuarios.tfBusqueda.getText() + "%' "
+                + "OR password LIKE '%" + PanelUsuarios.tfBusqueda.getText() + "%' "
                 + "ORDER BY id ASC");
             PanelUsuarios.tablaUsuarios = usuarioMetodos.rellenarTablaUsuarios(PanelUsuarios.tablaUsuarios, usuarios);
         }else{
