@@ -30,6 +30,8 @@ public class PanelMenu extends javax.swing.JPanel {
         if (PanelLogin.usuarioIniciado.getTipousuario()== TIPOUSUARIO.TUTOR) {
             PanelBotonMenuIzqUsuarios.setVisible(false);
         }
+        PanelCentralMenu = menuMetodos.cambioPanel(new PanelMenuPrincipal(), PanelCentralMenu);
+        
     }
 
     /**
@@ -208,6 +210,9 @@ public class PanelMenu extends javax.swing.JPanel {
         PanelBotonMenuIzqEmpresas.setMinimumSize(new java.awt.Dimension(0, 50));
         PanelBotonMenuIzqEmpresas.setPreferredSize(new java.awt.Dimension(162, 70));
         PanelBotonMenuIzqEmpresas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PanelBotonMenuIzqEmpresasMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 PanelBotonMenuIzqEmpresasMouseEntered(evt);
             }
@@ -245,6 +250,9 @@ public class PanelMenu extends javax.swing.JPanel {
         PanelBotonMenuIzqEmpresas.add(jLabel2);
 
         PanelMenuIzquierda.add(PanelBotonMenuIzqEmpresas);
+
+
+
 
         PanelBotonMenuIzqBolsaEmpleo.setBackground(new java.awt.Color(254, 177, 3));
         PanelBotonMenuIzqBolsaEmpleo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -298,6 +306,9 @@ public class PanelMenu extends javax.swing.JPanel {
         PanelBotonMenuIzqNecesidades.setMinimumSize(new java.awt.Dimension(0, 50));
         PanelBotonMenuIzqNecesidades.setPreferredSize(new java.awt.Dimension(162, 70));
         PanelBotonMenuIzqNecesidades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PanelBotonMenuIzqNecesidadesMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 PanelBotonMenuIzqNecesidadesMouseEntered(evt);
             }
@@ -604,6 +615,17 @@ public class PanelMenu extends javax.swing.JPanel {
     private void PanelBotonMenuIzqAnexoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonMenuIzqAnexoMouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_PanelBotonMenuIzqAnexoMouseExited
+    private void PanelBotonMenuIzqEmpresasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonMenuIzqEmpresasMouseClicked
+         PanelCentralMenu = menuMetodos.cambioPanel(new PanelEmpresa(), PanelCentralMenu);
+    }//GEN-LAST:event_PanelBotonMenuIzqEmpresasMouseClicked
+
+    private void PanelBotonMenuIzqNecesidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonMenuIzqNecesidadesMouseClicked
+        PanelCentralMenu = menuMetodos.cambioPanel(new PanelNecesidades(), PanelCentralMenu);
+    }//GEN-LAST:event_PanelBotonMenuIzqNecesidadesMouseClicked
+
+    private void PanelBotonmenuIzqMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonmenuIzqMenuMouseClicked
+        PanelCentralMenu = menuMetodos.cambioPanel(new PanelMenuPrincipal(), PanelCentralMenu);
+    }//GEN-LAST:event_PanelBotonmenuIzqMenuMouseClicked
 
     private void PanelBotonMenuIzqEmpresasMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_PanelBotonMenuIzqEmpresasMouseEntered
         PanelBotonMenuIzqEmpresas.setBackground(botonSeleccionado);
