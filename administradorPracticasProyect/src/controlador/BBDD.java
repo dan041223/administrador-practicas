@@ -645,7 +645,7 @@ public class BBDD {
 
             java.sql.Date fechaInicio = java.sql.Date.valueOf(fechaActual);
             java.sql.Date fechaFinal = java.sql.Date.valueOf(fecha90DiasDespues);
-            
+            //ERROR
             preparedStatement.setDate(1, fechaInicio);
             preparedStatement.setInt(2, Integer.parseInt(idAlumno));           
             preparedStatement.setBinaryStream(3, cvASubir1);
