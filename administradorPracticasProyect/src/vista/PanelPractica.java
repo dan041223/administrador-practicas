@@ -6,33 +6,33 @@
 package vista;
 
 import controlador.AlumnosMetodos;
-import controlador.AnexoMetodos;
+import controlador.PracticaMetodos;
 import java.awt.Color;
 import java.util.List;
 import modelo.Alumno;
-import modelo.Anexo22;
+import modelo.Practica;
 
 /**
  *
  * @author LinkA
  */
-public class PanelAnexo22 extends javax.swing.JPanel {
+public class PanelPractica extends javax.swing.JPanel {
 
         Color botonSeleccionado = new Color(230, 161, 2);
         Color botonNoSeleccionado = new Color(254, 177, 3);
-        AnexoMetodos anexoMetodos = new AnexoMetodos();
-        List<Anexo22> anexo = anexoMetodos
-                        .rellenarListaAnexo("select * from anexo22 ORDER BY id ASC");
+        PracticaMetodos practicaMetodos = new PracticaMetodos();
+        List<Practica> practicas = practicaMetodos
+                        .rellenarListaPractica("select * from practica where eliminado = FALSE ORDER BY id ASC");
 
-        public PanelAnexo22() {
+        public PanelPractica() {
                 initComponents();
-                tablaAnexos = anexoMetodos.prepararRenderizadoCeldas(tablaAnexos);
-                tablaAnexos = anexoMetodos.prepararEditadoCeldas(tablaAnexos);
+                tablaPractica = practicaMetodos.prepararRenderizadoCeldas(tablaPractica);
+                tablaPractica = practicaMetodos.prepararEditadoCeldas(tablaPractica);
 
-                tablaAnexos.setRowHeight(49);
-                tablaAnexos.getColumnModel().getColumn(5).setMinWidth(113);
-                tablaAnexos.getColumnModel().getColumn(5).setMaxWidth(113);
-                tablaAnexos = anexoMetodos.rellenarTablaAnexo(tablaAnexos, anexo);
+                tablaPractica.setRowHeight(49);
+                tablaPractica.getColumnModel().getColumn(6).setMinWidth(113);
+                tablaPractica.getColumnModel().getColumn(6).setMaxWidth(113);
+                tablaPractica = practicaMetodos.rellenarTablaPractica(tablaPractica, practicas);
         }
 
         /**
@@ -49,7 +49,7 @@ public class PanelAnexo22 extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaAnexos = new javax.swing.JTable();
+        tablaPractica = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         tfBusqueda = new javax.swing.JTextField();
@@ -61,23 +61,23 @@ public class PanelAnexo22 extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        tablaAnexos.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        tablaAnexos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPractica.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        tablaPractica.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "id Centro", "Familia Profesional", "Ciclo Formativo", "Anexo2.2", "Acciones"
+                "Id", "Fecha Inicio", "Id Alumno", "Anexoo4", "Anexo8", "Id Convenio", "Fecha Fin", "Acciones"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Byte.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Byte.class, java.lang.Byte.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true
+                false, false, false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -88,8 +88,8 @@ public class PanelAnexo22 extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tablaAnexos.setSelectionBackground(new java.awt.Color(254, 177, 3));
-        jScrollPane1.setViewportView(tablaAnexos);
+        tablaPractica.setSelectionBackground(new java.awt.Color(254, 177, 3));
+        jScrollPane1.setViewportView(tablaPractica);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -190,7 +190,7 @@ public class PanelAnexo22 extends javax.swing.JPanel {
         });
 
         jLabel3.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jLabel3.setText("Agregar Anexo");
+        jLabel3.setText("Agregar Practica");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -228,7 +228,7 @@ public class PanelAnexo22 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
         private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel2MouseClicked
-            new VentanaAgregarAnexo().setVisible(true);
+            new VentanaAgregarPractica().setVisible(true);
         }// GEN-LAST:event_jLabel2MouseClicked
 
         private void tfBusquedaFocusGained(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_tfBusquedaFocusGained
@@ -254,18 +254,19 @@ public class PanelAnexo22 extends javax.swing.JPanel {
         }// GEN-LAST:event_jPanel2MouseExited
 
         private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel2MouseClicked
-                List<Anexo22> anexos = null;
-                AnexoMetodos anexoMetodos = new AnexoMetodos();
+                List<Practica> practicas = null;
                 if (!tfBusqueda.getText().equals("Busque en cualquier campo")) {
-                        anexos = anexoMetodos.rellenarListaAnexo(
-                                        "SELECT * FROM anexo22 WHERE CAST(id AS TEXT) LIKE '%" + tfBusqueda.getText()
+                        practicas = practicaMetodos.rellenarListaPractica(
+                                        "SELECT * FROM practica WHERE CAST(id AS TEXT) LIKE '%" + tfBusqueda.getText()
                                                         + "%' "
-                                                        + "OR id_centro LIKE '%" + tfBusqueda.getText() + "%' "
-                                                        + "OR familia_profesional LIKE '%" + tfBusqueda.getText() + "%' "
-                                                        + "OR ciclo_formativo LIKE '%" + tfBusqueda.getText() + "%' "
-                                                        + "OR anexo2.2 LIKE '%" + tfBusqueda.getText() + "%' "
-                                                        +  "%' ORDER BY id ASC");
-                        tablaAnexos = anexoMetodos.rellenarTablaAnexo(tablaAnexos, anexos);
+                                                        + "OR fecha_inicio LIKE '%" + tfBusqueda.getText() + "%' "
+                                                        + "OR id_convenio LIKE '%" + tfBusqueda.getText() + "%' "
+                                                        + "OR anexo4 LIKE '%" + tfBusqueda.getText() + "%' "
+                                                        + "OR anexo8 LIKE '%" + tfBusqueda.getText() + "%' "
+                                                        + "OR fecha_fin LIKE '%" + tfBusqueda.getText() + "%' "
+                                                        + "OR id_alumno LIKE '%" + tfBusqueda.getText()
+                                                        + "%' ORDER BY id ASC");
+                        tablaPractica = practicaMetodos.rellenarTablaPractica(tablaPractica, practicas);
                 }
         }// GEN-LAST:event_jPanel2MouseClicked
 
@@ -278,7 +279,7 @@ public class PanelAnexo22 extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    public static javax.swing.JTable tablaAnexos;
+    public static javax.swing.JTable tablaPractica;
     public static javax.swing.JTextField tfBusqueda;
     // End of variables declaration//GEN-END:variables
 }

@@ -20,6 +20,7 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +30,9 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import modelo.Alumno;
+import modelo.Anexo22;
+import modelo.Empresa;
+import modelo.Practica;
 import modelo.Centro;
 import modelo.Convenio;
 import modelo.Empresa;
@@ -561,6 +565,26 @@ public class BBDD {
         }
         return empresas;
     }
+    
+    public List obtenerListaAnexo22(String query){
+        Anexo22 anexo;
+        List<Anexo22> anexos = null;
+        Connection con = conectar();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            anexos = new ArrayList<>();
+            while (rs.next()) {                
+                anexo = new Anexo22();
+                anexo.setId(rs.getInt("id"));
+                anexo.setIdCentro(rs.getInt("id_centro"));
+                anexo.setFamiliaProfesional(rs.getString("familia_profesional"));
+                anexo.setCicloFormativo(rs.getString("ciclo_formativo"));
+                anexo.setAnexo22(rs.getBytes("anexo22"));
+                anexo.setEliminado(rs.getBoolean("eliminado"));
+
+                anexos.add(anexo);
+            }
+        }
 
     public int editarNecesidad(int id, int asir, int dam, int daw, int fin, int mark) {
         int filasMod = 0;
@@ -636,8 +660,33 @@ public class BBDD {
         } catch (SQLException ex) {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return anexos;
+    }
+    
+    void borrarAnexo(int idABorrar) {
+        Connection con;
+        try {
+            con = conectar();
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate("UPDATE anexo22 SET eliminado = TRUE WHERE id = " + idABorrar + ";");
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public int agregarAnexo(String idCentro, String familiaProfesional, String ciclo, FileInputStream cvASubir) {
+        int filasMod = 0;
+        try {
+            Connection con = conectar();
+            String query = "INSERT INTO anexo22(id_centro, familia_profesional, ciclo_formativo, anexo22) VALUES (?,?,?,?)";
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, idCentro);
+            preparedStatement.setString(2, familiaProfesional);
+            preparedStatement.setString(3, ciclo);
+            preparedStatement.setBinaryStream(4, cvASubir);
+            
         return empresas;
-
+        }
     }
 
     List<Tutor> obtenerListaTutores(String query) {
@@ -688,6 +737,23 @@ public class BBDD {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return filasMod;
+    }
+    
+    List<Practica> obtenerListaPractica(String query) {
+        Practica practica;
+        List<Practica> practicas = null;
+        while (rs.next()) {                
+            practica = new Practica();
+            practica.setId(rs.getInt("id"));
+            practica.setFecha_inicio(rs.getString("fecha_inicio"));
+            practica.setId_alumno(rs.getInt("id_alumno"));
+            practica.setAnexo4(rs.getBytes("anexo4"));
+            practica.setAnexo8(rs.getBytes("anexo8"));
+            practica.setId_convenio(rs.getInt("id_convenio"));
+            practica.setFecha_fin(rs.getString("direccion"));
+            
+            practicas.add(practica);
+        }
     }
 
     public Empresa obtenerEmpresa(int idEscogido) {
@@ -740,6 +806,18 @@ public class BBDD {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return centros;
+    }
+    
+    void borrarPractica(int idABorrar) {
+        Connection con;
+        try {
+            con = conectar();
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate("UPDATE practica SET eliminado = TRUE WHERE id = " + idABorrar + ";");
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
 
     }
 
@@ -794,6 +872,27 @@ public class BBDD {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public int agregarPractica(String idAlumno, String idConvenio, FileInputStream cvASubir1, FileInputStream cvASubir2) {
+        int filasMod = 0;
+        try {
+            Connection con = conectar();
+            String query = "INSERT INTO practica (id_alumno, fecha_inicio, anexo4, anexo8, id_convenio, fecha_fin) VALUES (?,?,?,?,?,?)";
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            LocalDate fechaActual = LocalDate.now();
+            LocalDate fecha90DiasDespues = fechaActual.plusDays(90);
+
+            java.sql.Date fechaInicio = java.sql.Date.valueOf(fechaActual);
+            java.sql.Date fechaFinal = java.sql.Date.valueOf(fecha90DiasDespues);
+            //ERROR
+            preparedStatement.setDate(1, fechaInicio);
+            preparedStatement.setInt(2, Integer.parseInt(idAlumno));           
+            preparedStatement.setBinaryStream(3, cvASubir1);
+            preparedStatement.setBinaryStream(4, cvASubir2);
+            preparedStatement.setInt(5, Integer.parseInt(idConvenio));
+            preparedStatement.setDate(6, fechaFinal);
+        }
+    }
 
     public int agregarTutor(String nombre, String apellidos, String telefono, String email) {
         int filasMod = 0;
@@ -844,11 +943,6 @@ public class BBDD {
         return tutor;
     }
 
-    /**
-     *
-     *
-     */
-    /*
      
       public int agregarConvenio(Empresa empresaSeleccionada, FileInputStream anexo2, Centro centroSelecionado, FileInputStream anexo1) {
         int filasMod = 0;
@@ -870,7 +964,6 @@ public class BBDD {
      
      
      
-     */
     // Me sale un error 
     public Centro obtenerCentro(int idEscogido) {
         Centro centro = null;
