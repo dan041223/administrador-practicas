@@ -53,7 +53,7 @@ public class LoginMetodos {
             File file = new File("src\\files\\recuerdame.txt");
             fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write("   ");
+            bw.write(" ");
             bw.close();
             fw.close();
         } catch (IOException ex) {

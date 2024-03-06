@@ -358,8 +358,11 @@ public class PanelLogin extends javax.swing.JFrame {
             BufferedReader br = new BufferedReader(fr);
             
             String email = br.readLine();
-            if (!email.isEmpty()) {
+            if (!email.equalsIgnoreCase(" ")) {
                 tfEmail.setText(email);
+                tfEmail.setForeground(Color.black);
+            }else {
+                tfEmail.setText("");
                 tfEmail.setForeground(Color.black);
             }
         } catch (FileNotFoundException ex) {

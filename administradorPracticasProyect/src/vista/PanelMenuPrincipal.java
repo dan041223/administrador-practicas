@@ -39,21 +39,17 @@ public class PanelMenuPrincipal extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 947, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(381, 381, 381)
-                    .addComponent(jLabelBienvenida)
-                    .addContainerGap(381, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(314, 314, 314)
+                .addComponent(jLabelBienvenida)
+                .addContainerGap(448, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 701, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(329, 329, 329)
-                    .addComponent(jLabelBienvenida)
-                    .addContainerGap(329, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(330, 330, 330)
+                .addComponent(jLabelBienvenida)
+                .addContainerGap(300, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
