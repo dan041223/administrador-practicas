@@ -1,3 +1,7 @@
 /.metadata/
 /RemoteSystemsTempFiles/
 /bin/
+*.class
+administradorPracticasProyect/build/
+administradorPracticasProyect/nbproject/private/
+administradorPracticasProyect/dist/
