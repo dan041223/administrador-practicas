@@ -567,9 +567,10 @@ public class BBDD {
     }
     
     public List obtenerListaAnexo22(String query){
-        Anexo22 anexo;
         List<Anexo22> anexos = null;
-        Connection con = conectar();
+        try {
+            Anexo22 anexo;
+            Connection con = conectar();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             anexos = new ArrayList<>();
@@ -584,6 +585,10 @@ public class BBDD {
 
                 anexos.add(anexo);
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return anexos;
         }
 
     public int editarNecesidad(int id, int asir, int dam, int daw, int fin, int mark) {
@@ -660,7 +665,7 @@ public class BBDD {
         } catch (SQLException ex) {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return anexos;
+        return empresas;
     }
     
     void borrarAnexo(int idABorrar) {
@@ -685,8 +690,10 @@ public class BBDD {
             preparedStatement.setString(3, ciclo);
             preparedStatement.setBinaryStream(4, cvASubir);
             
-        return empresas;
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return filasMod;
     }
 
     List<Tutor> obtenerListaTutores(String query) {
@@ -740,20 +747,29 @@ public class BBDD {
     }
     
     List<Practica> obtenerListaPractica(String query) {
-        Practica practica;
         List<Practica> practicas = null;
-        while (rs.next()) {                
-            practica = new Practica();
-            practica.setId(rs.getInt("id"));
-            practica.setFecha_inicio(rs.getString("fecha_inicio"));
-            practica.setId_alumno(rs.getInt("id_alumno"));
-            practica.setAnexo4(rs.getBytes("anexo4"));
-            practica.setAnexo8(rs.getBytes("anexo8"));
-            practica.setId_convenio(rs.getInt("id_convenio"));
-            practica.setFecha_fin(rs.getString("direccion"));
-            
-            practicas.add(practica);
+        try {
+            Practica practica;
+            Connection con = conectar();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            practicas = new ArrayList<>();
+            while (rs.next()) {
+                practica = new Practica();
+                practica.setId(rs.getInt("id"));
+                practica.setFecha_inicio(rs.getString("fecha_inicio"));
+                practica.setId_alumno(rs.getInt("id_alumno"));
+                practica.setAnexo4(rs.getBytes("anexo4"));
+                practica.setAnexo8(rs.getBytes("anexo8"));
+                practica.setId_convenio(rs.getInt("id_convenio"));
+                practica.setFecha_fin(rs.getString("direccion"));
+                
+                practicas.add(practica);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return practicas;
     }
 
     public Empresa obtenerEmpresa(int idEscogido) {
@@ -891,7 +907,10 @@ public class BBDD {
             preparedStatement.setBinaryStream(4, cvASubir2);
             preparedStatement.setInt(5, Integer.parseInt(idConvenio));
             preparedStatement.setDate(6, fechaFinal);
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return filasMod;
     }
 
     public int agregarTutor(String nombre, String apellidos, String telefono, String email) {
