@@ -241,6 +241,9 @@ public class PanelMenu extends javax.swing.JPanel {
 
         PanelMenuIzquierda.add(PanelBotonMenuIzqEmpresas);
 
+
+
+
         PanelBotonMenuIzqBolsaEmpleo.setBackground(new java.awt.Color(254, 177, 3));
         PanelBotonMenuIzqBolsaEmpleo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         PanelBotonMenuIzqBolsaEmpleo.setMaximumSize(new java.awt.Dimension(250, 50));

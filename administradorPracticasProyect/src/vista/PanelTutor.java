@@ -5,39 +5,37 @@
  */
 package vista;
 
-import controlador.AlumnosMetodos;
+
+import controlador.TutorMetodos;
 import java.awt.Color;
 import java.util.List;
-import modelo.Alumno;
-import modelo.Convenio;
+import modelo.Tutor;
+import static vista.PanelEmpresa.tfBusqueda;
 
 /**
  *
  * @author LinkA
  */
-public class PanelConvenio extends javax.swing.JPanel {
+public class PanelTutor extends javax.swing.JPanel {
 
         Color botonSeleccionado = new Color(230, 161, 2);
         Color botonNoSeleccionado = new Color(254, 177, 3);
-        AlumnosMetodos alumnosMetodos = new AlumnosMetodos();
-        List<Convenio> convenios = alumnosMetodos
-                        .rellenarListaAlumnos("select * from convenio where eliminado = FALSE ORDER BY id ASC");
+        
+       TutorMetodos tutorMetodos = new TutorMetodos();
+       
+        List<Tutor> tutores = tutorMetodos
+                        .rellenarListaTutores("select * from tutor_centro ORDER BY id ASC");
 
-        /*
-        public PanelConvenio() {
+        public PanelTutor() {
                 initComponents();
-                tablaConvenio = alumnosMetodos.prepararRenderizadoCeldas(tablaConvenio);
-                tablaConvenio = alumnosMetodos.prepararEditadoCeldas(tablaConvenio);
+                tablaTutor = tutorMetodos.prepararRenderizadoCeldas(tablaTutor);
+                tablaTutor = tutorMetodos.prepararEditadoCeldas(tablaTutor);
 
-                tablaConvenio.setRowHeight(49);
-                tablaConvenio.getColumnModel().getColumn(6).setMinWidth(113);
-                tablaConvenio.getColumnModel().getColumn(6).setMaxWidth(113);
-                tablaConvenio = alumnosMetodos.rellenarTablaAlumnos(tablaConvenio, convenios);
+                tablaTutor.setRowHeight(49);
+                //tablaTutor.getColumnModel().getColumn(6).setMinWidth(113);
+                //tablaTutor.getColumnModel().getColumn(6).setMaxWidth(113);
+                tablaTutor = tutorMetodos.rellenarTablaTutores(tablaTutor, tutores);
         }
-        
-        
-        */
-        
 
         /**
          * This method is called from within the constructor to initialize the form.
@@ -53,8 +51,7 @@ public class PanelConvenio extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-
-        tablaConvenios = new javax.swing.JTable();
+        tablaTutor = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         tfBusqueda = new javax.swing.JTextField();
@@ -66,8 +63,8 @@ public class PanelConvenio extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        tablaConvenios.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        tablaConvenios.setModel(new javax.swing.table.DefaultTableModel(
+        tablaTutor.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        tablaTutor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -75,7 +72,7 @@ public class PanelConvenio extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Id", "Id_Empresa", "Id_Centro", "Anexo 1", "Anexo 2.1"
+                "Id", "Nombre", "Apellidos", "Telefono", "Email"
             }
         ) {
             Class[] types = new Class [] {
@@ -93,8 +90,8 @@ public class PanelConvenio extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tablaConvenios.setSelectionBackground(new java.awt.Color(254, 177, 3));
-        jScrollPane1.setViewportView(tablaConvenios);
+        tablaTutor.setSelectionBackground(new java.awt.Color(254, 177, 3));
+        jScrollPane1.setViewportView(tablaTutor);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -195,7 +192,7 @@ public class PanelConvenio extends javax.swing.JPanel {
         });
 
         jLabel3.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jLabel3.setText("Agregar convenio");
+        jLabel3.setText("Agregar tutor");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -233,7 +230,7 @@ public class PanelConvenio extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
         private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel2MouseClicked
-            new VentanaAgregarAlumno().setVisible(true);
+            new VentanaAgregarTutor().setVisible(true);
         }// GEN-LAST:event_jLabel2MouseClicked
 
         private void tfBusquedaFocusGained(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_tfBusquedaFocusGained
@@ -259,18 +256,17 @@ public class PanelConvenio extends javax.swing.JPanel {
         }// GEN-LAST:event_jPanel2MouseExited
 
         private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel2MouseClicked
-                List<Alumno> alumnos = null;
+                List<Tutor> tutores = null;
                 if (!tfBusqueda.getText().equals("Busque en cualquier campo")) {
-                        alumnos = alumnosMetodos.rellenarListaAlumnos(
-                                        "SELECT * FROM alumnos WHERE CAST(id AS TEXT) LIKE '%" + tfBusqueda.getText()
-                                                        + "%' "
+                        tutores = tutorMetodos.rellenarListaTutores(
+                                        "SELECT * FROM tutor_centro WHERE CAST(\"id\"AS TEXT) LIKE '%" + tfBusqueda.getText() + "%' "
+                                                        //+ "OR \"id\" LIKE '%" +tfBusqueda.getText() + "%' "
                                                         + "OR nombre LIKE '%" + tfBusqueda.getText() + "%' "
                                                         + "OR apellidos LIKE '%" + tfBusqueda.getText() + "%' "
                                                         + "OR telefono LIKE '%" + tfBusqueda.getText() + "%' "
-                                                        + "OR email LIKE '%" + tfBusqueda.getText() + "%' "
-                                                        + "OR ciclo LIKE '%" + tfBusqueda.getText()
-                                                        + "%' ORDER BY id ASC");
-                        tablaConvenios = alumnosMetodos.rellenarTablaAlumnos(tablaConvenios, alumnos);
+                                                        + "OR email LIKE '%" + tfBusqueda.getText() + "%' ");
+                                                  //      + "%' ORDER BY id ASC");
+                        tablaTutor = tutorMetodos.rellenarTablaTutores(tablaTutor, tutores);
                 }
         }// GEN-LAST:event_jPanel2MouseClicked
 
@@ -283,7 +279,7 @@ public class PanelConvenio extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable tablaConvenios;
-    private javax.swing.JTextField tfBusqueda;
+    public static javax.swing.JTable tablaTutor;
+    public static javax.swing.JTextField tfBusqueda;
     // End of variables declaration//GEN-END:variables
 }

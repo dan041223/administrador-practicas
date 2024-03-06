@@ -26,12 +26,16 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import modelo.Alumno;
 import modelo.Centro;
 import modelo.Convenio;
 import modelo.Empresa;
+import modelo.Item;
 import modelo.Necesidad;
 import modelo.TIPOUSUARIO;
+import modelo.Tutor;
 import modelo.Usuario;
 import org.postgresql.util.PSQLException;
 
@@ -178,9 +182,9 @@ public class BBDD {
         }
     }
 
-    List<Alumno> obtenerListaAlumnos(String query) {
+    ArrayList<Alumno> obtenerListaAlumnos(String query) {
         Alumno alumno;
-        List<Alumno> alumnos = null;
+        ArrayList<Alumno> alumnos = null;
         try {
             Connection con = conectar();
             Statement stmt = con.createStatement();
@@ -193,14 +197,11 @@ public class BBDD {
                 alumno.setApellidos(rs.getString("apellidos"));
                 alumno.setDni(rs.getString("dni"));
                 alumno.setEmail(rs.getString("email"));
-                alumno.setTelefono(rs.getString("telefono"));
                 alumno.setDireccion(rs.getString("direccion"));
                 alumno.setNumSeguridadSocial(rs.getString("numSeguridadSocial"));
+                alumno.setTelefono(rs.getString("telefono"));
                 alumno.setCiclo(rs.getString("ciclo"));
-                alumno.setEstado(rs.getBoolean("buscando"));
-                alumno.setBuscando(rs.getBoolean("buscando"));
                 alumno.setCv(rs.getBytes("curriculum"));
-                alumno.setIdCentro(rs.getInt("id_centro"));
 
                 alumnos.add(alumno);
             }
@@ -460,7 +461,6 @@ public class BBDD {
         return alumnos;
     }
 
-
     public int agregarBolsa(Alumno alumnoSeleccionado, Empresa empresaSeleccionada) {
         int filasMod = 0;
         try {
@@ -640,6 +640,31 @@ public class BBDD {
 
     }
 
+    List<Tutor> obtenerListaTutores(String query) {
+        Tutor tutor;
+        List<Tutor> tutores = null;
+        try {
+            Connection con = conectar();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            tutores = new ArrayList<>();
+            while (rs.next()) {
+                tutor = new Tutor();
+                tutor.setId(rs.getInt("id"));
+                tutor.setNombre(rs.getString("nombre"));
+                tutor.setApellidos(rs.getString("apellidos"));
+                tutor.setTelefono(rs.getString("telefono"));
+                tutor.setEmail(rs.getString("email"));
+
+                tutores.add(tutor);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return tutores;
+
+    }
+
     public int agregarEmpresa(String nombre, String cif, String direccion, String duenio, String ambito, String telefono, String email, String tutor, String nombre_contacto, String telefono_contacto, String email_contacto) {
         int filasMod = 0;
         try {
@@ -664,7 +689,7 @@ public class BBDD {
         }
         return filasMod;
     }
-    
+
     public Empresa obtenerEmpresa(int idEscogido) {
         Empresa empresa = new Empresa();
         try {
@@ -690,9 +715,36 @@ public class BBDD {
         }
         return empresa;
     }
-    
-     List<Convenio> obtenerListaConvenios(String query) {
-       Convenio convenio;
+
+    List<Centro> obtenerListaCentros(String query) {
+        Centro centro;
+        List<Centro> centros = null;
+        try {
+            Connection con = conectar();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            centros = new ArrayList<>();
+            while (rs.next()) {
+                centro = new Centro();
+
+                centro.setId(rs.getInt("id"));
+                centro.setNombre(rs.getString("nombre"));
+                centro.setEmail(rs.getString("email"));
+                centro.setTelefono(rs.getString("telefono"));
+                centro.setDireccion(rs.getString("direccion"));
+                centro.setId_tutor(rs.getInt("id_tutor"));
+
+                centros.add(centro);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return centros;
+
+    }
+
+    List<Convenio> obtenerListaConvenios(String query) {
+        Convenio convenio;
         List<Convenio> convenios = null;
         try {
             Connection con = conectar();
@@ -712,13 +764,91 @@ public class BBDD {
         }
         return convenios;
     }
-     
+
+    public int agregarCentro(String nombre, String email, String telefono, String direccion, String id_tutor) {
+        int filasMod = 0;
+        try {
+            Connection con = conectar();
+            String query = "INSERT INTO centro(nombre, email, telefono, direccion, id_tutor) VALUES (?,?,?,?,?)";
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, nombre);
+            preparedStatement.setString(2, email);
+            preparedStatement.setString(3, telefono);
+            preparedStatement.setString(4, direccion);
+            preparedStatement.setInt(5, Integer.parseInt(id_tutor));
+
+            filasMod = preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return filasMod;
+    }
+
+    void borrarCentro(int idABorrar) {
+        Connection con;
+        try {
+            con = conectar();
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate("UPDATE centro SET eliminado = TRUE WHERE id = " + idABorrar + ";");
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public int agregarTutor(String nombre, String apellidos, String telefono, String email) {
+        int filasMod = 0;
+        try {
+            Connection con = conectar();
+            String query = "INSERT INTO tutor_centro(nombre, apellidos, telefono, email) VALUES (?,?,?,?)";
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, nombre);
+            preparedStatement.setString(2, apellidos);
+            preparedStatement.setString(3, telefono);
+            preparedStatement.setString(4, email);
+
+            filasMod = preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return filasMod;
+    }
+
+    void borrarTutor(int idABorrar) {
+        Connection con;
+        try {
+            con = conectar();
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate("UPDATE tutor_centro SET eliminado = TRUE WHERE id = " + idABorrar + ";");
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Tutor obtenerTutor(int idEscogido) {
+        Tutor tutor = new Tutor();
+        try {
+            Connection con = conectar();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from tutor_centro where id = " + idEscogido + "");
+            if (rs.next()) {
+                tutor.setId(rs.getInt("id"));
+                tutor.setNombre(rs.getString("nombre"));
+                tutor.setApellidos(rs.getString("apellidos"));
+                tutor.setTelefono(rs.getString("telefono"));
+                tutor.setEmail(rs.getString("email"));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return tutor;
+    }
+
     /**
      *
-    
+     *
      */
-   
-     /*
+    /*
      
       public int agregarConvenio(Empresa empresaSeleccionada, FileInputStream anexo2, Centro centroSelecionado, FileInputStream anexo1) {
         int filasMod = 0;
@@ -741,7 +871,71 @@ public class BBDD {
      
      
      */
-     // Me sale un error 
-    
+    // Me sale un error 
+    public Centro obtenerCentro(int idEscogido) {
+        Centro centro = null;
 
+        try {
+            Connection con = conectar();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from centro where id = " + idEscogido + "");
+            if (rs.next()) {
+                centro.setId(rs.getInt("id"));
+                centro.setNombre(rs.getString("nombre"));
+                centro.setEmail(rs.getString("email"));
+                centro.setTelefono(rs.getString("telefono"));
+                centro.setDireccion(rs.getString("direccion"));
+                centro.setId_tutor(rs.getInt("id_tutor"));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return centro;
+    }
+
+    public Object[] cargarComboTutores() {
+
+        ArrayList<Item> tutores = new ArrayList<>();
+
+        Statement statement = null;
+        ResultSet registro = null;
+        Connection con = null;
+        try {
+            con = conectar();
+            statement = con.createStatement();
+            String query = "Select id,nombre,apellidos "
+                    + "from tutor_centro "
+                    + "order by id";
+
+            // libros
+            // que
+            // tenemos en nuestra
+            // base de datos
+            registro = statement.executeQuery(query);
+
+            while (registro.next()) {
+                Item item = new Item();
+                item.setNombreMostradoEnElCombo(registro.getString("nombre") + " " + registro.getString("apellidos"));
+                item.setIdEnLaTabla(registro.getInt("id"));
+                tutores.add(item);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                statement.close();
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("Error al cerrar.\n");
+            } catch (NullPointerException e) {
+
+            }
+        }
+
+        return tutores.toArray();
+
+    }
 }

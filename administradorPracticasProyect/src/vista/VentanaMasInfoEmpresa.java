@@ -40,8 +40,6 @@ public class VentanaMasInfoEmpresa extends javax.swing.JFrame {
     BBDD bbdd = new BBDD();
     EmpresaMetodos empresaMetodos = new EmpresaMetodos();
 
-    //byte[] cvActual;
-    //FileInputStream cvASubir;
     Empresa empresa;
     int idEmpresa;
     Color botonSeleccionado = new Color(230, 161, 2);
