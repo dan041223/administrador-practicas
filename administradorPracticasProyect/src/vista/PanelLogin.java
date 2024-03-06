@@ -35,6 +35,7 @@ public class PanelLogin extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(PanelLogin.class.getResource("/img/Logo.png")));
         initComponents();
         comprobarUsuario();
+        jLabel5.setVisible(false);
     }
 
     /**
