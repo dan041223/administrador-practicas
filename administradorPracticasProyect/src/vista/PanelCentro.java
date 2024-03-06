@@ -22,7 +22,7 @@ public class PanelCentro extends javax.swing.JPanel {
         CentrosMetodos centrosMetodos = new CentrosMetodos();
         public static int idSeleccionado;
         List<Centro> centros = centrosMetodos
-                        .rellenarListaCentro("select * from centro  ORDER BY id ASC");
+                        .rellenarListaCentro("select * from centro WHERE eliminado = False ORDER BY id ASC");
 
         public PanelCentro() {
                 initComponents();
