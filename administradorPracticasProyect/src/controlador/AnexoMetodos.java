@@ -10,6 +10,7 @@ import elementos.mensaje.message.MessageDialog;
 import elementos.tablas.TableActionCellEditor;
 import elementos.tablas.TableActionCellRender;
 import elementos.tablas.TableActionEvent;
+import java.io.FileInputStream;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JTable;
@@ -85,5 +86,23 @@ public class AnexoMetodos {
     public List rellenarListaAnexo(String query){
         List<Anexo22> anexos = bbdd.obtenerListaAnexo22(query);
         return anexos;
+    }
+    
+    public void comprobarCampos(JFrame framePadre, String idCentro, String familiaProfesional, String ciclo, FileInputStream cvASubir) {
+        Notification notificacion;
+        if (idCentro.equals("Id del Centro")
+                || familiaProfesional.equals("Familia Profesional")
+                || ciclo.equals("ciclo")
+                || idCentro.isEmpty()
+                || familiaProfesional.isEmpty()
+                || ciclo.isEmpty()
+                || ciclo.isEmpty()) {
+            notificacion = new Notification(framePadre, Notification.Type.WARNING, Notification.Location.TOP_CENTER, "Todos los campos deben de estar rellenos.");
+            notificacion.showNotification();
+        }else{
+            bbdd.agregarAnexo(idCentro, familiaProfesional, ciclo, cvASubir);
+            notificacion = new Notification(framePadre, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "¡Alumno creado con éxito!");
+            notificacion.showNotification();
+        }
     }
 }

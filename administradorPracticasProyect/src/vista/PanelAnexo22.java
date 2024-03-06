@@ -228,7 +228,7 @@ public class PanelAnexo22 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
         private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel2MouseClicked
-            new VentanaAgregarAlumno().setVisible(true);
+            new VentanaAgregarAnexo().setVisible(true);
         }// GEN-LAST:event_jLabel2MouseClicked
 
         private void tfBusquedaFocusGained(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_tfBusquedaFocusGained

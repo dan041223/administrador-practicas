@@ -552,7 +552,7 @@ public class BBDD {
             while (rs.next()) {                
                 anexo = new Anexo22();
                 anexo.setId(rs.getInt("id"));
-                anexo.setIdCentro(rs.getInt("id_entro"));
+                anexo.setIdCentro(rs.getInt("id_centro"));
                 anexo.setFamiliaProfesional(rs.getString("familia_profesional"));
                 anexo.setCicloFormativo(rs.getString("ciclo_formativo"));
                 anexo.setAnexo22(rs.getBytes("anexo22"));
@@ -575,5 +575,23 @@ public class BBDD {
         } catch (SQLException ex) {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public int agregarAnexo(String idCentro, String familiaProfesional, String ciclo, FileInputStream cvASubir) {
+        int filasMod = 0;
+        try {
+            Connection con = conectar();
+            String query = "INSERT INTO anexo22(id_centro, familia_profesional, ciclo_formativo, anexo22) VALUES (?,?,?,?)";
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, idCentro);
+            preparedStatement.setString(2, familiaProfesional);
+            preparedStatement.setString(3, ciclo);
+            preparedStatement.setBinaryStream(4, cvASubir);
+            
+            filasMod = preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return filasMod;
     }
 }
