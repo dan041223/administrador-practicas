@@ -28,7 +28,7 @@ import static vista.PanelAlumnos.tfBusqueda;
 import static vista.PanelConvenio.tablaConvenio;
 import vista.PanelLogin;
 import vista.VentanaMasInfoAlumno;
-
+a
 /**
  *
  * @author LinkA
