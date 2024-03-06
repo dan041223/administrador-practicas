@@ -101,7 +101,7 @@ public class AnexoMetodos {
             notificacion.showNotification();
         }else{
             bbdd.agregarAnexo(idCentro, familiaProfesional, ciclo, cvASubir);
-            notificacion = new Notification(framePadre, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "¡Alumno creado con éxito!");
+            notificacion = new Notification(framePadre, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "¡Anexo creado con éxito!");
             notificacion.showNotification();
         }
     }
