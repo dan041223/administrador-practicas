@@ -69,11 +69,6 @@ public class PanelMenu extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        PanelBotonMenuIzqNecesidades = new javax.swing.JPanel();
-        jPanel13 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         PanelBotonMenuIzqUsuarios = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
@@ -92,6 +87,12 @@ public class PanelMenu extends javax.swing.JPanel {
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
+        PanelBotonMenuIzqCentros1 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
         PanelCentralMenu = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
 
@@ -251,9 +252,6 @@ public class PanelMenu extends javax.swing.JPanel {
 
         PanelMenuIzquierda.add(PanelBotonMenuIzqEmpresas);
 
-
-
-
         PanelBotonMenuIzqBolsaEmpleo.setBackground(new java.awt.Color(254, 177, 3));
         PanelBotonMenuIzqBolsaEmpleo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         PanelBotonMenuIzqBolsaEmpleo.setMaximumSize(new java.awt.Dimension(250, 50));
@@ -299,52 +297,6 @@ public class PanelMenu extends javax.swing.JPanel {
         PanelBotonMenuIzqBolsaEmpleo.add(jLabel8);
 
         PanelMenuIzquierda.add(PanelBotonMenuIzqBolsaEmpleo);
-
-        PanelBotonMenuIzqNecesidades.setBackground(new java.awt.Color(254, 177, 3));
-        PanelBotonMenuIzqNecesidades.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        PanelBotonMenuIzqNecesidades.setMaximumSize(new java.awt.Dimension(250, 50));
-        PanelBotonMenuIzqNecesidades.setMinimumSize(new java.awt.Dimension(0, 50));
-        PanelBotonMenuIzqNecesidades.setPreferredSize(new java.awt.Dimension(162, 70));
-        PanelBotonMenuIzqNecesidades.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                PanelBotonMenuIzqNecesidadesMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                PanelBotonMenuIzqNecesidadesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                PanelBotonMenuIzqNecesidadesMouseExited(evt);
-            }
-        });
-        PanelBotonMenuIzqNecesidades.setLayout(new javax.swing.BoxLayout(PanelBotonMenuIzqNecesidades, javax.swing.BoxLayout.LINE_AXIS));
-
-        jPanel13.setBackground(new java.awt.Color(104, 104, 104));
-        jPanel13.setMaximumSize(new java.awt.Dimension(5, 30));
-
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 5, Short.MAX_VALUE)
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
-        );
-
-        PanelBotonMenuIzqNecesidades.add(jPanel13);
-
-        jLabel16.setText("   ");
-        PanelBotonMenuIzqNecesidades.add(jLabel16);
-
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menu (Personalizado).png"))); // NOI18N
-        PanelBotonMenuIzqNecesidades.add(jLabel11);
-
-        jLabel9.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel9.setText("  Necesidades");
-        PanelBotonMenuIzqNecesidades.add(jLabel9);
-
-        PanelMenuIzquierda.add(PanelBotonMenuIzqNecesidades);
 
         PanelBotonMenuIzqUsuarios.setBackground(new java.awt.Color(254, 177, 3));
         PanelBotonMenuIzqUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -509,25 +461,69 @@ public class PanelMenu extends javax.swing.JPanel {
         jLabel27.setText("Anexo2.2");
         PanelBotonMenuIzqAnexo.add(jLabel27);
 
+        PanelBotonMenuIzqCentros1.setBackground(new java.awt.Color(254, 177, 3));
+        PanelBotonMenuIzqCentros1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        PanelBotonMenuIzqCentros1.setMaximumSize(new java.awt.Dimension(250, 50));
+        PanelBotonMenuIzqCentros1.setMinimumSize(new java.awt.Dimension(0, 50));
+        PanelBotonMenuIzqCentros1.setPreferredSize(new java.awt.Dimension(162, 70));
+        PanelBotonMenuIzqCentros1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PanelBotonMenuIzqCentros1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PanelBotonMenuIzqCentros1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PanelBotonMenuIzqCentros1MouseExited(evt);
+            }
+        });
+        PanelBotonMenuIzqCentros1.setLayout(new javax.swing.BoxLayout(PanelBotonMenuIzqCentros1, javax.swing.BoxLayout.LINE_AXIS));
+
+        jPanel13.setBackground(new java.awt.Color(104, 104, 104));
+        jPanel13.setMaximumSize(new java.awt.Dimension(5, 30));
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 5, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        PanelBotonMenuIzqCentros1.add(jPanel13);
+
+        jLabel16.setText("   ");
+        PanelBotonMenuIzqCentros1.add(jLabel16);
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/oficina (Personalizado).png"))); // NOI18N
+        PanelBotonMenuIzqCentros1.add(jLabel9);
+
+        jLabel11.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel11.setText("  Centros");
+        PanelBotonMenuIzqCentros1.add(jLabel11);
+        PanelBotonMenuIzqCentros1.add(jLabel28);
+
         javax.swing.GroupLayout SeparadorInferiorMenuIzqLayout = new javax.swing.GroupLayout(SeparadorInferiorMenuIzq);
         SeparadorInferiorMenuIzq.setLayout(SeparadorInferiorMenuIzqLayout);
         SeparadorInferiorMenuIzqLayout.setHorizontalGroup(
             SeparadorInferiorMenuIzqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(SeparadorInferiorMenuIzqLayout.createSequentialGroup()
-                .addGroup(SeparadorInferiorMenuIzqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanelBotonMenuIzqPractica, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PanelBotonMenuIzqAnexo, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 20, Short.MAX_VALUE))
+            .addComponent(PanelBotonMenuIzqAnexo, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+            .addComponent(PanelBotonMenuIzqPractica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelBotonMenuIzqCentros1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         SeparadorInferiorMenuIzqLayout.setVerticalGroup(
             SeparadorInferiorMenuIzqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SeparadorInferiorMenuIzqLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(PanelBotonMenuIzqAnexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PanelBotonMenuIzqPractica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PanelBotonMenuIzqPractica, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PanelBotonMenuIzqCentros1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -544,7 +540,7 @@ public class PanelMenu extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1045, Short.MAX_VALUE)
+            .addGap(0, 1026, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -588,20 +584,18 @@ public class PanelMenu extends javax.swing.JPanel {
         PanelCentralMenu = menuMetodos.cambioPanel(new PanelBolsaEmpleoBueno(), PanelCentralMenu);
     }//GEN-LAST:event_PanelBotonMenuIzqBolsaEmpleoMouseClicked
 
-    private void PanelBotonmenuIzqMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonmenuIzqMenuMouseClicked
-       
-    }//GEN-LAST:event_PanelBotonmenuIzqMenuMouseClicked
-
     private void PanelBotonMenuIzqPracticaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonMenuIzqPracticaMouseClicked
         PanelCentralMenu = menuMetodos.cambioPanel(new PanelPractica(), PanelCentralMenu);
     }//GEN-LAST:event_PanelBotonMenuIzqPracticaMouseClicked
 
     private void PanelBotonMenuIzqPracticaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonMenuIzqPracticaMouseEntered
-        // TODO add your handling code here:
+        PanelBotonMenuIzqPractica.setBackground(botonSeleccionado);
+        jPanel17.setBackground(tagSeleccionado);
     }//GEN-LAST:event_PanelBotonMenuIzqPracticaMouseEntered
 
     private void PanelBotonMenuIzqPracticaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonMenuIzqPracticaMouseExited
-        // TODO add your handling code here:
+        PanelBotonMenuIzqPractica.setBackground(botonNoSeleccionado);
+        jPanel17.setBackground(tagNoSeleccionado);
     }//GEN-LAST:event_PanelBotonMenuIzqPracticaMouseExited
 
     private void PanelBotonMenuIzqAnexoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonMenuIzqAnexoMouseClicked
@@ -609,19 +603,31 @@ public class PanelMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_PanelBotonMenuIzqAnexoMouseClicked
 
     private void PanelBotonMenuIzqAnexoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonMenuIzqAnexoMouseEntered
-        // TODO add your handling code here:
+        PanelBotonMenuIzqAnexo.setBackground(botonSeleccionado);
+        jPanel18.setBackground(tagSeleccionado);
     }//GEN-LAST:event_PanelBotonMenuIzqAnexoMouseEntered
 
     private void PanelBotonMenuIzqAnexoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonMenuIzqAnexoMouseExited
-        // TODO add your handling code here:
+        PanelBotonMenuIzqAnexo.setBackground(botonNoSeleccionado);
+        jPanel18.setBackground(tagNoSeleccionado);
     }//GEN-LAST:event_PanelBotonMenuIzqAnexoMouseExited
     private void PanelBotonMenuIzqEmpresasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonMenuIzqEmpresasMouseClicked
          PanelCentralMenu = menuMetodos.cambioPanel(new PanelEmpresa(), PanelCentralMenu);
     }//GEN-LAST:event_PanelBotonMenuIzqEmpresasMouseClicked
 
-    private void PanelBotonMenuIzqNecesidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonMenuIzqNecesidadesMouseClicked
-        PanelCentralMenu = menuMetodos.cambioPanel(new PanelNecesidades(), PanelCentralMenu);
-    }//GEN-LAST:event_PanelBotonMenuIzqNecesidadesMouseClicked
+    private void PanelBotonMenuIzqCentros1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonMenuIzqCentros1MouseClicked
+        PanelCentralMenu = menuMetodos.cambioPanel(new PanelCentro(), PanelCentralMenu);
+    }//GEN-LAST:event_PanelBotonMenuIzqCentros1MouseClicked
+
+    private void PanelBotonMenuIzqCentros1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonMenuIzqCentros1MouseEntered
+        PanelBotonMenuIzqCentros1.setBackground(botonSeleccionado);
+        jPanel13.setBackground(tagSeleccionado);
+    }//GEN-LAST:event_PanelBotonMenuIzqCentros1MouseEntered
+
+    private void PanelBotonMenuIzqCentros1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonMenuIzqCentros1MouseExited
+        PanelBotonMenuIzqCentros1.setBackground(botonNoSeleccionado);
+        jPanel13.setBackground(tagNoSeleccionado);
+    }//GEN-LAST:event_PanelBotonMenuIzqCentros1MouseExited
 
     private void PanelBotonmenuIzqMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonmenuIzqMenuMouseClicked
         PanelCentralMenu = menuMetodos.cambioPanel(new PanelMenuPrincipal(), PanelCentralMenu);
@@ -646,16 +652,6 @@ public class PanelMenu extends javax.swing.JPanel {
         PanelBotonMenuIzqBolsaEmpleo.setBackground(botonNoSeleccionado);
         jPanel12.setBackground(tagNoSeleccionado);
     }// GEN-LAST:event_PanelBotonMenuIzqBolsaEmpleoMouseExited
-
-    private void PanelBotonMenuIzqNecesidadesMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_PanelBotonMenuIzqNecesidadesMouseEntered
-        PanelBotonMenuIzqNecesidades.setBackground(botonSeleccionado);
-        jPanel13.setBackground(tagSeleccionado);
-    }// GEN-LAST:event_PanelBotonMenuIzqNecesidadesMouseEntered
-
-    private void PanelBotonMenuIzqNecesidadesMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_PanelBotonMenuIzqNecesidadesMouseExited
-        PanelBotonMenuIzqNecesidades.setBackground(botonNoSeleccionado);
-        jPanel13.setBackground(tagNoSeleccionado);
-    }// GEN-LAST:event_PanelBotonMenuIzqNecesidadesMouseExited
 
     private void PanelBotonMenuIzqUsuariosMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_PanelBotonMenuIzqUsuariosMouseEntered
         PanelBotonMenuIzqUsuarios.setBackground(botonSeleccionado);
@@ -685,8 +681,8 @@ public class PanelMenu extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelBotonMenuIzqAnexo;
     private javax.swing.JPanel PanelBotonMenuIzqBolsaEmpleo;
+    private javax.swing.JPanel PanelBotonMenuIzqCentros1;
     private javax.swing.JPanel PanelBotonMenuIzqEmpresas;
-    private javax.swing.JPanel PanelBotonMenuIzqNecesidades;
     private javax.swing.JPanel PanelBotonMenuIzqPractica;
     private javax.swing.JPanel PanelBotonMenuIzqUsuarios;
     private javax.swing.JPanel PanelBotonmenuIzqAlumnos1;
@@ -715,6 +711,7 @@ public class PanelMenu extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

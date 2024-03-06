@@ -115,7 +115,7 @@ public class VentanaAgregarPractica extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
-        jLabel3.setText("Agregar nuevo alumno");
+        jLabel3.setText("Agregar nueva practica");
 
         jLabel14.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel14.setText("Anexo8");

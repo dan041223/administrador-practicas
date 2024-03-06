@@ -32,7 +32,7 @@ public class PracticaMetodos {
     public static int idEscogido;
     
     public JTable prepararRenderizadoCeldas(JTable tabla){
-        tabla.getColumnModel().getColumn(6).setCellRenderer(new TableActionCellRender());
+        tabla.getColumnModel().getColumn(7).setCellRenderer(new TableActionCellRender());
         return tabla;
     }
     
@@ -78,6 +78,7 @@ public class PracticaMetodos {
         DefaultTableModel modeloDefaultTabla = (DefaultTableModel) tablaPractica.getModel();
         modeloDefaultTabla.setRowCount(0);
         for (Practica practica : practicas) {
+            System.out.println("Una practica mas");
             modeloDefaultTabla.addRow(new Object[]{
                 practica.getId(),
                 practica.getFecha_inicio(),
@@ -85,14 +86,14 @@ public class PracticaMetodos {
                 practica.getAnexo4(),
                 practica.getAnexo8(),
                 practica.getId_convenio(),
-                practica.getEliminado()
+                practica.getFecha_fin(),
             });
         }
         tablaPractica.setModel(modeloDefaultTabla);
         return tablaPractica;
     }
      
-     public void comprobarCampos(JFrame framePadre, String idAlumno, String idConvenio, FileInputStream cvASubir1,  FileInputStream cvASubir2) {
+     public void comprobarCampos(JFrame framePadre, String idConvenio, String idAlumno, FileInputStream cvASubir1,  FileInputStream cvASubir2) {
         Notification notificacion;
         if (idAlumno.equals("Id del alumno")
                 || idConvenio.equals("Id del Convenio")) {

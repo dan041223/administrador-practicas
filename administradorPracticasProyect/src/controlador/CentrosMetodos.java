@@ -41,7 +41,7 @@ public class CentrosMetodos {
     public static int idEscogido;
     
     public JTable prepararRenderizadoCeldas(JTable tabla){
-        //tabla.getColumnModel().getColumn(7).setCellRenderer(new TableActionCellRender());
+        tabla.getColumnModel().getColumn(6).setCellRenderer(new TableActionCellRender());
         return tabla;
     }
     
@@ -74,7 +74,7 @@ public class CentrosMetodos {
                 }
             }
         };
-        //tabla.getColumnModel().getColumn(6).setCellEditor(new TableActionCellEditor(evento));
+        tabla.getColumnModel().getColumn(6).setCellEditor(new TableActionCellEditor(evento));
         return tabla;
     }
 

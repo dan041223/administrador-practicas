@@ -280,6 +280,6 @@ public class PanelPractica extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     public static javax.swing.JTable tablaPractica;
-    public static javax.swing.JTextField tfBusqueda;
+    private javax.swing.JTextField tfBusqueda;
     // End of variables declaration//GEN-END:variables
 }

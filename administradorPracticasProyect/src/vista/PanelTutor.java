@@ -18,13 +18,15 @@ import static vista.PanelEmpresa.tfBusqueda;
  */
 public class PanelTutor extends javax.swing.JPanel {
 
-        Color botonSeleccionado = new Color(230, 161, 2);
-        Color botonNoSeleccionado = new Color(254, 177, 3);
+    Color botonSeleccionado = new Color(230, 161, 2);
+    Color botonNoSeleccionado = new Color(254, 177, 3);
         
-       TutorMetodos tutorMetodos = new TutorMetodos();
+    int idSeleccionado = PanelCentro.idSeleccionado;
+        
+    TutorMetodos tutorMetodos = new TutorMetodos();
        
         List<Tutor> tutores = tutorMetodos
-                        .rellenarListaTutores("select * from tutor_centro ORDER BY id ASC");
+                        .rellenarListaTutores("select * from tutor_centro WHERE id = " + idSeleccionado + " ORDER BY id ASC");
 
         public PanelTutor() {
                 initComponents();

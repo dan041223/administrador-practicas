@@ -25,7 +25,6 @@ import modelo.Alumno;
 import modelo.Convenio;
 import vista.PanelAlumnos;
 import static vista.PanelAlumnos.tfBusqueda;
-import static vista.PanelConvenio.tablaConvenio;
 import vista.PanelLogin;
 import vista.VentanaMasInfoAlumno;
 

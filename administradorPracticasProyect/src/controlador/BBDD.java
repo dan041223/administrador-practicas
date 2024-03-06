@@ -501,7 +501,7 @@ public class BBDD {
         try {
             Connection con = conectar();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM alumnos WHERE CAST(\"idEmpresa\" AS TEXT) LIKE '%" + valorIntroducidoAlumnos
+            ResultSet rs = stmt.executeQuery("SELECT * FROM alumnos WHERE CAST(id AS TEXT) LIKE '%" + valorIntroducidoAlumnos
                     + "%' "
                     + "OR nombre LIKE '%" + valorIntroducidoAlumnos + "%' "
                     + "OR apellidos LIKE '%" + valorIntroducidoAlumnos + "%' "
@@ -545,7 +545,7 @@ public class BBDD {
             empresas = new ArrayList<>();
             while (rs.next()) {
                 empresa = new Empresa();
-                empresa.setId(rs.getInt("\"idEmpresa\""));
+                empresa.setId(rs.getInt("idEmpresa"));
                 empresa.setNombre(rs.getString("nombre"));
                 empresa.setCif(rs.getString("cif"));
                 empresa.setDuenio(rs.getString("dueño"));
@@ -762,7 +762,7 @@ public class BBDD {
                 practica.setAnexo4(rs.getBytes("anexo4"));
                 practica.setAnexo8(rs.getBytes("anexo8"));
                 practica.setId_convenio(rs.getInt("id_convenio"));
-                practica.setFecha_fin(rs.getString("direccion"));
+                practica.setFecha_fin(rs.getString("fecha_fin"));
                 
                 practicas.add(practica);
             }
@@ -896,17 +896,20 @@ public class BBDD {
             String query = "INSERT INTO practica (id_alumno, fecha_inicio, anexo4, anexo8, id_convenio, fecha_fin) VALUES (?,?,?,?,?,?)";
             PreparedStatement preparedStatement = con.prepareStatement(query);
             LocalDate fechaActual = LocalDate.now();
+            String fechaString = fechaActual.toString();
             LocalDate fecha90DiasDespues = fechaActual.plusDays(90);
-
-            java.sql.Date fechaInicio = java.sql.Date.valueOf(fechaActual);
-            java.sql.Date fechaFinal = java.sql.Date.valueOf(fecha90DiasDespues);
+            String fecha90DespuesString = fecha90DiasDespues.toString();
             //ERROR
-            preparedStatement.setDate(1, fechaInicio);
-            preparedStatement.setInt(2, Integer.parseInt(idAlumno));           
+            preparedStatement.setInt(1, Integer.parseInt(idAlumno));
+            preparedStatement.setString(2, fechaString);           
             preparedStatement.setBinaryStream(3, cvASubir1);
             preparedStatement.setBinaryStream(4, cvASubir2);
             preparedStatement.setInt(5, Integer.parseInt(idConvenio));
-            preparedStatement.setDate(6, fechaFinal);
+            preparedStatement.setString(6, fecha90DespuesString);
+            
+            System.out.println(idAlumno + " " + idConvenio);
+            
+            filasMod = preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -985,7 +988,7 @@ public class BBDD {
      
     // Me sale un error 
     public Centro obtenerCentro(int idEscogido) {
-        Centro centro = null;
+        Centro centro = new Centro();
 
         try {
             Connection con = conectar();

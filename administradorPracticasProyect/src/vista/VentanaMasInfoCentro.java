@@ -31,7 +31,6 @@ import modelo.Alumno;
 import modelo.Centro;
 import modelo.Item;
 import sun.misc.IOUtils;
-import static vista.PanelCentro.tfBusqueda;
 /**
  *
  * @author LinkA
@@ -41,7 +40,7 @@ public class VentanaMasInfoCentro extends javax.swing.JFrame {
     BBDD bbdd = new BBDD();
     CentrosMetodos centroMetodos = new CentrosMetodos();
     
-     JComboBox comboBoxSuggestionListaDeTutores;
+    JComboBox comboBoxSuggestionListaDeTutores;
     Object[] tutores;
 
     Centro centro;
@@ -55,7 +54,6 @@ public class VentanaMasInfoCentro extends javax.swing.JFrame {
         
         
         tutores = bbdd.cargarComboTutores();
-        comboBoxSuggestionListaDeTutores = new JComboBox(tutores);
         initComponents();  
         centro = bbdd.obtenerCentro(centroMetodos.idEscogido);
         idCentro = centro.getId();
@@ -393,13 +391,13 @@ public class VentanaMasInfoCentro extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel5MouseClicked
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        if (!tfBusqueda.getText().equals("Busque en cualquier campo")) {
-            List<Centro> centros = centroMetodos.rellenarListaCentro("SELECT * FROM centro WHERE CAST(id AS TEXT) LIKE '%" + tfBusqueda.getText()
+        if (!PanelCentro.tfBusqueda.getText().equals("Busque en cualquier campo")) {
+            List<Centro> centros = centroMetodos.rellenarListaCentro("SELECT * FROM centro WHERE CAST(id AS TEXT) LIKE '%" + PanelCentro.tfBusqueda.getText()
                 + "%' "
-                + "OR nombre LIKE '%" + tfBusqueda.getText() + "%' "
-                + "OR email LIKE '%" + tfBusqueda.getText() + "%' "
-                + "OR telefono LIKE '%" + tfBusqueda.getText() + "%' "
-                + "OR direccion LIKE '%" + tfBusqueda.getText() + "%' "
+                + "OR nombre LIKE '%" + PanelCentro.tfBusqueda.getText() + "%' "
+                + "OR email LIKE '%" + PanelCentro.tfBusqueda.getText() + "%' "
+                + "OR telefono LIKE '%" + PanelCentro.tfBusqueda.getText() + "%' "
+                + "OR direccion LIKE '%" + PanelCentro.tfBusqueda.getText() + "%' "
                 + "%' ORDER BY id ASC");
             PanelCentro.tablaCentro = centroMetodos.rellenarTablaCentros(PanelCentro.tablaCentro, centros);
         }
@@ -434,6 +432,7 @@ public class VentanaMasInfoCentro extends javax.swing.JFrame {
         tfEmail.setText(centro.getEmail());
         tfTelefono.setText(centro.getTelefono());
         tfDireccion.setText(centro.getDireccion());
+        
         comboBoxSuggestionListaDeTutores.getSelectedItem().toString();
         
         

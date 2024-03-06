@@ -33,23 +33,18 @@ public class PanelMenuPrincipal extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
 
         jLabelBienvenida.setFont(new java.awt.Font("Roboto", 0, 36)); // NOI18N
+        jLabelBienvenida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelBienvenida.setText("Bienvenido ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(314, 314, 314)
-                .addComponent(jLabelBienvenida)
-                .addContainerGap(448, Short.MAX_VALUE))
+            .addComponent(jLabelBienvenida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 947, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(330, 330, 330)
-                .addComponent(jLabelBienvenida)
-                .addContainerGap(300, Short.MAX_VALUE))
+            .addComponent(jLabelBienvenida, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
