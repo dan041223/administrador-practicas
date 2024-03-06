@@ -19,6 +19,7 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,6 +29,7 @@ import java.util.logging.Logger;
 import modelo.Alumno;
 import modelo.Anexo22;
 import modelo.Empresa;
+import modelo.Practica;
 import modelo.TIPOUSUARIO;
 import modelo.Usuario;
 import org.postgresql.util.PSQLException;
@@ -587,6 +589,70 @@ public class BBDD {
             preparedStatement.setString(2, familiaProfesional);
             preparedStatement.setString(3, ciclo);
             preparedStatement.setBinaryStream(4, cvASubir);
+            
+            filasMod = preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return filasMod;
+    }
+    
+    List<Practica> obtenerListaPractica(String query) {
+        Practica practica;
+        List<Practica> practicas = null;
+        try {
+            Connection con = conectar();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            practicas = new ArrayList<>();
+            while (rs.next()) {                
+                practica = new Practica();
+                practica.setId(rs.getInt("id"));
+                practica.setFecha_inicio(rs.getString("fecha_inicio"));
+                practica.setId_alumno(rs.getInt("id_alumno"));
+                practica.setAnexo4(rs.getBytes("anexo4"));
+                practica.setAnexo8(rs.getBytes("anexo8"));
+                practica.setId_convenio(rs.getInt("id_convenio"));
+                practica.setFecha_fin(rs.getString("direccion"));
+                
+                practicas.add(practica);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return practicas;
+    }
+    
+    void borrarPractica(int idABorrar) {
+        Connection con;
+        try {
+            con = conectar();
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate("UPDATE practica SET eliminado = TRUE WHERE id = " + idABorrar + ";");
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public int agregarPractica(String idAlumno, String idConvenio, FileInputStream cvASubir1, FileInputStream cvASubir2) {
+        int filasMod = 0;
+        try {
+            Connection con = conectar();
+            String query = "INSERT INTO practica (id_alumno, fecha_inicio, anexo4, anexo8, id_convenio, fecha_fin) VALUES (?,?,?,?,?,?)";
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            LocalDate fechaActual = LocalDate.now();
+            LocalDate fecha90DiasDespues = fechaActual.plusDays(90);
+
+            java.sql.Date fechaInicio = java.sql.Date.valueOf(fechaActual);
+            java.sql.Date fechaFinal = java.sql.Date.valueOf(fecha90DiasDespues);
+            
+            preparedStatement.setDate(1, fechaInicio);
+            preparedStatement.setInt(2, Integer.parseInt(idAlumno));           
+            preparedStatement.setBinaryStream(3, cvASubir1);
+            preparedStatement.setBinaryStream(4, cvASubir2);
+            preparedStatement.setInt(5, Integer.parseInt(idConvenio));
+            preparedStatement.setDate(6, fechaFinal);
+         
             
             filasMod = preparedStatement.executeUpdate();
         } catch (SQLException ex) {

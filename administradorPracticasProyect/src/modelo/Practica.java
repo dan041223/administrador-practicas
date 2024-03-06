@@ -10,15 +10,24 @@ package modelo;
  * @author LinkA
  */
 public class Practica {
+    int id;
     String fecha_inicio;
     int id_alumno;
     byte[] anexo4;
     byte[] anexo8;
     int id_convenio;
     String fecha_fin;
-    
-    public Practica(){
-        
+    Boolean eliminado;
+
+    public Practica() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFecha_inicio() {
@@ -68,5 +77,15 @@ public class Practica {
     public void setFecha_fin(String fecha_fin) {
         this.fecha_fin = fecha_fin;
     }
+
+    public Boolean getEliminado() {
+        return eliminado;
+    }
+
+    public void setEliminado(Boolean eliminado) {
+        this.eliminado = eliminado;
+    }
     
+    
+   
 }

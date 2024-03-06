@@ -80,11 +80,16 @@ public class PanelMenu extends javax.swing.JPanel {
         SeparadorInferiorMenuIzq = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
-        PanelBotonMenuIzqAnexo = new javax.swing.JPanel();
+        PanelBotonMenuIzqPractica = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
+        PanelBotonMenuIzqAnexo = new javax.swing.JPanel();
+        jPanel18 = new javax.swing.JPanel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
         PanelCentralMenu = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
 
@@ -403,6 +408,51 @@ public class PanelMenu extends javax.swing.JPanel {
         jLabel18.setPreferredSize(null);
         jPanel15.add(jLabel18, java.awt.BorderLayout.CENTER);
 
+        PanelBotonMenuIzqPractica.setBackground(new java.awt.Color(254, 177, 3));
+        PanelBotonMenuIzqPractica.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        PanelBotonMenuIzqPractica.setMaximumSize(new java.awt.Dimension(250, 50));
+        PanelBotonMenuIzqPractica.setMinimumSize(new java.awt.Dimension(0, 50));
+        PanelBotonMenuIzqPractica.setPreferredSize(new java.awt.Dimension(162, 70));
+        PanelBotonMenuIzqPractica.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PanelBotonMenuIzqPracticaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PanelBotonMenuIzqPracticaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PanelBotonMenuIzqPracticaMouseExited(evt);
+            }
+        });
+        PanelBotonMenuIzqPractica.setLayout(new javax.swing.BoxLayout(PanelBotonMenuIzqPractica, javax.swing.BoxLayout.LINE_AXIS));
+
+        jPanel17.setBackground(new java.awt.Color(104, 104, 104));
+        jPanel17.setMaximumSize(new java.awt.Dimension(5, 30));
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        PanelBotonMenuIzqPractica.add(jPanel17);
+
+        jLabel19.setText("     ");
+        PanelBotonMenuIzqPractica.add(jLabel19);
+
+        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/IconoPractica.png"))); // NOI18N
+        jLabel23.setText("   ");
+        PanelBotonMenuIzqPractica.add(jLabel23);
+
+        jLabel24.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel24.setText("Practicas");
+        PanelBotonMenuIzqPractica.add(jLabel24);
+
         PanelBotonMenuIzqAnexo.setBackground(new java.awt.Color(254, 177, 3));
         PanelBotonMenuIzqAnexo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         PanelBotonMenuIzqAnexo.setMaximumSize(new java.awt.Dimension(250, 50));
@@ -421,32 +471,32 @@ public class PanelMenu extends javax.swing.JPanel {
         });
         PanelBotonMenuIzqAnexo.setLayout(new javax.swing.BoxLayout(PanelBotonMenuIzqAnexo, javax.swing.BoxLayout.LINE_AXIS));
 
-        jPanel17.setBackground(new java.awt.Color(104, 104, 104));
-        jPanel17.setMaximumSize(new java.awt.Dimension(5, 30));
+        jPanel18.setBackground(new java.awt.Color(104, 104, 104));
+        jPanel18.setMaximumSize(new java.awt.Dimension(5, 30));
 
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 30, Short.MAX_VALUE)
         );
 
-        PanelBotonMenuIzqAnexo.add(jPanel17);
+        PanelBotonMenuIzqAnexo.add(jPanel18);
 
-        jLabel19.setText("     ");
-        PanelBotonMenuIzqAnexo.add(jLabel19);
+        jLabel25.setText("     ");
+        PanelBotonMenuIzqAnexo.add(jLabel25);
 
-        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/IconAnexo22.png"))); // NOI18N
-        jLabel23.setText("   ");
-        PanelBotonMenuIzqAnexo.add(jLabel23);
+        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/IconAnexo22.png"))); // NOI18N
+        jLabel26.setText("   ");
+        PanelBotonMenuIzqAnexo.add(jLabel26);
 
-        jLabel24.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel24.setText("Anexo2.2");
-        PanelBotonMenuIzqAnexo.add(jLabel24);
+        jLabel27.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel27.setText("Anexo2.2");
+        PanelBotonMenuIzqAnexo.add(jLabel27);
 
         javax.swing.GroupLayout SeparadorInferiorMenuIzqLayout = new javax.swing.GroupLayout(SeparadorInferiorMenuIzq);
         SeparadorInferiorMenuIzq.setLayout(SeparadorInferiorMenuIzqLayout);
@@ -454,14 +504,19 @@ public class PanelMenu extends javax.swing.JPanel {
             SeparadorInferiorMenuIzqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(SeparadorInferiorMenuIzqLayout.createSequentialGroup()
-                .addComponent(PanelBotonMenuIzqAnexo, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(SeparadorInferiorMenuIzqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PanelBotonMenuIzqPractica, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PanelBotonMenuIzqAnexo, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 20, Short.MAX_VALUE))
         );
         SeparadorInferiorMenuIzqLayout.setVerticalGroup(
             SeparadorInferiorMenuIzqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SeparadorInferiorMenuIzqLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(PanelBotonMenuIzqAnexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PanelBotonMenuIzqPractica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -478,7 +533,7 @@ public class PanelMenu extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1065, Short.MAX_VALUE)
+            .addGap(0, 1045, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -526,8 +581,20 @@ public class PanelMenu extends javax.swing.JPanel {
        
     }//GEN-LAST:event_PanelBotonmenuIzqMenuMouseClicked
 
+    private void PanelBotonMenuIzqPracticaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonMenuIzqPracticaMouseClicked
+        PanelCentralMenu = menuMetodos.cambioPanel(new PanelPractica(), PanelCentralMenu);
+    }//GEN-LAST:event_PanelBotonMenuIzqPracticaMouseClicked
+
+    private void PanelBotonMenuIzqPracticaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonMenuIzqPracticaMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PanelBotonMenuIzqPracticaMouseEntered
+
+    private void PanelBotonMenuIzqPracticaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonMenuIzqPracticaMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PanelBotonMenuIzqPracticaMouseExited
+
     private void PanelBotonMenuIzqAnexoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonMenuIzqAnexoMouseClicked
-        PanelCentralMenu = menuMetodos.cambioPanel(new PanelAnexo22(), PanelCentralMenu);
+         PanelCentralMenu = menuMetodos.cambioPanel(new PanelAnexo22(), PanelCentralMenu);
     }//GEN-LAST:event_PanelBotonMenuIzqAnexoMouseClicked
 
     private void PanelBotonMenuIzqAnexoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonMenuIzqAnexoMouseEntered
@@ -598,6 +665,7 @@ public class PanelMenu extends javax.swing.JPanel {
     private javax.swing.JPanel PanelBotonMenuIzqBolsaEmpleo;
     private javax.swing.JPanel PanelBotonMenuIzqEmpresas;
     private javax.swing.JPanel PanelBotonMenuIzqNecesidades;
+    private javax.swing.JPanel PanelBotonMenuIzqPractica;
     private javax.swing.JPanel PanelBotonMenuIzqUsuarios;
     private javax.swing.JPanel PanelBotonmenuIzqAlumnos1;
     private javax.swing.JPanel PanelBotonmenuIzqMenu;
@@ -622,6 +690,9 @@ public class PanelMenu extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -638,5 +709,6 @@ public class PanelMenu extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
     // End of variables declaration//GEN-END:variables
 }
