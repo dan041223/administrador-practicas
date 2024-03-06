@@ -6,9 +6,17 @@
 package vista;
 
 import controlador.LoginMetodos;
+import controlador.Principal;
 import elementos.Notification;
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Usuario;
 
 /**
@@ -26,6 +34,7 @@ public class PanelLogin extends javax.swing.JFrame {
     public PanelLogin() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(PanelLogin.class.getResource("/img/Logo.png")));
         initComponents();
+        comprobarUsuario();
     }
 
     /**
@@ -65,7 +74,7 @@ public class PanelLogin extends javax.swing.JFrame {
 
         tfEmail.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         tfEmail.setForeground(new java.awt.Color(204, 204, 204));
-        tfEmail.setText("prueba3");
+        tfEmail.setText("Introduzca su correo electrónico");
         tfEmail.setToolTipText("Introduzca su correo electrónico");
         tfEmail.setBorder(null);
         tfEmail.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -81,7 +90,7 @@ public class PanelLogin extends javax.swing.JFrame {
         jLabel3.setText("Contraseña");
 
         tfPassword.setForeground(new java.awt.Color(204, 204, 204));
-        tfPassword.setText("prueba3");
+        tfPassword.setText("*************");
         tfPassword.setToolTipText("*************");
         tfPassword.setBorder(null);
         tfPassword.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -285,6 +294,11 @@ public class PanelLogin extends javax.swing.JFrame {
                     Notification.Location.TOP_CENTER, "El usuario o la clave no son validos.");
             notification.showNotification();
         } else {
+            if (jCheckBoxCustom1.isSelected()) {
+                loginMetodos.crearReemplazarLogin(tfEmail.getText());
+            }else{
+                loginMetodos.limpiarArchivo();
+            }
             usuarioIniciado = usuarioABuscar;
             this.dispose();
             new VentanaPrincipal().setVisible(true);
@@ -334,6 +348,34 @@ public class PanelLogin extends javax.swing.JFrame {
                 new PanelLogin().setVisible(true);
             }
         });
+    }
+    
+    private void comprobarUsuario() {
+        FileReader fr = null;
+        try {
+            File file = new File("src\\files\\recuerdame.txt");
+            fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            
+            String email = br.readLine();
+            if (!email.equalsIgnoreCase(" ")) {
+                tfEmail.setText(email);
+                tfEmail.setForeground(Color.black);
+            }else {
+                tfEmail.setText("");
+                tfEmail.setForeground(Color.black);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PanelLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                fr.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

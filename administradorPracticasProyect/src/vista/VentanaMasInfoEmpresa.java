@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -29,7 +30,6 @@ import jnafilechooser.api.JnaFileChooser;
 import modelo.Empresa;
 import sun.misc.IOUtils;
 import static vista.PanelEmpresa.tablaEmpresa;
-import static vista.PanelEmpresa.tfBusqueda;
 
 /**
  *
@@ -653,25 +653,43 @@ public class VentanaMasInfoEmpresa extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel5MouseExited
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
+        int filasMod = 0;
+        MessageDialog mensaje = new MessageDialog(this);
+        mensaje.showMessage("Confirmacion moficacion", "Esta seguro de querer modificar la empresa?");
+        if (mensaje.getMessageType()==MessageDialog.MessageType.OK) {
+            filasMod = bbdd.modificarEmpresa(idEmpresa, tfNombre.getText(), tfCif.getText(), tfDireccion.getText(), tfDuenio.getText(), tfAmbito.getText(), tftelefono.getText(), tfEmail.getText(), tfTutor.getText(), tfTelefonoContacto.getText(), tfNombreContacto.getText(), tfEmailContacto.getText());
+        }else if(mensaje.getMessageType()==MessageDialog.MessageType.CANCEL){
+            Notification notificacion = new Notification(this, Notification.Type.WARNING, Notification.Location.TOP_CENTER, "Se ha cancelado la modificacion");
+            notificacion.showNotification();
+        }else{
+            Notification notificacion = new Notification(this, Notification.Type.WARNING, Notification.Location.TOP_CENTER, "Se ha cancelado la modificacion");
+            notificacion.showNotification();
+        }
         
-
+         if (filasMod != 1) {
+            Notification notificacion = new Notification(this, Notification.Type.WARNING, Notification.Location.TOP_CENTER, "Empresa no modificada con exito");
+            notificacion.showNotification();
+        }else{
+            Notification notificacion = new Notification(this, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Empresa modificada con exito");
+            notificacion.showNotification();
+        }
     }//GEN-LAST:event_jPanel5MouseClicked
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        if (!tfBusqueda.getText().equals("Busque en cualquier campo")) {
-            List<Empresa> empresas = empresaMetodos.rellenarListaEmpresa("SELECT * FROM empresa WHERE CAST(id AS TEXT) LIKE '%" + tfBusqueda.getText()
+        if (!PanelEmpresa.tfBusqueda.getText().equals("Busque en cualquier campo")) {
+            List<Empresa> empresas = empresaMetodos.rellenarListaEmpresa("SELECT * FROM empresa WHERE CAST(id AS TEXT) LIKE '%" + PanelEmpresa.tfBusqueda.getText()
                     + "%' "
-                    + "OR nombre LIKE '%" + tfBusqueda.getText() + "%' "
-                    + "OR cif LIKE '%" + tfBusqueda.getText() + "%' "
-                    + "OR direccion LIKE '%" + tfBusqueda.getText() + "%' "
-                    + "OR dueño LIKE '%" + tfBusqueda.getText() + "%' "
-                    + "OR ambito LIKE '%" + tfBusqueda.getText() + "%' "
-                    + "OR telefono LIKE '%" + tfBusqueda.getText() + "%' "
-                    + "OR email LIKE '%" + tfBusqueda.getText() + "%' "        
-                    + "OR tutor LIKE '%" + tfBusqueda.getText() + "%' "
-                    + "OR telefono_contacto LIKE '%" + tfBusqueda.getText() + "%' "        
-                    + "OR nombre_contacto LIKE '%" + tfBusqueda.getText() + "%' "
-                    + "OR email_contacto LIKE '%" + tfBusqueda.getText() + "%' ORDER BY id ASC");
+                    + "OR nombre LIKE '%" + PanelEmpresa.tfBusqueda.getText() + "%' "
+                    + "OR cif LIKE '%" + PanelEmpresa.tfBusqueda.getText() + "%' "
+                    + "OR direccion LIKE '%" + PanelEmpresa.tfBusqueda.getText() + "%' "
+                    + "OR dueño LIKE '%" + PanelEmpresa.tfBusqueda.getText() + "%' "
+                    + "OR ambito LIKE '%" + PanelEmpresa.tfBusqueda.getText() + "%' "
+                    + "OR telefono LIKE '%" + PanelEmpresa.tfBusqueda.getText() + "%' "
+                    + "OR email LIKE '%" + PanelEmpresa.tfBusqueda.getText() + "%' "        
+                    + "OR tutor LIKE '%" + PanelEmpresa.tfBusqueda.getText() + "%' "
+                    + "OR telefono_contacto LIKE '%" + PanelEmpresa.tfBusqueda.getText() + "%' "        
+                    + "OR nombre_contacto LIKE '%" + PanelEmpresa.tfBusqueda.getText() + "%' "
+                    + "OR email_contacto LIKE '%" + PanelEmpresa.tfBusqueda.getText() + "%' ORDER BY id ASC");
             PanelEmpresa.tablaEmpresa = empresaMetodos.rellenarTablaEmpresa(tablaEmpresa, empresas);
         }
     }//GEN-LAST:event_formWindowClosed

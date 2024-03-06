@@ -53,7 +53,8 @@ public class PanelConvenio extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaConvenio = new javax.swing.JTable();
+
+        tablaConvenios = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         tfBusqueda = new javax.swing.JTextField();
@@ -65,8 +66,8 @@ public class PanelConvenio extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        tablaConvenio.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        tablaConvenio.setModel(new javax.swing.table.DefaultTableModel(
+        tablaConvenios.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        tablaConvenios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -92,8 +93,8 @@ public class PanelConvenio extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tablaConvenio.setSelectionBackground(new java.awt.Color(254, 177, 3));
-        jScrollPane1.setViewportView(tablaConvenio);
+        tablaConvenios.setSelectionBackground(new java.awt.Color(254, 177, 3));
+        jScrollPane1.setViewportView(tablaConvenios);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -269,7 +270,7 @@ public class PanelConvenio extends javax.swing.JPanel {
                                                         + "OR email LIKE '%" + tfBusqueda.getText() + "%' "
                                                         + "OR ciclo LIKE '%" + tfBusqueda.getText()
                                                         + "%' ORDER BY id ASC");
-                        tablaConvenio = alumnosMetodos.rellenarTablaAlumnos(tablaConvenio, alumnos);
+                        tablaConvenios = alumnosMetodos.rellenarTablaAlumnos(tablaConvenios, alumnos);
                 }
         }// GEN-LAST:event_jPanel2MouseClicked
 
@@ -282,7 +283,7 @@ public class PanelConvenio extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    public static javax.swing.JTable tablaConvenio;
-    public static javax.swing.JTextField tfBusqueda;
+    private javax.swing.JTable tablaConvenios;
+    private javax.swing.JTextField tfBusqueda;
     // End of variables declaration//GEN-END:variables
 }
