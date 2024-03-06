@@ -30,6 +30,8 @@ public class PanelMenu extends javax.swing.JPanel {
         if (PanelLogin.usuarioIniciado.getTipousuario()== TIPOUSUARIO.TUTOR) {
             PanelBotonMenuIzqUsuarios.setVisible(false);
         }
+        PanelCentralMenu = menuMetodos.cambioPanel(new PanelMenuPrincipal(), PanelCentralMenu);
+        
     }
 
     /**
@@ -106,6 +108,9 @@ public class PanelMenu extends javax.swing.JPanel {
         PanelBotonmenuIzqMenu.setMinimumSize(new java.awt.Dimension(0, 50));
         PanelBotonmenuIzqMenu.setPreferredSize(new java.awt.Dimension(162, 70));
         PanelBotonmenuIzqMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PanelBotonmenuIzqMenuMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 PanelBotonmenuIzqMenuMouseEntered(evt);
             }
@@ -478,6 +483,10 @@ public class PanelMenu extends javax.swing.JPanel {
     private void PanelBotonMenuIzqNecesidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonMenuIzqNecesidadesMouseClicked
         PanelCentralMenu = menuMetodos.cambioPanel(new PanelNecesidades(), PanelCentralMenu);
     }//GEN-LAST:event_PanelBotonMenuIzqNecesidadesMouseClicked
+
+    private void PanelBotonmenuIzqMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBotonmenuIzqMenuMouseClicked
+        PanelCentralMenu = menuMetodos.cambioPanel(new PanelMenuPrincipal(), PanelCentralMenu);
+    }//GEN-LAST:event_PanelBotonmenuIzqMenuMouseClicked
 
     private void PanelBotonMenuIzqEmpresasMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_PanelBotonMenuIzqEmpresasMouseEntered
         PanelBotonMenuIzqEmpresas.setBackground(botonSeleccionado);
